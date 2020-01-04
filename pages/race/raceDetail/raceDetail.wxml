@@ -1,0 +1,17 @@
+<!--pages/race/raceDetail2/raceDetail.wxml-->
+<view class="race-detail-container container">
+    <navBar title="" back="{{true}}" home="{{false}}" bindback="onBack">
+        <view class="white barTitle" slot="center">活动详情</view>
+    </navBar>
+    <view class="race-detail flex-column-layout globalWidth">
+        <image class="race-detail-pic" src="{{imgSrc}}"></image>
+        <view class="race-detail-title">
+            {{raceTitle}}
+            <view class="tips race-detail-tips {{status === 1 ? 'pink' : 'blue'}}">{{status === 1 ? '未开始' : '进行中'}}</view>
+        </view>
+        <text class="race-detail-time">{{startTime + '-' + endTime}}</text>
+        <text class="race-detail-address">{{raceAddress}}</text>
+        <text class="race-detail-detail">{{raceDetail}}</text>
+        <button class="custom-btn" catchtap="signUp">报名</button>
+    </view>
+</view>

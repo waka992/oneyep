@@ -1,0 +1,147 @@
+/* pages/referee/refereeRate/refereeRate.wxss */
+
+.bgo {
+    background-color: rgba(0,0,0,0);
+}
+
+.rate-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.player-pic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 750rpx;
+    z-index: -2;
+}
+
+.mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 750rpx;
+    opacity: 0.6;
+    background-color: rgba(0,0,0,.7);
+    z-index: -1;
+}
+
+.rate-head,.rate-head2 {
+    color: #fff;
+    font-size: 34rpx;   
+    padding:0 40rpx;
+    height: 48rpx;
+    margin-top: 40rpx;
+}
+
+.rate-head2 {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.select-area {
+    position: relative;
+    flex: 1;
+}
+
+.list-pic {
+    width: 40rpx;
+    height: 30rpx;
+    float: right;
+    vertical-align: middle;
+    margin-top: 10rpx;
+}
+
+.title {
+    vertical-align: middle;
+}
+
+.player-num {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 204rpx;
+    color: #fff;
+    left: 50%;
+}
+
+.arow-left,.arow-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40rpx;
+    height: 38rpx;
+    display: inline-block;
+}
+
+.arow-left {
+    left: 40rpx;
+}
+
+.arow-right {
+    right: 40rpx;
+}
+
+.rate-area {
+    text-align: center;
+}
+
+.intro {
+    color: #fff;
+    font-size: 24rpx;
+}
+
+.rate-bottom {
+    height: 330rpx;
+}
+
+.rate-input {
+    display: inline-block;
+    width: 488rpx;
+    height: 98rpx;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 16rpx;
+    color: #557DF1;
+    font-size: 52rpx;
+    margin-top: 30rpx;
+}
+
+.rate-btn {
+    margin: 0 auto;
+    width: 268rpx;
+    height: 80rpx;
+    color: #fff;
+    background: linear-gradient(to right, #775AF0, #5489f4);
+    border-radius: 38rpx;
+    text-align: center;
+    line-height: 80rpx;
+    margin-top: 40rpx;
+}
+
+.rate-list {
+    flex: 1;
+    position: relative;
+}
+
+.reback-btn {
+    text-align: center;
+    float: right;
+}
+
+.back-pic {
+    width: 40rpx;
+    height: 30rpx;
+}
+
+.reback-word {
+    vertical-align: middle;
+    float: right;
+    margin-left: 10rpx;
+    font-size: 34rpx;
+}

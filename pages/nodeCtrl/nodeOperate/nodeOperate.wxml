@@ -1,0 +1,10 @@
+<!--pages/nodeCtrl/nodeOperate/nodeOperate.wxml-->
+<view class="node-operate" wx:if="{{show}}" >
+    <view class="mask" catchtap="close"></view>
+    <view class="operate-lists">
+        <view class="operate-list" wx:for="{{operateList}}" wx:key="index" catchtap="doTask" data-task="{{item.word}}">
+            <image class="operate-img" src="{{item.imgSrc}}"></image>
+            <text class="operate-word">{{item.word}}</text>
+        </view>
+    </view>
+</view>

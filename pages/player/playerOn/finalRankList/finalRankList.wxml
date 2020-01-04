@@ -1,0 +1,24 @@
+<!--决赛胜负单-->
+<view class="rank-list" wx-if="{{show}}">
+    <view class="mask">
+    </view>
+    <view class="list-container">
+        <image class="close-btn" src="/images/icon/rank-list-close.png" catchtap="close"></image>
+        <view class="race-name">
+            {{raceName}}
+        </view>
+        <view class="tips">红色为胜方，蓝色为负方，灰色为平局</view>
+        <view class="list-detail">
+            <view class="list-info">
+                <view class="list" wx:for="{{rankList}}" wx:key="index">
+                    <view class="list-item {{item.group1 == item.winner ? 'winner' : 'loser'}}">{{item.group1}}</view>
+                    <view class="list-item">
+                        <image class="icon-vs" src="/images/icon/icon-vs-light.png"></image>
+                    </view>
+                    <view class="list-item {{item.group2 == item.winner ? 'winner' : 'loser'}}">{{item.group2}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="rank">{{isWin ? '我' : '对'}}方胜</view>
+    </view>
+</view>

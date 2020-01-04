@@ -1,0 +1,30 @@
+<!--pages/pay/pay.wxml-->
+<view class="container">
+    <navBar title="" back="{{true}}" home="{{false}}" bindback="onBack">
+        <view class="white barTitle" slot="center">支付成功</view>
+    </navBar>
+    <view class="pay-container">
+        <view class="pay-success">
+            <view class="success-word">
+                <image class="success-pic" src="/images/zhifuchenggong.png"></image>
+                <view class="success">支付成功</view>
+            </view>
+            <view class="success-next">
+                <view>2秒后跳转至报名列表</view>
+                <view>
+                    您还可以报名参与其他项目
+                </view>
+            </view>
+        </view>
+        <view class="order-info">
+            <view class="globalWidth">
+                <view class="info-title">
+                    订单信息：
+                </view>
+                <view class="info-detail">
+                    内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 …
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,41 @@
+<!--pages/playerInfoForm/playerInfoForm.wxml-->
+<view class="container" hover-class="none" hover-stop-propagation="false">
+    <navBar title="" back="{{true}}" home="{{false}}" bindback="onBack">
+        <view class="white barTitle" slot="center">选手信息</view>
+    </navBar>
+    <view class="player-info-form-container" hover-class="none" hover-stop-propagation="false">
+        <!-- 视频海报 -->
+        <view class="player-info-media" hover-class="none" hover-stop-propagation="false">
+            
+        </view>
+        <view class="player-info-form globalWidth" hover-class="none" hover-stop-propagation="false">
+            <form class="player-info-form-area" bindsubmit="formSubmit">
+                <view class="player-info-form-section" hover-class="none" hover-stop-propagation="false">
+                    <view class="player-info-form-section-title">姓名</view>
+                    <input class="player-info-form-section-input" name="name" placeholder="name" />
+                </view>
+                <view class="player-info-form-section" hover-class="none" hover-stop-propagation="false">
+                    <view class="player-info-form-section-title">性别</view>
+                    <picker class="player-info-form-section-input" bindchange="bindPickerChange" value="{{gender}}" range="{{genderArr}}" name="gender">
+                        <view class="picker">
+                        {{genderArr[gender]}}
+                        </view>
+                    </picker>
+                </view>
+                <view class="player-info-form-section" hover-class="none" hover-stop-propagation="false">
+                    <view class="player-info-form-section-title">年龄</view>
+                    <input class="player-info-form-section-input" name="age" placeholder="age" />
+                </view>
+                <view class="player-info-form-section" hover-class="none" hover-stop-propagation="false">
+                    <view class="player-info-form-section-title">手机号</view>
+                    <input class="player-info-form-section-input" name="mobile" placeholder="mobile" />
+                </view>
+                <view class="player-info-form-section" hover-class="none" hover-stop-propagation="false">
+                    <view class="player-info-form-section-title">微信号</view>
+                    <input class="player-info-form-section-input" name="wechat" placeholder="wechat" />
+                </view>
+                <button class="player-info-btn custom-btn" formType="submit">提交</button>
+            </form>
+        </view>
+    </view>
+</view>

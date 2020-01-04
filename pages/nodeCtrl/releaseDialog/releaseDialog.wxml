@@ -1,0 +1,8 @@
+<!--pages/nodeCtrl/releaseDialog/releaseDialog.wxml-->
+<view class="release-dialog" wx:if="{{show}}" >
+    <view class="mask" catchtap="close"></view>
+    <view class="release-content">
+        <textarea class="text-area" placeholder="请填写发布内容！" value="{{content}}" bindinput="contentChange" placeholder-style="color:#999;" name="" id="" cols="30" rows="10"></textarea>
+        <buttonr class="release-btn" catchtap="release">发布</buttonr>
+    </view>
+</view>

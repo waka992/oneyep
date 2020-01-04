@@ -1,0 +1,53 @@
+/* pages/referee/referee.wxss */
+.referee-container {
+    position: relative;
+    width: 100%;
+}
+
+.player-show {
+    position: relative;
+    width: 100%;
+    height: 808rpx;
+}
+
+.player-pic {
+    width: 750rpx;
+    height: 808rpx;
+}
+
+.i18n-btn {
+    position: absolute;
+    width: 132rpx;
+    height: 54rpx;
+    line-height: 48rpx;
+    text-align: center;
+    color: #fff;
+    border: 1px solid #fff;
+    right: 20rpx;
+    top: 20rpx;
+    font-size: 30rpx;
+    border-radius: 38rpx;
+}
+
+.start-btn {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 192rpx;
+}
+
+.completed {
+    display: flex;
+    /* flex: 1; */
+    min-height: 772rpx;
+    color: #A5A5A5;
+    font-size: 52rpx;
+    text-align: center;
+    white-space: pre-wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.complete-btn {
+    margin: 0 auto;
+}

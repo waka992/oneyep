@@ -1,0 +1,11 @@
+<!--pages/masterCtrl/ctrlDetail/ctrlDetail.wxml-->
+<view class="ctrl-detail" wx:if="{{show}}">
+    <view class="mask" catchtap="close"></view>
+    <view class="node-lists">
+        <view class="node-list {{index === 2 ? 'hl' : ''}}" wx:for="{{nodeList}}" wx:key="index">
+            <view class="evt">{{item.event}}</view>
+            <view class="time">开始:{{item.startTime}}</view>
+        </view>
+    </view>
+    <button class="custom-btn ctrl-detail-btn" catchtap="showDetail">详情</button>
+</view>

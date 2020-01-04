@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "race-list": "/pages/race/raceList/raceList",
+    "mp-actionsheet": "/WeUI/actionsheet/actionsheet"
+  }
+}

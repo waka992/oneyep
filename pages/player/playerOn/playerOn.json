@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "rank-list": "/components/rankList/rankList",
+    "final-rank-list": "./finalRankList/finalRankList",
+    "pair-final": "./pairFinal/pairFinal"
+  }
+}

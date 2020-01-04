@@ -1,0 +1,64 @@
+/* pages/activityProcess/activityProcess.wxss */
+.activity-process-process {
+    width: 670rpx;
+    margin: 0 auto;
+}
+
+.process-title {
+    color: #fff;
+    font-size: 24rpx;
+}
+
+.process-detail {
+    height: 604rpx;
+    margin-top: 20rpx;
+    text-align: center;
+    color: #858585;
+}
+
+.detail-title {
+    font-size: 36rpx;
+}
+
+.activity-process-bill {
+    font-size: 32rpx;
+    padding: 25rpx 40rpx;
+    height: 100rpx;
+    line-height: 1;
+    border-bottom: 1px solid #4F4F4F;
+}
+
+.bill-program {
+    color: #D3D3D3;
+    float: left;
+    line-height: 16rpx;
+}
+
+.bill-amount {
+    float: right;
+    color: #fff;
+    line-height: 16rpx;
+}
+
+
+.info-title {
+    font-size: 28rpx;
+    color: #c4c4c4;
+    margin: 20rpx 0;
+}
+
+.info-detail {
+    font-size: 24rpx;
+    color: #b5b5b5;
+}
+
+.btn {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 72rpx;
+}
+
+.pink {
+    color: #EC3C8D;
+}

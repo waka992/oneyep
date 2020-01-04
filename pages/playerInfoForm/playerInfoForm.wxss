@@ -1,0 +1,34 @@
+/* pages/playerInfoForm/playerInfoForm.wxss */
+.player-info-media {
+    width: 100%;
+    height: 362rpx;
+}
+
+.player-info-form {
+    position: relative;
+    height: 766rpx;
+}
+
+.player-info-form-section-title {
+    height: 60rpx;
+    width: 100%;
+    font-size: 28rpx;
+    color: #828282;
+}
+
+.player-info-form-section-input {
+    width: 100%;
+    height: 60rpx;
+    font-size: 30rpx;
+    color: #fff;
+    text-align: center;
+    background-color: #232425;
+    line-height: 60rpx;
+}
+
+.player-info-btn {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+}

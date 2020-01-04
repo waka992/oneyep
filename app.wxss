@@ -1,0 +1,82 @@
+/**app.wxss**/
+@import './WeUI/weui-wxss/dist/style/weui.wxss';
+Page {
+  background-color: #191919;
+}
+/* 公共样式 */
+.container {
+  position: relative;
+  background-color: #191919;
+  min-height: 100vh;
+  font-family:PingFangSC-Regular,PingFang SC;
+}
+
+.white {
+  color: #fff;
+}
+
+.globalWidth {
+  width: 670rpx;
+  margin: 0 auto;
+}
+
+.ml20 {
+  margin-left: 20rpx;
+}
+
+.barTitle {
+  font-size: 17px;
+}
+
+.flex-column-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  padding: 0 !important;
+}
+
+/* 定制样式 */
+.custom-btn {
+  width: 482rpx !important;
+  height: 90rpx;
+  border-radius: 45rpx;
+  background: linear-gradient(to right, #5c3cde, #5489f5);
+  font-size: 36rpx;
+  color: #fff;
+  font-weight: normal;
+  line-height: 90rpx;
+  text-align: center;
+}
+
+.tips {
+  position: absolute;
+  width: 106rpx;
+  height: 40rpx;
+  border-radius: 21rpx;
+  font-size: 20rpx;
+  line-height: 40rpx;
+  text-align: center;
+  color: #fff;
+}
+
+.tips.pink {
+  background-color: #ec3c8d;
+}
+
+.tips.blue {
+  background-color: #4D7AFF;
+}
+
+.ml40 {
+  margin-left: 40rpx;
+}
+
+.bgpink {
+  background-color: #ec3c8d;
+}
+
+.bgblue {
+  background-color: #557FF1;
+}

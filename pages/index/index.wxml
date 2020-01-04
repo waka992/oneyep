@@ -1,0 +1,22 @@
+<!-- index.wxml -->
+<view class="container">
+  <navBar title="" back="{{false}}" home="{{false}}" background="{{'#191919'}}">
+    <view class="white ml20 barTitle" slot="left">首页</view>
+  </navBar>
+  <view class="swiper-container">
+    <swiper class="swiper" circular="{{true}}" autoplay="{{true}}" indicator-dots="{{indicatorDots}}" bindchange="swiperChange" previous-margin="{{previousmargin}}" next-margin="{{nextmargin}}">
+      <block wx:for="{{imgsArr}}" wx:key="{{index}}">
+        <swiper-item>
+          <image class="{{index == currentSwiper ? ' active' : ' quiet'}}" src="{{item.url}}"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <!-- 重置小圆点的样式 -->
+    <view class="dots">
+      <block wx:for="{{imgsArr}}" wx:key="{{index}}">
+        <view class="dot{{index == currentSwiper ? ' active' : ''}}"></view>
+      </block>
+    </view>
+  </view>
+  <race-list raceList="{{raceList}}" bind:showDetail="showDetail"></race-list>
+</view>

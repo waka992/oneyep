@@ -1,0 +1,108 @@
+/* pages/referee/refereeBattle/refereeBattle.wxss */
+.battle-container {
+    position: relative;
+    flex: 1;
+    background-color: #fff;
+}
+
+.abstain-btn {
+    position: absolute;
+    top: 30rpx;
+    left: 40rpx;
+    width: 132rpx;
+    height: 54rpx;
+    line-height: 54rpx;
+    border: 1px solid #fff;
+    color: #fff;
+    border-radius: 38rpx;
+    text-align: center;
+    font-size: 34rpx;
+    z-index: 10;
+}
+
+.list-pic {
+    position: absolute;
+    top: 30rpx;
+    right: 40rpx;
+    width: 40rpx;
+    height: 30rpx;
+    z-index: 10;
+}
+
+.mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color:rgba(0,0,0,.35);
+    z-index: 9;
+}
+
+.mask.selectRight {
+    clip-path: polygon(0 0, 99% 0, 0 99%);
+}
+
+.mask.selectLeft {
+    clip-path: polygon(100% 1%, 100% 100%, 1% 100%);
+}
+
+.left, .right {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color:rgba(0,0,0,0);
+    overflow: hidden;
+}
+
+.player-pic1, .player-pic2 {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.player-pic1 {
+    left: 0;
+    clip-path: polygon(0 0, 99% 0, 0 99%);
+    z-index: 1;
+}
+
+.player-pic2 {
+    right: 0;
+    clip-path: polygon(100% 1%, 100% 100%, 1% 100%);
+    z-index: 2;
+}
+
+.vs-pic {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 238rpx;
+    height: 366rpx;
+    z-index: 10;
+}
+
+.info1, .info2 {
+    position: absolute;
+    font-size: 52rpx;
+    z-index: 10;
+}
+
+.info1 {
+    color: #5480F1;
+    top: 20%;
+    left: 10%;
+}
+
+.info2 {
+    color: #EC3C8D;
+    bottom: 20%;
+    right: 10%;
+}
+
+.group {
+    margin-right: 20rpx;
+}

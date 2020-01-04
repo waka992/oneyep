@@ -1,0 +1,40 @@
+<!--赛事进行-->
+<view class="container">
+    <navBar title="" back="{{true}}" home="{{false}}" bindback="onBack">
+        <view class="white barTitle" slot="center">赛事进行</view>
+    </navBar>
+    <view class="playerOn-container">
+        <view class="info">
+            <image class="user-bg" src="/images/user-bg.png">
+            </image>
+            <view class="ranking">{{ranking}}</view>
+            <view class="name">{{name}}</view>
+            <view class="status tips {{status === 0 ? 'pink' : 'blue'}}" >{{status === 0 ? '未开始' : '进行中'}}</view>
+            <view class="describe">{{describe}}</view>
+        </view>
+        <view class="race-status globalWidth">
+            <view class="race-status-head">
+                <view class="race-left">
+                    <image class="race-left-inner {{hasPrev ? '' : 'opacity6'}}" src="/images/icon/arow-left.png" catchtap="toPrevious"></image>
+                </view>
+                <view class="race-right" bindtap="toNext">
+                    <image class="race-right-inner {{hasNext ? '' : 'opacity6'}}" src="/images/icon/arow-right.png"></image>
+                </view>
+                <view class="race-name">{{raceName}}</view>
+            </view>
+            <view class="race-detail" wx-if="{{!rating}}">
+                <image class="rank-list-btn" catchtap="openRankList" src="/images/icon/rank-list-open.png"></image>
+                <view class="race-detail-inner">{{'赛事进行中...\n恭喜您\n晋级十六强'}}</view>
+            </view>
+            <view class="race-detail" wx-if="{{rating}}">
+                <pair-final></pair-final>
+            </view>
+            <view class="race-info">
+                <text class="race-info-name">{{raceName}}</text>
+                <text class="race-info-time">时间：{{time}}</text>
+            </view>
+        </view>
+    </view>
+    <rank-list show="{{showRankList}}"></rank-list>
+    <final-rank-list show="{{showFinalRankList}}"></final-rank-list>
+</view>

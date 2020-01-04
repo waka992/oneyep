@@ -1,0 +1,33 @@
+<!--扫一扫-->
+<view class="container">
+  <navBar title="" back="{{true}}" home="{{false}}">
+    <view class="white ml20 barTitle" slot="center">二维码/条码</view>
+  </navBar>
+   <!-- <camera 
+    bindscancode="getCode"
+    device-position="back" 
+    flash="auto" 
+    binderror="error" 
+    style="width: 100%; height: 100%; position:absolute;top:0;left:0;" 
+    mode="scanCode"></camera> -->
+  <view class="scan-container">
+    <view class="camera-area">
+        <view class="line-horizon left-top"></view>
+        <view class="line-vertical left-top"></view>
+        <view class="line-horizon right-top"></view>
+        <view class="line-vertical right-top"></view>
+        <view class="line-horizon left-bottom"></view>
+        <view class="line-vertical left-bottom"></view>
+        <view class="line-horizon right-bottom"></view>
+        <view class="line-vertical right-bottom"></view>
+        <view class="camera-square">
+           
+        </view>
+        <view class="tips">扫一扫绑定角色关系</view>
+    </view>
+    <view class="detail">
+    说明：一个人可能会有多重身份，比如选手、裁判等，工作人员会根据您的不同角色向您展示不同的角色二维码。绑定了选手角色后，如还需绑定其他角色，请点击继续绑定按钮。
+    </view>
+  </view>
+</view>
+

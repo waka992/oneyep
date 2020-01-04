@@ -1,0 +1,34 @@
+<!--pages/race/raceSignUp/raceSignUp.wxml-->
+<!-- 报名 -->
+<view class="container" hover-class="none" hover-stop-propagation="false">
+    <navBar title="" back="{{true}}" home="{{false}}" bindback="onBack">
+        <view class="white barTitle" slot="center">报名</view>
+    </navBar>
+    <view class="race-signup" hover-class="none" hover-stop-propagation="false">
+        <view class="race-signup-programs" hover-class="none" hover-stop-propagation="false">
+            <view wx:for="{{programs}}" wx:key="{{index}}" class="race-signup-program" hover-class="none" hover-stop-propagation="false">
+                <view class="race-signup-program-name {{index % 3 == 0 ? 'color1' : index % 3 == 1 ? 'color2' : 'color3'}}" hover-class="none" hover-stop-propagation="false">
+                    {{item.itemName}}
+                </view>
+                <view class="race-signup-program-status {{item._status === 1 ? 'no' : 'already'}}" 
+                hover-class="none" 
+                hover-stop-propagation="false" 
+                catchtap="signUp" 
+                data-raceid="{{item.id}}" 
+                data-status="{{item._status}}">
+                    {{item._status === 1 ? '报名' : '已报名'}}
+                </view>
+            </view>
+        </view>
+        <view class="race-signup-notice" hover-class="none" hover-stop-propagation="false">
+            <text class="race-signup-notice-title" selectable="false" decode="false">
+                {{title}}
+            </text>
+            <text class="race-signup-notice-info" selectable="false" space="false" decode="false">
+                {{info}}
+            </text>
+        </view>
+    </view>
+    <button class="race-signup-btn custom-btn" catchtap="onBack">完成</button>
+</view>
+

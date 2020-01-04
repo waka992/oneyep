@@ -1,0 +1,49 @@
+/* pages/nodeCtrl/releaseDialog/releaseDialog.wxss */
+.release-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+.mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0,0,0,.8);
+}
+
+.release-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 530rpx;
+    width: 100%;
+    background-color: #232425;
+}
+
+.text-area {
+    color: #fff;
+    font-size: 26rpx;
+    background-color: #4A4A4A;
+    width: 660rpx;
+    height: 374rpx;
+    margin: 30rpx auto;
+    padding: 20rpx;
+    box-sizing: border-box;
+}
+
+.release-btn {
+    position: absolute;
+    width: 218rpx;
+    height: 56rpx;
+    line-height: 56rpx;
+    border-radius: 28rpx;
+    background-color: #4D7AFF;
+    color: #fff;
+    text-align: center;
+    bottom: 50rpx;
+    right: 46rpx;
+}

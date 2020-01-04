@@ -1,0 +1,17 @@
+<!--pages/referee/referee.wxml-->
+<view class="container">
+    <navBar title="" back="{{true}}" home="{{false}}" bindback="backToUser">
+        <view class="white ml20 barTitle" slot="center">裁判</view>
+    </navBar>
+    <view class="referee-container" wx:if="{{!isComplete}}">
+        <view class="player-show">
+            <image class="player-pic" src="/images/player-video.png"></image>
+            <view class="i18n-btn">English</view>
+        </view>
+    </view>
+    <view class="custom-btn start-btn" wx:if="{{!isComplete}}" catchtap="start">开始</view>
+    <view class="completed" wx:if="{{isComplete}}">
+        <view class="completed-word">{{'赛事圆满完成！\n感谢您的辛苦付出'}}</view>
+    </view>
+    <view class="custom-btn start-btn" wx:if="{{isComplete}}" catchtap="complete">完成</view>
+</view>

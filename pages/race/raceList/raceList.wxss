@@ -1,0 +1,70 @@
+/* pages/race/raceListCompo/raceList.wxss */
+.raceList-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 98rpx;
+}
+
+.raceList-container {
+    position: relative;
+    width: 710rpx;
+    height: 210rpx;
+    margin-top: 56rpx;
+    background-color: #232425;
+    border-radius: 8rpx;
+    margin: 56rpx auto 0;
+}
+
+.race-pic {
+    position: absolute;
+    top: -38rpx;
+    left: 28rpx;
+    width: 152rpx;
+    height: 208rpx;
+    background-color: #fff;
+}
+
+.race-detail {
+    position: absolute;
+    top: 26rpx;
+    left: 214rpx;
+}
+
+.race-title {
+    color: #fff;
+    font-size: 32rpx;
+    margin-bottom: 24rpx;
+    width: 416rpx;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.race-time,
+.race-address {
+    color: #797979;
+    font-size: 24rpx;
+    margin-bottom: 4rpx;
+}
+.race-status {
+    position: absolute;
+    width: 94rpx;
+    height: 40rpx;
+    top: 0;
+    right: 0;
+    border-radius: 0 21rpx 0 21rpx;
+    font-size: 20rpx;
+    text-align: center;
+    line-height: 40rpx;
+    color: #fff;
+}
+/* 进行中 */
+.race-status.onPlay {
+    background-color: #4D7AFF;
+}
+
+/* 未开始 */
+.race-status.onReady {
+    background-color: #EC3C8D;
+}

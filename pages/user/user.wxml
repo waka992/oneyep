@@ -1,0 +1,16 @@
+<!--pages/user/user.wxml-->
+<view class="container">
+    <navBar title="" back="{{false}}" home="{{false}}">
+        <view class="white ml20 barTitle" slot="left">我的</view>
+    </navBar>
+    <view class="user-container" hover-class="none" hover-stop-propagation="false">
+        <view class="avatar" catchtap="auth">
+            <image class="avatar-bg" src="/images/user-bg.png"></image>
+            <image class="avatar-pic" src="{{avatar}}"></image>
+            <view class="name">{{username}}</view>
+        </view>
+        <race-list raceList="{{raceList}}" bind:showDetail="showDetail"></race-list>
+    </view>
+    <mp-actionsheet title="{{sheetTitle}}" show-cancel="{{false}}" bindactiontap="sheetSelect" show="{{showActionsheet}}" actions="{{groups}}">
+    </mp-actionsheet>
+</view>

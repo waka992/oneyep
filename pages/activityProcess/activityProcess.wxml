@@ -1,0 +1,36 @@
+<!--pages/activityProcess/activityProcess.wxml-->
+<view class="container" hover-class="none" hover-stop-propagation="false">
+    <navBar title="" back="{{true}}" home="{{false}}" bindback="onBack">
+        <view class="white barTitle" slot="center">活动流程</view>
+    </navBar>
+    <view class="activity-process-container" hover-class="none" hover-stop-propagation="false">
+        <view class="activity-process-process" hover-class="none" hover-stop-propagation="false">
+            <view class="process-title">
+                活动流程介绍
+            </view>
+            <view class="process-detail">
+                <view class="detail-title">项目 <text class="pink">Popping</text></view>
+                <view class="detail-line">
+                    流程图
+                </view>
+            </view>
+        </view>
+        <view class="activity-process-bill" hover-class="none" hover-stop-propagation="false">
+            <text class="bill-program">
+                项目：<text class="pink">Popping</text>
+            </text>
+            <text class="bill-amount">
+                ¥：200
+            </text>
+        </view>
+        <view class="activity-process-info globalWidth" hover-class="none" hover-stop-propagation="false">
+            <view class="info-title" hover-class="none" hover-stop-propagation="false">
+                购票须知
+            </view>
+            <view class="info-detail" hover-class="none" hover-stop-propagation="false">
+                本活动分为三个比赛项目，您可以选择您擅长的项目进行报名，或者同时挑战多个项目，您报名支付后需提交参赛选手的个人信息，报名流程才算完整哦！
+            </view>
+        </view>
+    </view>
+    <button class="btn custom-btn" catchtap="onPay">去支付</button>
+</view>

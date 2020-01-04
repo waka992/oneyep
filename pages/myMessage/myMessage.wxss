@@ -1,0 +1,136 @@
+/* pages/myMessage/myMessage.wxss */
+.msg-head {
+    margin-top: 20rpx;
+    padding:0 40rpx;
+    color: #fff;
+    font-size: 34rpx;
+    vertical-align: middle;
+}
+
+.head-pic {
+    float: right;
+    width: 40rpx;
+    height: 34rpx;
+    vertical-align: middle;
+    margin-top: 8rpx;
+}
+
+.msg-lists {
+    padding: 20rpx 40rpx;
+    margin-top: 10rpx;
+}
+
+.msg-list {
+    min-height: 348rpx;
+    color: #fff;
+    margin-bottom: 40rpx;
+}
+
+.user-info {
+    height: 64rpx;
+    vertical-align: middle;
+}
+
+.user-avatar {
+    height: 64rpx;
+    width: 64rpx;
+    border-radius: 50%;
+}
+
+.user-name,.user-avatar,.user-group,.user-identity,.msg-time {
+    vertical-align: middle;
+}
+
+.user-name {
+    margin-left: 20rpx;
+}
+
+.user-group,.user-identity {
+    display: inline-block;
+    width: 100rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    text-align: center;
+    border-radius: 18rpx;
+    font-size: 22rpx;
+}
+
+.user-group {
+    background-color: #4D7AFF;
+    margin-left: 20rpx;
+}
+
+.user-identity {
+    border: 1px solid #4D7AFF;
+    color: #4D7AFF;
+    margin-left: 10rpx;
+}
+
+.msg-time {
+    float: right;
+    font-size: 22rpx;
+    color: #999999;
+    line-height: 64rpx;
+}
+
+.msg-from {
+    color: #919191;
+    font-size: 24rpx;
+    margin-left: 80rpx;
+}
+
+.hl-from {
+    color: #CD2371;
+    margin: 0 10rpx;
+}
+
+.reply-word {
+    margin: 16rpx 0 16rpx 80rpx;
+}
+
+.input-area {
+    width: 100%;
+    border-radius: 6rpx;
+    background-color: #2d2d2d;
+    padding: 12rpx;
+}
+
+.operate-area {
+    height: 76rpx;
+}
+
+.operate-btn {
+    float: right;
+    margin-top: 20rpx;
+}
+
+.reply-btn, .delete-btn {
+    display: inline-block;
+    width: 90rpx;
+    height: 36rpx;
+    line-height: 36rpx;
+    text-align: center;
+    border-radius: 18rpx;
+    font-size: 22rpx;
+}
+
+.reply-btn {
+    background-color: #4D7AFF;
+    color: #fff;
+    margin-right: 18rpx;
+}
+
+.delete-btn {
+    color: #979797;
+    border: 1px solid #979797;
+}
+
+.textarea-placeholder {
+    font-size: 26rpx;
+    color: #666666;
+}
+
+.reply-textarea-style {
+    height: 110rpx;
+    font-size: 26rpx;
+}

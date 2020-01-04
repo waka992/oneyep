@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/masterCtrl/masterCtrl",
+    "pages/user/user",
+    "pages/index/index",
+    "pages/nodeCtrl/nodeCtrl",
+    "pages/authorization/authorization",
+    "pages/race/raceSignUp/raceSignUp",
+    "pages/race/raceDetail/raceDetail",
+    "pages/playerInfoForm/playerInfoForm",
+    "pages/activityProcess/activityProcess",
+    "pages/pay/pay",
+    "pages/race/raceSignIn/raceSignIn",
+    "pages/referee/referee",
+    "pages/scan/scan",
+    "pages/myMessage/myMessage",
+    "pages/player/playerOn/playerOn",
+    "pages/referee/refereeRate/refereeRate",
+    "pages/referee/refereeBattle/refereeBattle",
+    "pages/referee/refereeBattle/refereeBattleList/refereeBattleList"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationStyle": "custom"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "navBar": "/components/navBar/navBar"
+  },
+  "tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "首页"
+      }
+    ]
+  }
+}

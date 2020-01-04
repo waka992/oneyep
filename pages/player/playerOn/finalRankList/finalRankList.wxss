@@ -1,0 +1,99 @@
+/* components/rankList/rankList.wxss */
+.rank-list {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.mask {
+    background-color: #000;
+    opacity: 0.8;
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.list-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 530rpx;
+    height: 750rpx;
+    border-radius: 6px;
+    background-color: #4D7AFF;
+}
+
+.race-name, .rank {
+    font-size: 40rpx;
+    color: #fff;
+    height: 100rpx;
+    line-height: 100rpx;
+    width: 100%;
+    text-align: center;
+}
+
+.list-detail {
+    position: relative;
+    width: 490rpx;
+    height: 520rpx;
+    border-radius: 6px;
+    background-color: #fff;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0 20rpx;
+}
+
+.tips {
+    font-size: 22rpx;
+    color: #fff;
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    right: -48rpx;
+    top: -48rpx;
+    width: 48rpx;
+    height: 48rpx;
+}
+
+.list-info {
+    height: 460rpx;
+    overflow-y: auto;
+}
+
+.icon-vs {
+    width: 54rpx;
+    height: 44rpx;
+}
+
+.list {
+    display: flex;
+    color: #666;
+    font-size: 24rpx;
+    height: 58rpx;
+    align-items: center;
+    margin: 24rpx 0;
+}
+
+.list-item {
+    display: inline-block;
+    text-align: center;
+    flex: 1;
+    font-size: 48rpx;
+    font-family:Songti SC;
+    font-weight: 600;
+}
+
+.winner {
+    color: #EC3C8D;
+}
+
+.loser {
+    color: #4D7AFF;
+}

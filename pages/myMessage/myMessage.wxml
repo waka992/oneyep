@@ -1,0 +1,35 @@
+<!--pages/myMessage/myMessage.wxml-->
+<view class="container">
+    <navBar title="" back="{{true}}" home="{{false}}" bindback="onBack">
+        <view class="white barTitle" slot="center">我的消息</view>
+    </navBar>
+    <view class="my-msg-container">
+        <view class="msg-head">
+            <text class="head-word">消息数：</text>
+            <text class="head-word2">{{msgCount}}条</text>
+            <image class="head-pic" src="/images/icon/msg-icon.png"></image>
+        </view>
+        <view class="msg-lists">
+            <view class="msg-list" wx:for="{{msgLists}}" wx:key="index" wx:for-item="info">
+                <view class="user-info">
+                    <image class="user-avatar" src="{{info.avatar}}"></image>
+                    <text class="user-name">{{info.userName}}</text>
+                    <view class="user-group">{{info.group}}</view>
+                    <view class="user-identity">{{info.identity}}</view>
+                    <view class="msg-time">{{info.time}}</view>
+                </view>
+                <view class="msg-from">回复了你在<text class="hl-from">{{info.from}}</text>中的{{info.operate}}信息</view>
+                <view class="reply-word">{{info.msg}}</view>
+                <view class="input-area">
+                    <textarea class="reply-textarea-style" placeholder-class="textarea-placeholder" id="" placeholder="{{info.fromMsg}}"></textarea>
+                </view>
+                <view class="operate-area">
+                    <view class="operate-btn">
+                        <view class="reply-btn">回复</view>
+                        <view class="delete-btn">删除</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

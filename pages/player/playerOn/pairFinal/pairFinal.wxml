@@ -1,0 +1,43 @@
+<!--决赛界面-->
+<view class="final-container">
+    <view class="once-more" wx:if="{{playerInfo1.status == 3}}">one more</view>
+    <view class="left">
+        <view class="player-vs">
+            <view class="player-square">
+                <image class="question-mark" src="/images/ask.png"></image>
+                <image class="player-pic1" ></image>
+            </view>
+        </view>
+        <view class="result">
+            <view class="res-word">
+                <view class="unknow" wx:if="{{playerInfo1.status == 2}}">?</view>
+                <view class="win" wx:if="{{playerInfo1.status == 1}}">win</view>
+                <view class="lose" wx:if="{{playerInfo1.status == 0}}">lose</view>
+            </view>
+            <view class="res-group">
+                <view class="group-left">{{playerInfo1.group}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="middle">
+        <image class="final-vs" src="/images/final-vs.png"></image>
+    </view>
+    <view class="right">
+    <view class="player-vs">
+        <view class="player-square">
+            <image class="question-mark" src="/images/ask.png"></image>
+            <image class="player-pic2"></image>
+        </view>
+        </view>
+        <view class="result">
+            <view class="res-word">
+                <view class="unknow" wx:if="{{playerInfo2.status == 2}}">?</view>
+                <view class="win" wx:if="{{playerInfo2.status == 1}}">win</view>
+                <view class="lose" wx:if="{{playerInfo2.status == 0}}">lose</view>
+            </view>
+            <view class="res-group">
+                <view class="group-right">{{playerInfo2.group}}</view>
+            </view>
+        </view>
+    </view>
+</view>

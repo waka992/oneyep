@@ -1,0 +1,30 @@
+<!--pages/masterCtrl/masterCtrl.wxml-->
+<view class="container flex-column-layout">
+    <navBar title="" back="{{true}}" home="{{false}}" background="{{'#191919'}}" bindback="backToUser">
+        <view class="white ml20 barTitle" slot="center">总控主页</view>
+    </navBar>
+    <view class="master-ctrl-container flex-column-layout" hover-class="none" hover-stop-propagation="false">
+        <view class="time-plan flex-column-layout">
+            <view class="time-plan-header">
+                <view class="title">活动时间规划</view>
+                <view class="icon">
+                    <image class="menu-icon" src="/images/icon/menu-icon.png" wx:if="{{!isComplete}}"></image>
+                    <image class="msg-icon" src="/images/icon/msg-icon.png" wx:if="{{!isComplete}}"></image>
+                </view>
+            </view>
+            <view class="time-plan-list" wx:if="{{!isComplete}}">
+                <view class="list-head">
+                    <view class="time">时间</view>
+                    <view class="node">节点</view>
+                </view>
+                <view class="list-items">
+                    <view class="list-item" wx:for="{{timePlanList}}" wx:key="index" catchtap="showDetail" data-nodeid="{{item.nodeId}}">
+                        <view class="time">{{item.time}}</view>
+                        <view class="node">{{item.node}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <ctrl-detail show="{{switchDetail}}" bind:showNode="showNode"></ctrl-detail>
+</view>

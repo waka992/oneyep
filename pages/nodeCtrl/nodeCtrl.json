@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "node-operate": "./nodeOperate/nodeOperate",
+    "release-dialog": "./releaseDialog/releaseDialog"
+  }
+}

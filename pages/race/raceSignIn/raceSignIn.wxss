@@ -1,0 +1,41 @@
+/* pages/race/raceSignIn/raceSignIn.wxss */
+.race-detail {
+    justify-content: center;
+}
+
+.race-detail-pic {
+    width: 670rpx;
+    height: 324rpx;
+    margin-bottom: 40rpx;
+}
+
+.race-detail-tips {
+    top: 5rpx;
+    right: 0;
+}
+
+.race-detail-title {
+    position: relative;
+    color: #fff;
+    font-size: 32rpx;
+    margin-bottom: 16rpx;
+}
+
+.race-detail-time {
+    color: #797979;
+    font-size: 13px;
+    margin-bottom: 16rpx;
+}
+
+.race-detail-address {
+    color: #797979;
+    font-size: 13px;
+    margin-bottom: 30rpx;
+}
+
+.race-detail-detail {
+    color: #B5B5B5;
+    font-size: 24rpx;
+    margin-bottom: 50rpx;
+    height: 300rpx;
+}

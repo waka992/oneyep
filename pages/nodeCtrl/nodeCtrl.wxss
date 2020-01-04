@@ -1,0 +1,150 @@
+/* pages/nodeCtrl/nodeCtrl.wxss */
+.time-plan-header {
+    position: relative;
+    height: 50rpx;
+    margin-top: 20rpx;
+}
+
+.time-detail {
+    color: #9C9C9C;
+    font-size: 28rpx;
+    margin-left: 50rpx;
+}
+
+.time-detail-duration {
+    margin-left: 30rpx;
+}
+
+.time-plan-list {
+    padding: 0 20rpx;
+}
+
+.title {
+    margin-left: 50rpx;
+    font-size: 32rpx;
+    float: left;
+    color: #fff;
+}
+
+.event {
+    position: absolute;
+    color: #fff;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 32rpx;
+}
+
+.icon {
+    float: right;
+}
+
+.menu-icon,.msg-icon {
+    width: 40rpx;
+    height: 30rpx;
+    margin-right: 40rpx;
+}
+
+.groups {
+    margin-top: 54rpx;
+}
+
+.group {
+    width: 670rpx;
+    min-height: 76rpx;
+    margin: 20rpx auto;
+    transition: all .8s;
+}
+
+.group-name {
+    display: inline-block;
+    font-size: 34rpx;
+    vertical-align: middle;
+    color: #fff;
+}
+
+.group-status {
+    float: right;
+    width:130rpx;
+    height:56rpx;
+    line-height: 56rpx;
+    background:#3A3A3A;
+    border-radius:28rpx;
+    text-align: center;
+    color: #fff;
+    vertical-align: middle;
+    font-size: 28rpx;
+    margin-right: 20rpx;
+}
+
+.collapse-icon {
+    width: 20rpx;
+    height: 36rpx;
+    transition: all .5s;
+    vertical-align: middle;
+    margin-left: 30rpx;
+    margin-right: 30rpx;
+}
+
+.finish {
+    background-color: #4D7AFF;
+}
+
+.open {
+    transform: rotate(90deg);
+}
+
+.task-lists {
+    width: 670rpx;
+    height: auto;
+    transition: all .8s;
+    overflow: hidden;
+}
+
+.collapse {
+    height: 0rpx;
+}
+
+.task-list {
+    width: 670rpx;
+    margin: 20rpx auto;
+    height: 60rpx;
+}
+
+.task-num {
+    margin: 0 20rpx;
+    width: 40rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    border: 1px solid #8d8d8d;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.task-num, .task-detail {
+    display: inline-block;
+    color: #8D8D8D;
+    font-size: 28rpx;
+    vertical-align: middle;
+}
+
+.task-status-icon, .task-status {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.task-status-icon {
+    width: 40rpx;
+    height: 40rpx;
+    margin-right: 40rpx;
+}
+
+.task-status {
+    color: #CA0000;
+    font-size: 28rpx;
+    float: right;
+    margin-right: 50rpx;
+}
+
+.complete {
+    color: #47B556;
+}

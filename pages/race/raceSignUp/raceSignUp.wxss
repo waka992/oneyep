@@ -1,0 +1,75 @@
+/* pages/race/raceSignUp/raceSignUp.wxss */
+.race-signup {
+}
+
+.race-signup-programs {
+    padding: 70rpx;
+}
+
+.race-signup-program {
+    margin-bottom: 32rpx;
+    height: 62rpx;
+}
+
+.race-signup-program-name {
+    float: left;
+}
+
+.race-signup-program-status {
+    float: right;
+    width: 144rpx;
+    height: 62rpx;
+    text-align: center;
+    line-height: 62rpx;
+    color: #fff;
+    border-radius: 31rpx;
+    font-size: 28rpx;
+    font-weight: normal;
+}
+.race-signup-program-status.no {
+    background-color: #5489F5;
+}
+.race-signup-program-status.already {
+    background-color: #4a4a4a;
+}
+
+.race-signup-notice {
+    width: 710rpx;
+    height: 272rpx;
+    padding: 0 30rpx 30rpx;
+    margin: 0 auto;
+    background-color: #666;
+    line-height: 1;
+}
+
+.race-signup-notice-title {
+    color: #fff;
+    font-size: 32rpx;
+    line-height: 32rpx;
+}
+
+.race-signup-notice-info {
+    color: #B5B5B5;
+    font-size: 24rpx;
+    line-height: 34rpx;
+}
+
+.race-signup-btn {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 230rpx;
+}
+
+/* 字体颜色备选 */
+.color1 {
+    color: #1D8E8A;
+}
+
+.color2 {
+    color: #EC3C8D;
+}
+
+.color3 {
+    color: #D84444;
+}

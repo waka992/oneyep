@@ -1,0 +1,48 @@
+<!--pages/nodeCtrl/nodeCtrl.wxml-->
+<view class="container">
+    <navBar title="" back="{{true}}" home="{{false}}" bindback="onBack">
+        <view class="white ml20 barTitle" slot="center">节点控制台</view>
+    </navBar>
+    <view class="master-ctrl-container" hover-class="none" hover-stop-propagation="false">
+        <view class="time-plan">
+            <view class="time-plan-header">
+                <view class="title">{{'节点'}}</view>
+                <view class="event">{{nodeName}}</view>
+                <view class="icon">
+                    <image class="menu-icon" src="/images/icon/menu-icon.png" catchtap="menuClick"></image>
+                    <image class="msg-icon" src="/images/icon/msg-icon.png" catchtap="msgClick"></image>
+                </view>
+            </view>
+            <view class="time-detail">时间：{{startTime + '-' + endTime}}</view>
+            <view class="groups">
+               <view class="group" wx:for="{{groups}}" wx:key="index">
+                   <view class="group-head" catchtap="openGroup" data-index="{{index}}">
+                        <image class="collapse-icon {{openIndex === index ? 'open' : ''}}" src="/images/icon/collapse-icon.png"></image>
+                        <view class="group-name">{{item.name}}</view>
+                        <view class="group-status {{Number(item.status) ? 'finish' : ''}}">
+                            {{Number(item.status) ? '已完成' : '未完成'}}
+                        </view>
+                    </view>
+                   <view class="task-lists {{openIndex === index ? '' : 'collapse'}}">
+                       <view class="task-list" wx:for="{{item.tasks}}" wx:for-item="tItem" wx:for-index="tIndex" wx:key="tI">
+                            <view class="task-num">
+                                {{ tIndex + 1 }}
+                            </view>
+                            <view class="task-detail">
+                                {{tItem.taskName}}
+                            </view>
+                            <view wx:if="{{item.canOperate}}" class="task-status {{Number(tItem.status) ? 'complete' : ''}}" catchtap="taskClick">
+                                <image class="task-status-icon" src="{{Number(tItem.status) ? '/images/icon/complete-icon.png' : '/images/icon/uncomplete-icon.png'}}"></image>
+                                操作
+                            </view>
+                       </view>
+                   </view>
+               </view>
+            </view>
+        </view>
+    </view>
+    <node-operate show="{{switchNodeOperate}}" operateList="{{operateList}}" bind:operate="operate" bind:close="closeNode"></node-operate>
+    <node-operate show="{{switchTaskOperate}}" operateList="{{operateList3}}" bind:operate="operate" bind:close="closeTask"></node-operate>
+    <release-dialog show="{{switchRelease}}" bind:close="closeRelease"></release-dialog>
+</view>
+

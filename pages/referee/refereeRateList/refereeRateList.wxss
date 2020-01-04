@@ -1,0 +1,33 @@
+/* pages/referee/refereeRateList/refereeRateList.wxss */
+.referee-rate-list {
+    margin: 0 auto;
+    overflow-y: auto;
+    margin-top: 134rpx;
+    max-height: 1050rpx;
+}
+
+.list {
+    position: relative;
+    display: inline-block;
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 8rpx;
+    background-color: #4a4a4a;
+    line-height: 80rpx;
+    text-align: center;
+    color: #fff;
+    font-size: 40rpx;
+    margin: 20rpx 0 20rpx 60rpx;
+}
+
+.rated {
+    background-color: #4D7AFF;
+}
+
+.tick {
+    position: absolute;
+    width: 26rpx;
+    height: 22rpx;
+    right: 4rpx;
+    bottom: 4rpx;
+}

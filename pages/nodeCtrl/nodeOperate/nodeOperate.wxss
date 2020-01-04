@@ -1,0 +1,49 @@
+/* pages/nodeCtrl/nodeOperate/nodeOperate.wxss */
+.mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0,0,0,.8);
+}
+
+.node-operate {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.operate-lists {
+    position: absolute;
+    width: 100%;
+    background-color: #232425;
+    bottom: 0;
+    left: 0;
+}
+
+.operate-list {
+    width: 590rpx;
+    height: 68rpx;
+    line-height: 68rpx;
+    margin: 20rpx auto;
+    text-align: center;
+    background-color: #4A4A4A;
+    border-radius: 6rpx;
+}
+
+.operate-img {
+    width: 40rpx;
+    height: 40rpx;
+    display: inline-block;
+    margin-right: 20rpx;
+    vertical-align: middle;
+}
+
+.operate-word {
+    font-size: 34rpx;
+    color: #fff;
+    vertical-align: middle;
+}

@@ -1,0 +1,57 @@
+/**index.wxss**/
+@import "/app.wxss";
+@import "/pages/race/raceList/raceList.wxss";
+.container {
+  background-color: #000;
+}
+.swiper-container {
+  height: 395rpx;
+  position: relative; 
+}
+
+.swiper {
+  height: 365rpx;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.swiper image {
+  position: absolute;
+  height: 365rpx;
+  width: 670rpx;
+  border-radius: 5px;
+}
+
+.swiper image.quiet {
+  width: 630rpx;
+  margin:0 20rpx;
+}
+
+/*用来包裹所有的小圆点  */
+.dots{  
+  width: 112rpx;
+  height: 8rpx; 
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  left: 328rpx;
+  bottom: 0rpx;
+}  
+/*未选中时的小圆点样式 */
+.dot{
+  width: 24rpx;  
+  height: 8rpx;   
+  margin-right: 20rpx;
+  background-color: #7A7A7A;
+}  
+/*选中以后的小圆点样式  */
+.active{  
+  background-color: #4D7AFF;
+}
+
+.raceList-template {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 98rpx;
+}
