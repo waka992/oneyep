@@ -1,9 +1,9 @@
 {
   "pages": [
-    "pages/masterCtrl/masterCtrl",
-    "pages/user/user",
     "pages/index/index",
+    "pages/masterCtrl/masterCtrl",
     "pages/nodeCtrl/nodeCtrl",
+    "pages/user/user",
     "pages/authorization/authorization",
     "pages/race/raceSignUp/raceSignUp",
     "pages/race/raceDetail/raceDetail",
@@ -23,7 +23,6 @@
     "navigationBarTextStyle": "white",
     "navigationStyle": "custom"
   },
-  "style": "v2",
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
     "navBar": "/components/navBar/navBar"

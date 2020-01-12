@@ -7,36 +7,51 @@ Component({
     show: {type: Boolean, value: false},
     operateList: {type: Array, value: []},
   },
-
+  lifetimes: {
+    attached: function() {
+      this.showPicker()
+    },
+  },
+  // 以下是旧式的定义方式，可以保持对 <2.2.3 版本基础库的兼容
+  attached: function() {
+    this.showPicker()
+  },
   /**
    * 组件的初始数据
    */
   data: {
-    // operateList: [
-    //   {imgSrc:'/images/icon/icon-start.png', word: '开始'}, 
-    //   {imgSrc:'/images/icon/icon-urge.png', word: '催办'},
-    //   {imgSrc:'/images/icon/icon-reback.png', word: '回滚'},
-    //   {imgSrc:'/images/icon/icon-end.png', word: '结束'},
-    //   {imgSrc:'/images/icon/icon-share.png', word: '分享'},
-    // ],
-    // operateList3: [
-    //   {imgSrc:'/images/icon/icon-start.png', word: '开始'}, 
-    //   {imgSrc:'/images/icon/icon-end.png', word: '结束'},
-    //   {imgSrc:'/images/icon/icon-feedback.png', word: '反馈'},
-    // ]
+    animationData: null
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
+    showPicker() {
+      var that = this;
+      var animation = wx.createAnimation({
+        duration: 500,
+        timingFunction: 'ease'
+      })
+      that.animation = animation
+      animation.translateY(300).step()
+      that.setData({
+        animationData: animation.export(),
+      })
+      setTimeout(function () {
+        animation.translateY(0).step()
+        that.setData({
+          animationData: animation.export()
+        })
+      }, 50)
+    },
     doTask(evt) {
       console.log(evt);
-      this.triggerEvent('operate', {word: evt.currentTarget.dataset.task})
-      this.triggerEvent('close')
+      this.triggerEvent('operate', {type: evt.currentTarget.dataset.type})
+      this.triggerEvent('close', )
     },
     close() {
-      this.triggerEvent('close')
+      this.triggerEvent('close', '')
     }
   }
 })

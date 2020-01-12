@@ -1,0 +1,88 @@
+/* pages/masterCtrl/ctrlDetail/ctrlDetail.wxss */
+.ctrl-detail {
+    position: relative;
+}
+
+.mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0,0,0,.8);
+}
+
+.ctrl-detail-btn {
+    bottom: 40rpx;
+}
+
+.pickerView {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.picker-column {
+    position: relative;
+    color: white;
+    background-color: #232425;
+}
+
+.picker-view {
+    height: 420rpx;
+    width: 100%;
+    /* padding-bottom: 130rpx; */
+    /* position: absolute; */
+    /* left: 0; */
+    /* bottom: 0; */
+}
+
+.node-lists {
+    padding-top: 34rpx;
+    padding-bottom: 34rpx;
+    color: #8D8D8D;
+    font-size: 24rpx;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 618rpx;
+    width: 750rpx;
+    background-color: #232425;
+}
+
+.node-list {
+    display: flex;
+    height: 74rpx;
+    line-height: 74rpx;
+    color: #fff;
+}
+
+.evt {
+    flex:1.5;
+    padding-right: 40rpx;
+    text-align: right;
+    color: #fff;
+}
+
+.time,
+.duration {
+    text-align: center;
+    flex: 1;
+    color: #fff;
+}
+
+.hl {
+    color: #fff;
+    font-size: 26rpx;
+}
+
+.custom-btn {
+    width: 482rpx !important;
+    height: 90rpx;
+    line-height: 90rpx;
+    border-radius: 45rpx;
+    background: linear-gradient(to right, #5c3cde, #5489f5);
+    font-size: 36rpx;
+    color: #fff;
+    font-weight: normal;
+  }

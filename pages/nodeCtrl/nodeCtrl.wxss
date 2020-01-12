@@ -1,4 +1,8 @@
 /* pages/nodeCtrl/nodeCtrl.wxss */
+.master-ctrl-container {
+    flex: 1;
+}
+
 .time-plan-header {
     position: relative;
     height: 50rpx;

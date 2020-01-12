@@ -1,0 +1,22 @@
+<!--pages/masterCtrl/ctrlDetail/ctrlDetail.wxml-->
+<view class="ctrl-detail">
+    <view class="mask" catchtap="close"></view>
+    <view class="node-lists" animation="{{animationData}}">
+        <picker-view bindchange="change"  
+        class='picker-view'
+        mask-style="background:#232425; z-index:0;">
+            <picker-view-column class="picker-column">
+                <view class="node-list" wx:for="{{nodeList}}" wx:key="index">
+                    <view class="evt">{{item.event}}</view>
+                    <view class="time">开始:{{item.startTime}}</view>
+                </view>
+            </picker-view-column>
+        </picker-view>
+
+        <!-- <view class="node-list {{index === 2 ? 'hl' : ''}}" wx:for="{{nodeList}}" wx:key="index">
+            <view class="evt">{{item.event}}</view>
+            <view class="time">开始:{{item.startTime}}</view>
+        </view> -->
+    </view>
+    <button class="custom-btn ctrl-detail-btn" catchtap="showDetail">确定</button>
+</view>

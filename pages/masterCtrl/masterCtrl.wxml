@@ -26,5 +26,5 @@
             </view>
         </view>
     </view>
-    <ctrl-detail show="{{switchDetail}}" bind:showNode="showNode"></ctrl-detail>
+    <ctrl-detail wx-if="{{switchDetail}}" show="{{switchDetail}}" nodeList="{{showDetailList}}" bind:showNode="showNode" bind:closeNode="closeNode"></ctrl-detail>
 </view>

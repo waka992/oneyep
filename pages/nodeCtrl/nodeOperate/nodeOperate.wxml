@@ -1,10 +1,15 @@
 <!--pages/nodeCtrl/nodeOperate/nodeOperate.wxml-->
-<view class="node-operate" wx:if="{{show}}" >
+<view class="node-operate">
     <view class="mask" catchtap="close"></view>
-    <view class="operate-lists">
-        <view class="operate-list" wx:for="{{operateList}}" wx:key="index" catchtap="doTask" data-task="{{item.word}}">
-            <image class="operate-img" src="{{item.imgSrc}}"></image>
-            <text class="operate-word">{{item.word}}</text>
+    <view class="operate-lists" animation="{{animationData}}">
+        <view class="operate-list" wx:for="{{operateList}}" wx:key="index" catchtap="doTask" data-type="{{item.type}}">
+            <view class="operate-list" wx:if="{{item.word != '分享'}}">
+                <image class="operate-img" src="{{item.imgSrc}}"></image>
+                <text class="operate-word">{{item.word}}</text>
+            </view>
+            <view class="operate-list" wx:if="{{item.word == '分享'}}">
+                <button class="share-btn" open-type="share"><image class="operate-img" src="{{item.imgSrc}}"></image>分享</button>
+            </view>
         </view>
     </view>
 </view>

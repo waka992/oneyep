@@ -11,7 +11,6 @@ const request = (url, options) => {
             //    'x-token': 'x-token'  // 看自己是否需要
            },
            success(request) {
-               console.log(request);
                if (request.data && request.data.code == 1) {
                    resolve(request.data.data)
                } else {

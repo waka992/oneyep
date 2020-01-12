@@ -6,16 +6,15 @@ Component({
   properties: {
     show: {type: Boolean, value: false},
     nodeList: {type: Array, value: []},
-    animationData: null,
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    // nodeList: [
-    //   {nodeName: '选手签到', beginTime: '11:00', duration: '1\'00"'},
-    // ]
+    label: "event",
+    selectValues: 0,
+    animationData: null
   },
   lifetimes: {
     attached: function() {
@@ -31,6 +30,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    change(e) {
+      this.setData({
+        selectValues: e.detail.value[0]
+      })
+    },
     showPicker() {
       var that = this;
       var animation = wx.createAnimation({
@@ -38,7 +42,7 @@ Component({
         timingFunction: 'ease'
       })
       that.animation = animation
-      animation.translateY(300).step()
+      animation.translateY(200).step()
       that.setData({
         animationData: animation.export(),
       })
@@ -50,11 +54,11 @@ Component({
       }, 50)
     },
     showDetail(e) {
-      console.log(e);
-      this.triggerEvent('showNode', e)
+      let data = this.data
+      this.triggerEvent('showNode', data.nodeList[data.selectValues])
     },
     close() {
-      this.triggerEvent('closeNode')
+      this.triggerEvent('close')
     }
   }
 })

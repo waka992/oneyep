@@ -1,12 +1,12 @@
 <!--pages/nodeCtrl/nodeCtrl.wxml-->
-<view class="container">
+<view class="container flex-column-layout">
     <navBar title="" back="{{true}}" home="{{false}}" bindback="onBack">
         <view class="white ml20 barTitle" slot="center">节点控制台</view>
     </navBar>
     <view class="master-ctrl-container" hover-class="none" hover-stop-propagation="false">
         <view class="time-plan">
             <view class="time-plan-header">
-                <view class="title">{{'节点'}}</view>
+                <view class="title" catchtap="menuClick">{{'节点'}}</view>
                 <view class="event">{{nodeName}}</view>
                 <view class="icon">
                     <image class="menu-icon" src="/images/icon/menu-icon.png" catchtap="menuClick"></image>
@@ -31,8 +31,9 @@
                             <view class="task-detail">
                                 {{tItem.taskName}}
                             </view>
-                            <view wx:if="{{item.canOperate}}" class="task-status {{Number(tItem.status) ? 'complete' : ''}}" catchtap="taskClick">
-                                <image class="task-status-icon" src="{{Number(tItem.status) ? '/images/icon/complete-icon.png' : '/images/icon/uncomplete-icon.png'}}"></image>
+                            <!-- status 0未开始 1进行中 2结束 -->
+                            <view wx:if="{{item.canOperate}}" class="task-status {{tItem.taskStatus == 2 ? 'complete' : ''}}" catchtap="taskClick" data-nodeid="{{tItem.id}}" data-status="{{tItem.taskStatus}}">
+                                <image class="task-status-icon" src="{{tItem.taskStatus == 2 ? '/images/icon/complete-icon.png' : '/images/icon/uncomplete-icon.png'}}"></image>
                                 操作
                             </view>
                        </view>
@@ -41,8 +42,9 @@
             </view>
         </view>
     </view>
-    <node-operate show="{{switchNodeOperate}}" operateList="{{operateList}}" bind:operate="operate" bind:close="closeNode"></node-operate>
-    <node-operate show="{{switchTaskOperate}}" operateList="{{operateList3}}" bind:operate="operate" bind:close="closeTask"></node-operate>
-    <release-dialog show="{{switchRelease}}" bind:close="closeRelease"></release-dialog>
+    <node-operate wx:if="{{switchNodeOperate}}" show="{{switchNodeOperate}}" operateList="{{operateList}}" bind:operate="operateNode" bind:close="closeNode"></node-operate>
+    <node-operate wx:if="{{switchTaskOperate}}" show="{{switchTaskOperate}}" operateList="{{showOperateList3}}" bind:operate="operate" bind:close="closeTask"></node-operate>
+    <release-dialog wx:if="{{switchRelease}}" show="{{switchRelease}}" bind:close="closeRelease" bind:release="sendRelease"></release-dialog>
+    <my-picker wx:if="{{switchBackNode}}" show="{{switchBackNode}}" nodeList="{{timePlanList}}" bind:showNode="toBackNode" bind:close="closeBackDialog"></my-picker>
 </view>
 
