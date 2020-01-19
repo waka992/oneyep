@@ -1,70 +1,53 @@
 // pages/referee/refereeBattle/refereeBattleList/refereeBattleList.js
+import api from '../../../../api/api'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    group: 0, // x强
+    playerList: []
   },
   backToRefereeBattle() {
     wx.navigateBack({
       delta: 1
     });
   },
+  // 获取battle列表
+  getBattleList(param) {
+    api.post('room/event/getBattleGroupMap', param).then(res => {
+      if (res) {
+        let groups = []
+        for (const key in res) {
+          if (res.hasOwnProperty(key)) {
+            const element = res[key];
+            for (const k in element) {
+              if (element.hasOwnProperty(k)) {
+                const group = element[k];
+                groups.push(group)
+              }
+            }
+          }
+        }
+        let x = 0
+        if (Object.keys(res) && Object.keys(res)[0]) {
+          x = Number(Object.keys(res)[0])
+        }
+        this.setData({
+          group: x,
+          playerList: groups,
+        })
+        // fn && fn()
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options);
+    let param = JSON.parse(options.param)
+    this.getBattleList(param)
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

@@ -81,7 +81,8 @@
 }
 
 .list-items {
-    height: 850rpx;
+    /* height: 850rpx; */
+    flex: 1;
     /* padding-bottom: 150rpx; */
     overflow-y: auto;
 }

@@ -12,7 +12,7 @@
                     <image class="msg-icon" src="/images/icon/msg-icon.png" wx:if="{{!isComplete}}"></image>
                 </view>
             </view>
-            <view class="time-plan-list" wx:if="{{!isComplete}}">
+            <view class="time-plan-list flex-column-layout" wx:if="{{!isComplete}}">
                 <view class="list-head">
                     <view class="time">时间</view>
                     <view class="node">节点</view>

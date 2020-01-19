@@ -1,9 +1,13 @@
 {
   "pages": [
+    "pages/referee/refereeBattle/refereeBattle",
+    "pages/referee/refereeBattle/refereeBattleList/refereeBattleList",
+    "pages/referee/refereeRate/refereeRate",
+    "pages/referee/referee",
+    "pages/user/user",
     "pages/index/index",
     "pages/masterCtrl/masterCtrl",
     "pages/nodeCtrl/nodeCtrl",
-    "pages/user/user",
     "pages/authorization/authorization",
     "pages/race/raceSignUp/raceSignUp",
     "pages/race/raceDetail/raceDetail",
@@ -11,13 +15,9 @@
     "pages/activityProcess/activityProcess",
     "pages/pay/pay",
     "pages/race/raceSignIn/raceSignIn",
-    "pages/referee/referee",
     "pages/scan/scan",
     "pages/myMessage/myMessage",
-    "pages/player/playerOn/playerOn",
-    "pages/referee/refereeRate/refereeRate",
-    "pages/referee/refereeBattle/refereeBattle",
-    "pages/referee/refereeBattle/refereeBattleList/refereeBattleList"
+    "pages/player/playerOn/playerOn"
   ],
   "window": {
     "navigationBarTextStyle": "white",

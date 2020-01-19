@@ -116,7 +116,7 @@ Page({
       // 裁判
       case 3:
           wx.navigateTo({
-            url: '/pages/referee/referee?isComplete=false',
+            url: `/pages/referee/referee?isComplete=false&id=${eventid}`,
           })
         break
       // 选手
@@ -170,7 +170,6 @@ Page({
    */
   onLoad: function (options) {
     let sessionKey = wx.getStorageSync('sessionKey');
-    console.log('sesKey', sessionKey);
   },
   // 查询授权
   checkAuthorization() {
@@ -193,6 +192,7 @@ Page({
                       iv: iv,
                       sessionKey: sessionKey,
                     }).then((res) => {
+                      if (res.openId) {wx.setStorageSync('openid', res.openId);}
                       wx.hideLoading();
                     }).catch((error) => {
                       console.log(error);
@@ -206,6 +206,7 @@ Page({
   // 获取赛事列表
   getList() {
     let userId = wx.getStorageSync('openid')
+    console.log(userId);
     if (!userId) {return}
     wx.showLoading({
       mask: true,
@@ -245,6 +246,9 @@ Page({
       this.getTabBar().setData({
         selected: 1
       })
+    }
+    if (wx.getStorageSync('sessionKey')) {
+      this.checkAuthorization()
     }
     let that = this
     this.getList()

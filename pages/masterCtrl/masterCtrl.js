@@ -75,7 +75,7 @@ Page({
   getNodes(opt) {
     let {roleId, id} = opt
     // roleId = '001' // 测试
-    id = '001' // 测试
+    // id = '001' // 测试
     this.setData({eventId: id})
     api.post('node/eventAllNode', {id: id, userId: wx.getStorageSync('openid')}).then(res => {
       let list = res

@@ -13,7 +13,7 @@
             </view>
         </view>
         <view class="referee-battle-lists">
-            <view class="list-item">
+            <view class="list-item" wx:for="{{playerList}}" wx:key="index">
                 <view class="group1">
                     <image class="res-icon" src="{{'/images/icon/icon-win.png'}}"></image>
                     <view class="group-no bgpink">A1</view>

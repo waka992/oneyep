@@ -1,4 +1,7 @@
 // pages/referee/referee.js
+let app = getApp().globalData;
+import api from '../../api/api'
+
 Page({
 
   /**
@@ -8,9 +11,21 @@ Page({
     isComplete: true
   },
   start() {
-    wx.navigateTo({
-      url: '/pages/referee/refereeRate/refereeRate',
+    // 先查询当前比赛状态（海选还是battle
+    let param = {
+      id: '001', // 赛事id
+      userId: wx.getStorageSync('openid')
+    }
+    api.post('/node/getCurrentNode', param).then(res => {
+      console.log(res);
     })
+    return
+    let flag = 1 // 当前是海选还是battle
+    if (flag == 1) {
+      wx.navigateTo({
+        url: '/pages/referee/refereeRate/refereeRate',
+      })
+    }
   },
   complete() {
     // 还要请求一下重新开始的裁判状态
@@ -34,9 +49,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let isComplete = options.isComplete === 'true' ? true : false
+    console.log(options);
+    let isComplete = options.isComplete === 'true' ? true : false // 是否已完成评分
+    let id = options.id
     this.setData({
-      isComplete: isComplete
+      isComplete: isComplete,
+      eventId: id,
     })
   },
 

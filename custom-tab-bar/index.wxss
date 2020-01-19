@@ -6,18 +6,19 @@
   height: 98rpx;
   background: #303030;
   display: flex;
+  /* padding-bottom: env(safe-area-inset-bottom); */
   margin-bottom: constant(safe-area-inset-bottom);
   margin-bottom: env(safe-area-inset-bottom);
 }
 
-.gap {
+/* .gap {
   position: fixed;
   bottom: 0;
   width: 100%;
   height: constant(safe-area-inset-bottom);
   height: env(safe-area-inset-bottom);
   background-color: #303030;
-}
+} */
 
 .tab-bar-border {
   background-color: rgba(0, 0, 0, 0.33);

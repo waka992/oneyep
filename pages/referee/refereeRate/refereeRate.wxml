@@ -4,25 +4,26 @@
         <view class="white ml20 barTitle" slot="left">裁判</view>
     </navBar>
     <view class="mask"></view>
-    <image class="player-pic" src="/images/player-video.png" wx:if="{{!showRateList}}"></image>
+    <image class="player-pic" src="{{'/images/player-video.png'}}" wx:if="{{!showRateList}}"></image>
     <view class="rate-container" wx:if="{{!showRateList}}">
         <view class="rate-head">
             <text class="title">HipHop 海选</text>
             <image class="list-pic" src="/images/icon/menu-icon.png" catchtap="openList"></image>
         </view>
         <view class="select-area">
-            <image class="arow-left" src="/images/icon/arow-left.png"></image>
-            <image class="arow-right" src="/images/icon/arow-right.png"></image>
-            <view class="player-num">8</view>
+            <image class="arow-left" src="/images/icon/arow-left.png" catchtap="goPrevious"></image>
+            <image class="arow-right" src="/images/icon/arow-right.png" catchtap="goNext"></image>
+            <view class="player-num">{{currentPlayer.num}}</view>
         </view>
         <view class="rate-bottom">
             <view class="rate-area">
-                <view class="intro">请您为8号选手评分</view>
-                <input class="rate-input" type="text"/>
+                <view class="intro">请您为{{currentPlayer.num}}号选手评分</view>
+                <input class="rate-input" type="number" maxlength="3" bindinput="scoreEdit" type="text"/>
             </view>
             <view class="rate-btn" catchtap="confirmRate">确认评分</view>
         </view>
     </view>
+    <!-- 评分列表 -->
     <view class="rate-list" wx:if="{{showRateList}}">
         <view class="rate-head2">
             <text class="title">HipHop 海选</text>
@@ -31,6 +32,6 @@
                 <image class="back-pic" src="/images/icon/icon-back.png"></image>
             </view>
         </view>
-        <referee-rate-list show="{{showRateList}}"></referee-rate-list>
+        <referee-rate-list show="{{showRateList}}" playerList="{{playerList}}"></referee-rate-list>
     </view>
 </view>

@@ -8,7 +8,7 @@ Page({
    */
   data: {
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-
+    from: '',
   },
   // 返回
   onBack() {
@@ -32,11 +32,19 @@ Page({
         }).then(res => {
           console.log("getuserinfo成功！");
         })
-        //授权成功后，跳转进入小程序首页
-        wx.switchTab({
-            url: '/pages/user/user'  
-        })
-    } else {
+        if (this.data.from == 'enroll') {
+          console.log(this.data.from);
+          wx.navigateBack({
+            delta: 1
+          })
+        }
+        else {
+          //授权成功后，跳转进入小程序首页
+          wx.switchTab({
+              url: '/pages/user/user'  
+          })
+        }
+      } else {
         //用户按了拒绝按钮
         wx.showModal({
             title:'警告',
@@ -55,7 +63,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if (options.from) {
+      this.setData({
+        from: options.from
+      })
+    }
   },
 
   /**

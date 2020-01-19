@@ -3,7 +3,7 @@
     <navBar title="" back="{{true}}" home="{{false}}" bindback="onBack">
         <view class="white barTitle" slot="center">玩野文化</view>
     </navBar>
-    <view wx:if="{{canIUse}}" style="color:#fff;">
+    <view class="auth-page" wx:if="{{canIUse}}" style="color:#fff;">
         <view class='header'>微信授权</view>
         <view class='content'>
             <view>申请获取以下权限</view>
