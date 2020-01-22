@@ -26,7 +26,6 @@
     height: 750rpx;
     border-radius: 6px;
     background-color: #4D7AFF;
-    z-index: 99;
 }
 
 .race-name, .rank {
@@ -97,9 +96,4 @@
 
 .loser {
     color: #4D7AFF;
-}
-
-/* 平局 */
-.draw {
-    color: #D3D3D3;
 }

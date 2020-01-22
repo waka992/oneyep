@@ -4,7 +4,8 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    show: {type: Boolean, default: true}
+    show: {type: Boolean, default: true},
+    rankList: {type: Array, default: []},
   },
 
   /**
@@ -13,15 +14,6 @@ Component({
   data: {
     raceName: '对决赛-FreeStyle16进8',
     isWin: false,
-    rankList: [
-      { group1: 'A1', group2: 'A2', winner: 'A1'},
-      { group1: 'A1', group2: 'A2', winner: 'A1'},
-      { group1: 'A1', group2: 'A2', winner: 'A2'},
-      { group1: 'A1', group2: 'A2', winner: 'A1'},
-      { group1: 'A1', group2: 'A2', winner: 'A2'},
-      { group1: 'A1', group2: 'A2', winner: 'A1'},
-      { group1: 'G1', group2: 'G2', winner: 'G2'},
-    ]
   },
 
   /**

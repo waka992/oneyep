@@ -1,4 +1,4 @@
-// pages/player/playerOn/playerOn.js
+// 当前是海选查看成绩
 import api from '../../../api/api'
 Page({
   /**
@@ -13,7 +13,8 @@ Page({
     time: '12:25-12:55',
     hasPrev: false,
     hasNext: true,
-    showFinalRankList: true, // 展开battle名单
+    showRankList: false, // 展开海选名单
+    showFinalRankList: false, // 展开battle名单
     itemUserId: '', // 当前选手id
     rating: false, // 比赛是否进行中
     playerList: [],
@@ -28,7 +29,7 @@ Page({
   },
   openRankList() {
       this.setData({
-        showFinalRankList: true
+        showRankList: true
       })
   },
   toNext() {
