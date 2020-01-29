@@ -12,11 +12,11 @@
             <view class="list-info">
                 <view class="list" wx:for="{{rankList}}" wx:key="index">
                     <!-- class = draw平局 -->
-                    <view class="list-item {{item.battleLeft.id == item.winBattle.id ? 'winner' : 'loser'}}">{{item.battleLeft.nickName}}</view>
+                    <view class="list-item {{item.battleLeft.isWin == 1 ?'winner' : item.battleLeft.isWin == 0 && item.battleRight.isWin == 0 ? 'draw' : item.battleLeft.isWin == 0 ? 'loser' : 'draw' }}">{{item.battleLeft.itemNum}}</view>
                     <view class="list-item">
                         <image class="icon-vs" src="/images/icon/icon-vs-light.png"></image>
                     </view>
-                    <view class="list-item {{item.battleRight.id == item.winBattle.id ? 'winner' : 'loser'}}">{{item.battleRight.nickName}}</view>
+                    <view class="list-item {{item.battleRight.isWin == 1 ?'winner' : item.battleLeft.isWin == 0 && item.battleRight.isWin == 0 ? 'draw' : item.battleRight.isWin == 0 ? 'loser' : 'draw' }}">{{item.battleRight.itemNum}}</view>
                 </view>
             </view>
         </view>

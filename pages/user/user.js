@@ -31,7 +31,10 @@ Page({
       { text: '选手', value: 4, icon: '/images/icon/player-icon.png' },
     ], // 固定组用于筛选groups
     groups: [],
-    returnIdentity: [] // 返回的身份列表
+    returnIdentity: [], // 返回的身份列表
+    page: 0,
+    totalList: 0,
+    timer: null,
   },
   // 授权界面
   auth() {
@@ -171,6 +174,13 @@ Page({
   onLoad: function (options) {
     let sessionKey = wx.getStorageSync('sessionKey');
   },
+  // 下拉刷新
+  onPullDownRefresh() {
+    this.setData({
+      page: 0
+    })
+    this.getList()
+  },
   // 查询授权
   checkAuthorization() {
     let that = this
@@ -207,13 +217,16 @@ Page({
   getList() {
     let userId = wx.getStorageSync('openid')
     console.log(userId);
-    if (!userId) {return}
+    if (!userId) {
+      return
+    }
     wx.showLoading({
+      title: 'loading',
       mask: true,
     });
     let that = this
     api.post('event/myList', {
-      page: 0,
+      page: this.data.page,
       pageSize: 10,
       userId: userId
     }).then(res => {
@@ -223,19 +236,32 @@ Page({
         ele.endTime = ele.endTime.slice(0, 10)
       });
       that.setData({
-        raceList: arr
+        totalList: res.total, 
+        raceList: arr,
       })
+      wx.stopPullDownRefresh()
       wx.hideLoading();
     })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  // 底部加载更多
+  getMoreList() {
+    let {totalList, raceList, page} = this.data
+    if (totalList <= raceList.length) {return}
+    this.setData({
+      page: Number(page) + 1,
+    })
+    this.debounceGetList()
   },
-
+  // 获取赛事列表
+  debounceGetList() {
+    clearTimeout(this.data.timer)
+    let timer = setTimeout(() => {
+      this.getList()
+    }, 1000)
+    this.setData({
+      timer: timer
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -289,39 +315,4 @@ Page({
       }
     })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

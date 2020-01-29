@@ -64,7 +64,7 @@
 }
 
 .list-info {
-    height: 460rpx;
+    height: 500rpx;
     overflow-y: auto;
 }
 

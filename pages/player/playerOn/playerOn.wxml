@@ -26,7 +26,7 @@
             <!-- 赛事完结 -->
             <view class="race-detail" wx-if="{{chosenGroup.winBattle.itemUserId == itemUserId}}">
                 <image class="rank-list-btn" catchtap="openRankList" src="/images/icon/rank-list-open.png"></image>
-                <view class="race-detail-inner">{{'恭喜您\n晋级十六强'}}</view>
+                <view class="race-detail-inner">{{'恭喜您\n晋级'+ group +'强'}}</view>
             </view>
             <!-- 赛事信息 -->
             <view class="race-detail" wx-if="{{chosenGroup.winBattle.itemUserId != itemUserId}}">

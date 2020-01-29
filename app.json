@@ -1,15 +1,15 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/player/playerOn/playerOn",
-    "pages/player/playerOnAudition/playerOnAudition",
-    "pages/referee/refereeBattle/refereeBattle",
-    "pages/referee/refereeBattle/refereeBattleList/refereeBattleList",
-    "pages/referee/refereeRate/refereeRate",
-    "pages/referee/referee",
     "pages/user/user",
+    "pages/index/index",
     "pages/masterCtrl/masterCtrl",
     "pages/nodeCtrl/nodeCtrl",
+    "pages/player/playerOn/playerOn",
+    "pages/referee/refereeRate/refereeRate",
+    "pages/referee/refereeBattle/refereeBattleList/refereeBattleList",
+    "pages/referee/refereeBattle/refereeBattle",
+    "pages/player/playerOnAudition/playerOnAudition",
+    "pages/referee/referee",
     "pages/authorization/authorization",
     "pages/race/raceSignUp/raceSignUp",
     "pages/race/raceDetail/raceDetail",
@@ -22,7 +22,8 @@
   ],
   "window": {
     "navigationBarTextStyle": "white",
-    "navigationStyle": "custom"
+    "navigationStyle": "custom",
+    "enablePullDownRefresh": true
   },
   "sitemapLocation": "sitemap.json",
   "usingComponents": {

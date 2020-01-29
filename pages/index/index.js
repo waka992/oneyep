@@ -15,6 +15,7 @@ Page({
     previousmargin: '40rpx',//前边距
     nextmargin: '40rpx',//后边距
     page: 0,
+    totalList: 0, // 总数
     raceList: [
       // {
       // id: 0,
@@ -27,8 +28,16 @@ Page({
       // },
     ]
   },
+  // 下拉加载更多
   onReachBottom() {
     this.getMoreList()
+  },
+  // 下拉刷新
+  onPullDownRefresh() {
+    this.setData({
+      page: 0
+    })
+    this.getList()
   },
   //事件处理函数
   bindViewTap: function() {
@@ -79,15 +88,19 @@ Page({
         ele.endTime = ele.endTime.slice(0, 10)
       });
       that.setData({
+        totalList: res.total, 
         raceList: arr
       })
+      wx.stopPullDownRefresh()
       wx.hideLoading();
     })
   },
   // 底部加载更多
   getMoreList() {
+    let {totalList, raceList, page} = this.data
+    if (totalList <= raceList.length) {return}
     this.setData({
-      page: Number(this.data.page) + 1,
+      page: Number(page) + 1,
     })
     this.debounceGetList()
   },

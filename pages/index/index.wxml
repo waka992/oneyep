@@ -5,7 +5,7 @@
   </navBar>
   <view class="swiper-container">
     <swiper class="swiper" circular="{{true}}" autoplay="{{true}}" indicator-dots="{{indicatorDots}}" bindchange="swiperChange" previous-margin="{{previousmargin}}" next-margin="{{nextmargin}}">
-      <block wx:for="{{imgsArr}}" wx:key="{{index}}">
+      <block wx:for="{{imgsArr}}" wx:key="index">
         <swiper-item>
           <image class="{{index == currentSwiper ? ' active' : ' quiet'}}" src="{{item.url}}"></image>
         </swiper-item>
@@ -13,7 +13,7 @@
     </swiper>
     <!-- 重置小圆点的样式 -->
     <view class="dots">
-      <block wx:for="{{imgsArr}}" wx:key="{{index}}">
+      <block wx:for="{{imgsArr}}" wx:key="index">
         <view class="dot{{index == currentSwiper ? ' active' : ''}}"></view>
       </block>
     </view>

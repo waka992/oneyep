@@ -6,7 +6,7 @@
     </navBar>
     <view class="race-signup" hover-class="none" hover-stop-propagation="false">
         <view class="race-signup-programs" hover-class="none" hover-stop-propagation="false">
-            <view wx:for="{{programs}}" wx:key="{{index}}" class="race-signup-program" hover-class="none" hover-stop-propagation="false">
+            <view wx:for="{{programs}}" wx:key="index" class="race-signup-program" hover-class="none" hover-stop-propagation="false">
                 <view class="race-signup-program-name {{index % 3 == 0 ? 'color1' : index % 3 == 1 ? 'color2' : 'color3'}}" hover-class="none" hover-stop-propagation="false">
                     {{item.itemName}}
                 </view>

@@ -1,6 +1,6 @@
 <!--决赛界面-->
 <view class="final-container">
-    <view class="once-more" wx:if="{{playerInfo1.status == 3}}">one more</view>
+    <view class="once-more" wx:if="{{playerInfo.battleLeft.isWin == 0 && playerInfo.battleRight.isWin == 0}}">one more</view>
     <view class="left">
         <view class="player-vs">
             <view class="player-square">
@@ -10,12 +10,12 @@
         </view>
         <view class="result">
             <view class="res-word">
-                <view class="unknow" wx:if="{{!playerInfo.winBattle}}">?</view>
-                <view class="win" wx:if="{{playerInfo.winBattle && playerInfo.winBattle.id === playerInfo.battleLeft.id }}">win</view>
-                <view class="lose" wx:if="{{playerInfo.loseBattle && playerInfo.loseBattle.id === playerInfo.battleLeft.id}}">lose</view>
+                <view class="unknow" wx:if="{{playerInfo.battleLeft.isWin == -1}}">?</view>
+                <view class="win" wx:if="{{playerInfo.battleLeft.isWin == 1 }}">win</view>
+                <view class="lose" wx:if="{{playerInfo.battleLeft.isWin == 0}}">lose</view>
             </view>
             <view class="res-group">
-                <view class="group-left">{{playerInfo1.group}}</view>
+                <view class="group-left">{{playerInfo.battleLeft.itemNum}}</view>
             </view>
         </view>
     </view>
@@ -31,12 +31,12 @@
         </view>
         <view class="result">
             <view class="res-word">
-                <view class="unknow" wx:if="{{!playerInfo.winBattle}}">?</view>
-                <view class="win" wx:if="{{playerInfo.winBattle && playerInfo.winBattle.id === playerInfo.battleRight.id }}">win</view>
-                <view class="lose" wx:if="{{playerInfo.loseBattle && playerInfo.loseBattle.id === playerInfo.battleRight.id}}">lose</view>
+                <view class="unknow" wx:if="{{playerInfo.battleRight.isWin == -1}}">?</view>
+                <view class="win" wx:if="{{playerInfo.battleRight.isWin == 1}}">win</view>
+                <view class="lose" wx:if="{{playerInfo.battleRight.isWin == 0}}">lose</view>
             </view>
             <view class="res-group">
-                <view class="group-right">{{playerInfo2.group}}</view>
+                <view class="group-right">{{playerInfo.battleRight.itemNum}}</view>
             </view>
         </view>
     </view>
