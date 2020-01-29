@@ -7,8 +7,8 @@ Page({
   data: {
     ranking: '?',
     name: '陈某',
-    status: 0, // 0未开始
-    describe: '您未参与此项，请等待',
+    status: 1, // 0未开始
+    describe: '',
     raceName: '海选赛-HipHop',
     time: '12:25-12:55',
     hasPrev: false,
@@ -94,10 +94,11 @@ Page({
     }
     api.post('event/getEventUserInfo', param).then(res => {
       this.getBattleInfo({
-        itemUserId: res.id
+        itemUserId: res.id,
       })
       this.setData({
-        itemUserId: res.id
+        itemUserId: res.id,
+        name: res.userName,
       })
     })
   },
@@ -114,14 +115,27 @@ Page({
         if (res.length > 1) {
           hasNext = true
         }
-        let x = data.group
         this.setData({
-          group: x,
           chosenGroup: data,
           currentItems: res,
-          hasNext: hasNext
+          hasNext: hasNext,
         })
         // fn && fn()
+      }
+    })
+  },
+
+  // 获取赛事信息
+  getEventItem(info) {
+    // userid用itemuserid
+    let param = {eventId: 1, itemId: 1} // 测试用
+    api.post('room/event/getEventItem', param).then(res => {
+      if (res) {
+        this.setData({
+          raceName: `对决赛 - ${res.itemName}`,
+          title: res.itemName,
+          group: res.initRankGroup, // x强
+        })
       }
     })
   },
@@ -155,6 +169,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getUserItemInfo()
+    this.getUserItemInfo() // 获取当前用户信息
+    this.getEventItem()// 获取赛事信息
   },
 })

@@ -1,14 +1,14 @@
 {
   "pages": [
     "pages/user/user",
+    "pages/player/playerOnAudition/playerOnAudition",
+    "pages/player/playerOn/playerOn",
     "pages/index/index",
     "pages/masterCtrl/masterCtrl",
     "pages/nodeCtrl/nodeCtrl",
-    "pages/player/playerOn/playerOn",
     "pages/referee/refereeRate/refereeRate",
     "pages/referee/refereeBattle/refereeBattleList/refereeBattleList",
     "pages/referee/refereeBattle/refereeBattle",
-    "pages/player/playerOnAudition/playerOnAudition",
     "pages/referee/referee",
     "pages/authorization/authorization",
     "pages/race/raceSignUp/raceSignUp",

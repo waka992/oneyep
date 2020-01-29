@@ -203,6 +203,9 @@ Page({
                       sessionKey: sessionKey,
                     }).then((res) => {
                       if (res.openId) {wx.setStorageSync('openid', res.openId);}
+                      if (that.data.raceList.length == 0) {
+                        that.getList()
+                      }
                       wx.hideLoading();
                     }).catch((error) => {
                       console.log(error);
@@ -216,7 +219,6 @@ Page({
   // 获取赛事列表
   getList() {
     let userId = wx.getStorageSync('openid')
-    console.log(userId);
     if (!userId) {
       return
     }
@@ -235,9 +237,11 @@ Page({
         ele.beginTime = ele.beginTime.slice(0, 10)
         ele.endTime = ele.endTime.slice(0, 10)
       });
+      let orginArr = that.data.raceList
+      orginArr.push(...arr)
       that.setData({
         totalList: res.total, 
-        raceList: arr,
+        raceList: orginArr,
       })
       wx.stopPullDownRefresh()
       wx.hideLoading();

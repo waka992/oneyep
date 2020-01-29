@@ -87,9 +87,11 @@ Page({
         ele.beginTime = ele.beginTime.slice(0, 10)
         ele.endTime = ele.endTime.slice(0, 10)
       });
+      let orginArr = that.data.raceList
+      orginArr.push(...arr)
       that.setData({
         totalList: res.total, 
-        raceList: arr
+        raceList: orginArr
       })
       wx.stopPullDownRefresh()
       wx.hideLoading();

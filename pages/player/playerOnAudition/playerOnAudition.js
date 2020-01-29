@@ -1,4 +1,4 @@
-// 当前是海选查看成绩
+// 海选
 import api from '../../../api/api'
 Page({
   /**
@@ -7,17 +7,18 @@ Page({
   data: {
     ranking: '?',
     name: '陈某',
-    status: 0, // 0未开始
+    status: 1, // 0未开始
     describe: '您未参与此项，请等待',
     raceName: '海选赛-HipHop',
     time: '12:25-12:55',
     hasPrev: false,
-    hasNext: true,
-    showRankList: false, // 展开海选名单
+    hasNext: false,
     showFinalRankList: false, // 展开battle名单
     itemUserId: '', // 当前选手id
     rating: false, // 比赛是否进行中
     playerList: [],
+    currentItem: 0, // 当前第几个赛事
+    currentItems: [], // 当前选手赛事列表
     group: 0,
     chosenGroup: {}, // 当前查看组
   },
@@ -28,37 +29,119 @@ Page({
     })
   },
   openRankList() {
-      this.setData({
-        showRankList: true
-      })
+    this.getAuditionList()
+    this.setData({
+      showFinalRankList: true
+    })
   },
+  // 下一个赛事
   toNext() {
-
-  },
-  toPrevious() {
-
-  },
-  raceNoHandler(num) {
-    switch(num) {
-      case 1:
-          this.setData({
-            rating: false,
-          })
-          break
-      case 2:
-          this.setData({
-            rating: true
-          })
-          break
-      case 3:
-          this.setData({
-            rating: false,
-          })
-        break
+    let data = this.data
+    let { currentItem, currentItems} = data
+    if (currentItem >= currentItems.length - 1) {
+      wx.showToast({
+        title: '没有更多了',
+        icon: 'none',
+        duration: 1500,
+      });
+      return
+    }
+    else {
+      let num = currentItem + 1
+      let hasNext = true
+      // 最后一个
+      if (num == 0) {
+        hasNext = false
+      }
+      this.setData({
+        currentItem: num,
+        chosenGroup: currentItems[num],
+        hasNext:hasNext
+      })
     }
   },
+  // 上一个赛事
+  toPrevious() {
+    let data = this.data
+    let { currentItem, currentItems} = data
+    if (currentItem <= 0) {
+      wx.showToast({
+        title: '没有更多了',
+        icon: 'none',
+        duration: 1500,
+      });
+      return
+    }
+    else {
+      let num = currentItem - 1
+      let hasPrev = true
+      // 第一个
+      if (num == 0) {
+        hasPrev = false
+      }
+      this.setData({
+        currentItem: num,
+        chosenGroup: currentItems[num],
+        hasPrev: hasPrev
+      })
+    }
+  },
+  // 获取用户item信息
+  getUserItemInfo() {
+    let param = {
+      id: 1, // evnetid,测试用
+      userId: wx.getStorageSync('openid')
+    }
+    api.post('event/getEventUserInfo', param).then(res => {
+      this.getBattleInfo({
+        itemUserId: res.id
+      })
+      this.setData({
+        name: res.userName,
+        itemUserId: res.id
+      })
+    })
+  },
+
+  // 获取battle双方信息
+  getBattleInfo(info) {
+    // userid用itemuserid
+    let param = {eventId: 1, itemId: 1, userId: info.itemUserId} // 测试用
+    api.post('room/event/getUserBattle', param).then(res => {
+      if (res) {
+        // 处理组
+        let data = res[this.data.currentItem]
+        let hasNext = false
+        if (res.length > 1) {
+          hasNext = true
+        }
+        this.setData({
+          chosenGroup: data,
+          currentItems: res,
+          hasNext: hasNext
+        })
+        // fn && fn()
+      }
+    })
+  },
+
+  // 获取赛事信息
+  getEventItem(info) {
+    // userid用itemuserid
+    let param = {eventId: 1, itemId: 1} // 测试用
+    api.post('room/event/getEventItem', param).then(res => {
+      if (res) {
+        this.setData({
+          raceName: `海选赛 - ${res.itemName}`,
+          title: res.itemName,
+          group: res.initRankGroup, // x强
+        })
+      }
+    })
+  },
+
   // 获取battle列表
-  getBattleList() {
+  getAuditionList(fn) {
     let param = {eventId: 1, itemId: 1, judgeId: 1} // 测试用
     api.post('room/event/getBattleGroupMap', param).then(res => {
       if (res) {
@@ -75,22 +158,10 @@ Page({
             }
           }
         }
-        console.log(res);
-        let x = 0
-        if (Object.keys(res) && Object.keys(res)[0]) {
-          x = Number(Object.keys(res)[0])
-        }
-        // let leftInfo = groups[this.data.round].battleLeft
-        // let rightInfo = groups[this.data.round].battleRight
-        console.log(groups[0]);
         this.setData({
           playerList: groups,
-          group: x,
-          chosenGroup: groups[0]
-          // leftInfo: leftInfo,
-          // rightInfo: rightInfo,
         })
-        // fn && fn()
+        fn && fn()
       }
     })
   },
@@ -98,6 +169,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getBattleList()
+    this.getUserItemInfo() // 获取当前用户信息
+    this.getEventItem()// 获取赛事信息
   },
 })
