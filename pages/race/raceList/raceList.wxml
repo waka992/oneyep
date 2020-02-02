@@ -2,13 +2,14 @@
 <!-- 赛事列表 -->
 <!-- <scroll-view scroll-y='true' style="height:{{height}}px" bindscrolltolower='lower'> -->
     <view class="raceList-box">
-        <view class="raceList-container" wx:for="{{raceList}}" wx:for-item="race" wx:key="index" data-id="{{race.id}}" catchtap="showDetail">
+        <view class="raceList-container" wx:for="{{raceList}}" wx:for-item="race" wx:key="index" data-id="{{race.id}}" data-flowstatus="{{race.flowStatus}}" catchtap="showDetail">
             <!-- <image src="{{race.picUrl}}" class="race-pic"></image> -->
             <view class="race-detail">
                 <view class="race-title">{{race.eventName}}</view>
                 <view class="race-time">{{race.beginTime + '-' + race.endTime}}</view>
                 <view class="race-address">{{race.address}}</view>
             </view>
+            <!-- flowStatus 0草稿 1发布 2进行中 3结束 -->
             <view class="race-status onPlay" wx:if="{{race.flowStatus == 3}}">结束</view>
             <view class="race-status onPlay" wx:if="{{race.flowStatus == 2}}">进行中</view>
             <view class="race-status onReady" wx:if="{{race.flowStatus == 1}}">未开始</view>

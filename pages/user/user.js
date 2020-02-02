@@ -281,7 +281,6 @@ Page({
       this.checkAuthorization()
     }
     let that = this
-    this.getList()
     // 查看是否授权
     wx.checkSession({
       success () {
@@ -319,4 +318,7 @@ Page({
       }
     })
   },
+  onLoad: function() {
+    this.getList()
+  }
 })

@@ -5,15 +5,14 @@ Component({
    */
   properties: {
     show: {type: Boolean, default: true},
-    rankList: {type: Array, default: []},
+    playerList: {type: Array, default: []},
+    title: {type: String, default: ''},
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    raceName: '对决赛-FreeStyle16进8',
-    isWin: false,
   },
 
   /**
@@ -21,7 +20,6 @@ Component({
    */
   methods: {
     close() {
-      console.log('close')
       this.setData({
         show: false
       })

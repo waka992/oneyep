@@ -23,20 +23,42 @@
                 </view>
                 <view class="race-name">{{raceName}}</view>
             </view>
-            <!-- 赛事完结 -->
-            <view class="race-detail" wx-if="{{chosenGroup.winBattle.itemUserId == itemUserId}}">
-                <image class="rank-list-btn" catchtap="openRankList" src="/images/icon/rank-list-open.png"></image>
-                <view class="race-detail-inner">{{'恭喜您\n晋级'+ group +'强'}}</view>
+            <!-- 未开始 -->
+            <view wx-if="{{currentItemStatus == 'normal'}}">
+                <view class="race-detail">
+                    <view class="race-detail-inner">{{'赛事筹备中'}}</view>
+                </view>
             </view>
-            <!-- 赛事信息 -->
-            <view class="race-detail" wx-if="{{chosenGroup.winBattle.itemUserId != itemUserId}}">
-                <pair-final playerInfo="{{chosenGroup}}"></pair-final>
+            <!-- battle -->
+            <view wx-if="{{currentItemStatus == 'battle'}}">
+                <view class="race-detail" wx-if="{{battleFinish}}">
+                    <image class="rank-list-btn" catchtap="openRankList" src="/images/icon/rank-list-open.png"></image>
+                    <view class="race-detail-inner" wx-if="{{chosenGroup.winBattle.itemUserId == itemUserId}}">{{'恭喜您\n晋级'+ group +'强'}}</view>
+                    <view class="race-detail-inner" wx-if="{{chosenGroup.loseBattle.itemUserId == itemUserId}}">{{'很遗憾\n未能晋级'}}</view>
+                </view>
+                <!-- 赛事信息 -->
+                <view class="race-detail" wx-if="{{!battleFinish}}">
+                    <pair-final playerInfo="{{chosenGroup}}" judge="{{judge}}"></pair-final>
+                </view>
+                <view class="race-info">
+                    <text class="race-info-name">{{raceName}}</text>
+                    <text class="race-info-time">时间：{{time}}</text>
+                </view>
             </view>
-            <view class="race-info">
-                <text class="race-info-name">{{raceName}}</text>
-                <text class="race-info-time">时间：{{time}}</text>
+            <!-- 海选 -->
+            <view wx-if="{{currentItemStatus == 'audition'}}">
+                <view class="race-detail">
+                    <image class="rank-list-btn" catchtap="openAuditionList" src="/images/icon/rank-list-open.png"></image>
+                    <view class="race-detail-inner" wx-if="{{auditionFinish}}">{{'赛事进行中...'}}</view>
+                    <view class="race-detail-inner">{{'恭喜您\n晋级十六强'}}</view>
+                </view>
+                <view class="race-info">
+                    <text class="race-info-name">{{raceName}}</text>
+                    <text class="race-info-time">时间：{{time}}</text>
+                </view>
             </view>
         </view>
     </view>
-    <final-rank-list show="{{showFinalRankList}}" rankList="{{playerList}}"></final-rank-list>
+    <final-rank-list show="{{showFinalRankList}}" playerList="{{playerList}}" title="{{raceName}}"></final-rank-list>
+    <rank-list show="{{showAuditionRankList}}" playerList="{{auditionPlayerList}}" title="{{raceName}}" currentRank="{{currentRank}}"></rank-list>
 </view>

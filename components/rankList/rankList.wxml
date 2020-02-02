@@ -5,7 +5,7 @@
     <view class="list-container">
         <image class="close-btn" src="/images/icon/rank-list-close.png" catchtap="close"></image>
         <view class="race-name">
-            {{raceName}}
+            {{title}}
         </view>
         <view class="list-detail">
             <image class="list-bg" src="/images/rank-list-bg.png">
@@ -16,13 +16,13 @@
                 <view class="list-head-item rage-item">综合得分</view>
             </view>
             <view class="list-info">
-                <view class="list {{ rank - 1 === index ? 'line':''}}" wx:for="{{rankList}}" wx:key="index">
-                    <view class="list-item rank-item">{{item.rank}}</view>
-                    <view class="list-item playerNo-item">{{item.playerNo}}</view>
-                    <view class="list-item rage-item">{{item.rage}}</view>
+                <view class="list {{ currentRank == index ? 'line':''}}" wx:for="{{playerList}}" wx:key="index">
+                    <view class="list-item rank-item">{{index + 1}}</view>
+                    <view class="list-item playerNo-item">{{item.itemNum}}</view>
+                    <view class="list-item rage-item">{{item.totalScore}}</view>
                 </view>
             </view>
         </view>
-        <view class="rank">第{{rank}}名</view>
+        <view class="rank">第{{currentRank + 1}}名</view>
     </view>
 </view>

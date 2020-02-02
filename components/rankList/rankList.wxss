@@ -26,6 +26,7 @@
     height: 750rpx;
     border-radius: 6px;
     background-color: #4D7AFF;
+    z-index: 99;
 }
 
 .race-name, .rank {

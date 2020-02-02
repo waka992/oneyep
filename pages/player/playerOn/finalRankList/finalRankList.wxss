@@ -82,11 +82,24 @@
     margin: 24rpx 0;
 }
 
+.list-head {
+    height: 38rpx;   
+}
+
+.list-head-item {
+    display: inline-block;
+    text-align: center;
+    flex: 1;
+    font-family:Songti SC;
+    font-weight: 600;
+    font-size: 28rpx;
+}
+
 .list-item {
     display: inline-block;
     text-align: center;
     flex: 1;
-    font-size: 48rpx;
+    font-size: 38rpx;
     font-family:Songti SC;
     font-weight: 600;
 }

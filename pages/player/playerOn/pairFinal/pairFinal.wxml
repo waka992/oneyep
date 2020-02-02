@@ -10,9 +10,9 @@
         </view>
         <view class="result">
             <view class="res-word">
-                <view class="unknow" wx:if="{{playerInfo.battleLeft.isWin == -1}}">?</view>
-                <view class="win" wx:if="{{playerInfo.battleLeft.isWin == 1 }}">win</view>
-                <view class="lose" wx:if="{{playerInfo.battleLeft.isWin == 0}}">lose</view>
+                <view class="unknow" wx:if="{{judge == ''}}">?</view>
+                <view class="win" wx:if="{{judge == 'left'}}">win</view>
+                <view class="lose" wx:if="{{judge == 'right'}}">lose</view>
             </view>
             <view class="res-group">
                 <view class="group-left">{{playerInfo.battleLeft.itemNum}}</view>
@@ -31,9 +31,9 @@
         </view>
         <view class="result">
             <view class="res-word">
-                <view class="unknow" wx:if="{{playerInfo.battleRight.isWin == -1}}">?</view>
-                <view class="win" wx:if="{{playerInfo.battleRight.isWin == 1}}">win</view>
-                <view class="lose" wx:if="{{playerInfo.battleRight.isWin == 0}}">lose</view>
+                <view class="unknow" wx:if="{{judge == ''}}">?</view>
+                <view class="win" wx:if="{{judge == 'right'}}">win</view>
+                <view class="lose" wx:if="{{judge == 'left'}}">lose</view>
             </view>
             <view class="res-group">
                 <view class="group-right">{{playerInfo.battleRight.itemNum}}</view>

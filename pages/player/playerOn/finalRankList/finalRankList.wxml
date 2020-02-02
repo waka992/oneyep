@@ -5,21 +5,26 @@
     <view class="list-container">
         <image class="close-btn" src="/images/icon/rank-list-close.png" catchtap="close"></image>
         <view class="race-name">
-            {{raceName}}
+            {{title}}
         </view>
-        <view class="tips">红色为胜方，蓝色为负方，灰色为平局</view>
+        <!-- <view class="tips">红色为胜方，蓝色为负方，灰色为平局</view> -->
         <view class="list-detail">
             <view class="list-info">
-                <view class="list" wx:for="{{rankList}}" wx:key="index">
+                <view class="list list-head">
+                    <view class=".list-head-item">裁判</view>
+                    <view class=".list-head-item">选手</view>
+                </view>
+                <view class="list" wx:for="{{playerList}}" wx:key="index">
                     <!-- class = draw平局 -->
-                    <view class="list-item {{item.battleLeft.isWin == 1 ?'winner' : item.battleLeft.isWin == 0 && item.battleRight.isWin == 0 ? 'draw' : item.battleLeft.isWin == 0 ? 'loser' : 'draw' }}">{{item.battleLeft.itemNum}}</view>
-                    <view class="list-item">
+                    <view class="list-item">{{item.judgeName}}</view>
+                    <!-- <view class="list-item">
                         <image class="icon-vs" src="/images/icon/icon-vs-light.png"></image>
-                    </view>
-                    <view class="list-item {{item.battleRight.isWin == 1 ?'winner' : item.battleLeft.isWin == 0 && item.battleRight.isWin == 0 ? 'draw' : item.battleRight.isWin == 0 ? 'loser' : 'draw' }}">{{item.battleRight.itemNum}}</view>
+                    </view> -->
+                    <view class="list-item">{{item.battleLeft.nickName}}</view>
+                    <!-- <view class="list-item {{item.battleRight.isWin == 1 ?'winner' : item.battleLeft.isWin == 0 && item.battleRight.isWin == 0 ? 'draw' : item.battleRight.isWin == 0 ? 'loser' : 'draw' }}">{{item.battleRight.itemNum}}</view> -->
                 </view>
             </view>
         </view>
-        <view class="rank">{{isWin ? '我' : '对'}}方胜</view>
+        <!-- <view class="rank">{{isWin ? '我' : '对'}}方胜</view> -->
     </view>
 </view>

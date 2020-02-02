@@ -21,8 +21,17 @@ Component({
    */
   methods: {
     showDetail(evt) {
-      let id = evt.currentTarget.dataset.id
-      console.log(id);
+      let {id, flowstatus} = evt.currentTarget.dataset
+      console.log(flowstatus);
+      if (flowstatus == 3) {
+        wx.showToast({
+          title: '活动已结束',
+          icon: 'none',
+          duration: 1500,
+          mask: false,
+        });
+        return
+      }
       this.triggerEvent('showDetail', {id: id})
       // wx.navigateTo({
       //   url: '/pages/race/raceDetail/raceDetail?id=' + id,

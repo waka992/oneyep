@@ -35,5 +35,5 @@
             </view>
         </view>
     </view>
-    <rank-list show="{{showRankList}}" playerList="{{playerList}}"></rank-list>
+    <rank-list show="{{true}}" playerList="{{playerList}}"></rank-list>
 </view>

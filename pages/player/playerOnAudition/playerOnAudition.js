@@ -8,7 +8,7 @@ Page({
     ranking: '?',
     name: '陈某',
     status: 1, // 0未开始
-    describe: '您未参与此项，请等待',
+    describe: '',
     raceName: '海选赛-HipHop',
     time: '12:25-12:55',
     hasPrev: false,
@@ -21,6 +21,7 @@ Page({
     currentItems: [], // 当前选手赛事列表
     group: 0,
     chosenGroup: {}, // 当前查看组
+    showRankList: false,
   },
   // 返回
   onBack() {
@@ -31,7 +32,7 @@ Page({
   openRankList() {
     this.getAuditionList()
     this.setData({
-      showFinalRankList: true
+      showRankList: true
     })
   },
   // 下一个赛事
@@ -142,24 +143,14 @@ Page({
 
   // 获取battle列表
   getAuditionList(fn) {
-    let param = {eventId: 1, itemId: 1, judgeId: 1} // 测试用
-    api.post('room/event/getBattleGroupMap', param).then(res => {
+    let param = {eventId: 1, itemId: 1} // 测试用
+    api.post('room/event/getUserRecordList', param).then(res => {
       if (res) {
-        // 处理组
-        let groups = []
-        for (const key in res) {
-          if (res.hasOwnProperty(key)) {
-            const element = res[key];
-            for (const k in element) {
-              if (element.hasOwnProperty(k)) {
-                const group = element[k];
-                groups.push(group)
-              }
-            }
-          }
-        }
+        let arr = res.sort((a, b) => {
+          return a.totalScore - b.totalScore
+        })
         this.setData({
-          playerList: groups,
+          playerList: arr,
         })
         fn && fn()
       }
