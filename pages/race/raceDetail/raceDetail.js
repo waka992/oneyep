@@ -24,6 +24,14 @@ Page({
   },
   // 报名
   signUp() {
+    let openid = wx.getStorageSync('openid');
+    if (!openid) {
+      wx.navigateTo({
+        url: '/pages/authorization/authorization?from=enroll',
+      });
+     
+      this.login()
+    }
     wx.navigateTo({
       url: '/pages/race/raceSignUp/raceSignUp?id=' + this.data.id
     })
@@ -47,6 +55,65 @@ Page({
       })
       console.log(res);
       wx.hideLoading()
+    })
+  },
+
+
+  // 登录操作
+  login() {
+    let self = this
+    wx.login({
+      success (res) {
+        if (res.code) {
+          // 登录成功，获取用户信息
+          self.backendLogin(res.code)
+        } else {
+          // 否则弹窗显示，showToast需要封装
+          // showToast()
+        }
+      },
+      fail () {
+        // showToast()
+      }
+    })
+  },
+
+  // 调用后台登录接口
+  backendLogin(code) {
+    let self = this
+    api.post('wx/login', {code: code}).then((res) => {
+      wx.setStorageSync('sessionKey', res.session_key);
+      wx.setStorageSync('openid', res.openid);
+      wx.hideLoading();
+      self.checkAuthorization()
+    })
+  },
+
+  // 查询授权
+  checkAuthorization() {
+    let that = this
+    wx.getSetting({
+      success: function (res) {
+          if (res.authSetting['scope.userInfo']) {
+              wx.getUserInfo({
+                  success: function (res) {
+                    let {signature, rawData, encryptedData, iv} = res
+                    let sessionKey = wx.getStorageSync('sessionKey')
+                    api.post('getUserInfo', {
+                      signature: signature,
+                      rawData: rawData,
+                      encryptedData: encryptedData,
+                      iv: iv,
+                      sessionKey: sessionKey,
+                    }).then((res) => {
+                      wx.hideLoading();
+                    }).catch((error) => {
+                      console.log(error);
+                    })
+                  }
+              });
+          }
+      }
     })
   },
 
