@@ -8,6 +8,15 @@
     flex: 1;
 }
 
+.tips {
+    width: 100%;
+    color: #fff;
+}
+
+.tips-item {
+    margin-left: 30rpx;
+}
+
 .completed {
     display: flex;
     /* flex: 1; */
@@ -52,7 +61,7 @@
 }
 
 .list-head {
-    margin-top: 40rpx;
+    margin-top: 60rpx;
     color: #fff;
     font-size: 28rpx;
 }
@@ -64,6 +73,28 @@
 .time, .duration, .node {
     display: inline-block;
     text-align: center;
+    vertical-align: middle;
+}
+
+.status {
+    width: 60rpx;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.status-icon {
+    width: 30rpx;
+    height: 30rpx;
+    vertical-align: middle;
+}
+
+.horizon {
+    display: inline-block;
+    width: 40rpx;
+    height: 40rpx;
+    font-size: 40rpx;
+    color: #A5A5A5;
+    font-weight: 900;
 }
 
 .time {

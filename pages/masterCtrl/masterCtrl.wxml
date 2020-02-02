@@ -13,12 +13,27 @@
                 </view>
             </view>
             <view class="time-plan-list flex-column-layout" wx:if="{{!isComplete}}">
+                <view class="tips">
+                    <view class="horizon tips-item">-</view>
+                    - 未开始
+                    <image class="status-icon tips-item" src="/images/icon/icon-playStatus.png"></image>
+                    - 进行中
+                    <image class="status-icon tips-item" src="/images/icon/icon-tickStatus.png"></image>
+                    - 已结束
+                </view>
                 <view class="list-head">
+                    <view class="status">状态</view>
                     <view class="time">时间</view>
                     <view class="node">节点</view>
                 </view>
                 <view class="list-items">
-                    <view class="list-item" wx:for="{{timePlanList}}" wx:key="index" catchtap="showDetail" data-nodeid="{{item.nodeId}}">
+                    <view class="list-item" wx:for="{{timePlanList}}" wx:key="index" catchtap="showDetail" data-nodeid="{{item.id}}">
+                        <view class="status">
+                            <!-- 0未开始 1进行中 2结束 -->
+                            <image wx-if="{{item.nodeStatus == 2}}" class="status-icon" src="/images/icon/icon-tickStatus.png"></image>
+                            <image wx-if="{{item.nodeStatus == 1}}" class="status-icon" src="/images/icon/icon-playStatus.png"></image>
+                            <view wx-if="{{item.nodeStatus == 0}}" class="horizon">-</view>
+                        </view>
                         <view class="time">{{item.time}}</view>
                         <view class="node">{{item.node}}</view>
                     </view>

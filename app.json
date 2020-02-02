@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/masterCtrl/masterCtrl",
     "pages/race/raceSignUp/raceSignUp",
     "pages/user/user",
     "pages/player/playerOn/playerOn",
-    "pages/masterCtrl/masterCtrl",
     "pages/player/playerOnAudition/playerOnAudition",
     "pages/nodeCtrl/nodeCtrl",
     "pages/referee/refereeRate/refereeRate",

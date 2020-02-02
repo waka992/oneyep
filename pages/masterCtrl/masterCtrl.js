@@ -19,12 +19,13 @@ Page({
    */
   // 弹出详情框
   showDetail(e) {
+    // 实际是id而不是nodeid
     let nodeid = e.currentTarget.dataset.nodeid
     let arr = []
     for (let i = 0; i < this.data.timePlanList.length; i++) {
       const ele = this.data.timePlanList[i];
       // 当前选中的节点
-      if (ele.nodeId == nodeid) {
+      if (ele.id == nodeid) {
         // 加入前一个节点
         if (this.data.timePlanList[i - 1]) {
           arr.push(this.data.timePlanList[i - 1])
@@ -54,6 +55,7 @@ Page({
   },
   // 打开节点操作界面
   showNode(e) {
+    console.log(this.data.selectNodeId);
     wx.navigateTo({
       url: `/pages/nodeCtrl/nodeCtrl?nodeid=${this.data.selectNodeId}&eventid=${this.data.eventId}`,
     })
@@ -74,7 +76,6 @@ Page({
   // 获取当前节点
   getNodes(opt) {
     let {roleId, id} = opt
-    // roleId = '001' // 测试
     // id = '001' // 测试
     this.setData({eventId: id})
     api.post('node/eventAllNode', {id: id, userId: wx.getStorageSync('openid')}).then(res => {
@@ -95,52 +96,4 @@ Page({
     this.getNodes(options)
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function (res) {
-
-  }
 })

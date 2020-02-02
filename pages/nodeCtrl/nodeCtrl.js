@@ -140,7 +140,6 @@ Page({
   getNode(id){
   //     组长 裁判 userId 001 总控 002
     let userid = wx.getStorageSync('openid')
-    userid = '001' // 测试用
     let param = {id: id, userId: userid }
     api.post('node/getNode', {id: id, userId: userid}).then(res => {
       console.log(res);
@@ -182,8 +181,7 @@ Page({
   // 回滚时候获取列表
   getNodes(opt) {
     let {roleId, id} = opt
-    // roleId = '001' // 测试
-    id = '001' // 测试
+    // id = '001' // 测试
     api.post('node/eventAllNode', {id: id, userId: wx.getStorageSync('openid')}).then(res => {
       let list = res
       for (let i = 0; i < res.length; i++) {
