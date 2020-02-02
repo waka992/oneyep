@@ -30,6 +30,7 @@ Page({
     showAuditionRankList: false,
     auditionPlayerList: [],
     currentRank: 99, // 当前排名
+    auditionFinish: false, // 是否结束
   },
   // 返回
   onBack() {
@@ -62,14 +63,15 @@ Page({
       if (num == currentItems.length - 1) {
         hasNext = false
       }
-      let itemId = currentItems[num]
-      this.getCurrentNode(1) // 测试用
-      // this.getCurrentNode(itemId)
+      let itemId = currentItems[num].id
       this.setData({
         currentItem: num,
         hasNext:hasNext,
+        itemId: itemId,
         hasPrev: true
       })
+      this.getCurrentNodeType()
+
     }
   },
   // 上一个赛事
@@ -91,34 +93,27 @@ Page({
       if (num == 0) {
         hasPrev = false
       }
-      let itemId = currentItems[num]
-      this.getCurrentNode(1) // 测试用
-      // this.getCurrentNode(itemId)
+      let itemId = currentItems[num].id
       this.setData({
         currentItem: num,
         hasPrev: hasPrev,
+        itemId: itemId,
         hasNext: true
       })
+      this.getCurrentNodeType()
     }
-  },
-  // 获取用户item信息
-  getUserItemInfo() {
-    let param = {
-      id: this.data.eventId,
-      userId: wx.getStorageSync('openid')
-    }
-    api.post('event/getEventUserInfo', param).then(res => {
-      this.setData({
-        itemUserId: res.id,
-        name: res.userName,
-      })
-    })
   },
 
   // 获取battle双方信息
   getBattleInfo() {
     // userid用itemuserid
-    let param = {eventId: this.data.eventId, itemId: 1, userId: this.data.itemUserId} // 测试用
+    // itemId 1 测试用
+    let {eventId, itemUserId, itemId} = this.data
+    let param = {
+      eventId: eventId,
+      itemId: itemId,
+      userId: itemUserId
+    }
     api.post('room/event/getUserBattle', param).then(res => {
       if (res) {
         // 处理组
@@ -174,23 +169,12 @@ Page({
     })
   },
 
-  // 获取赛事信息
-  getEventItem(info) {
-    // userid用itemuserid
-    let param = {eventId: this.data.eventId, itemId: info.id} // 测试用
-    api.post('room/event/getEventItem', param).then(res => {
-      if (res) {
-        this.setData({
-          raceName: `${info.title} - ${res.itemName}`,
-          group: res.initRankGroup, // x强
-        })
-      }
-    })
-  },
-
   // 获取battle列表
   getBattleList(fn) {
-    let param = {eventId: this.data.eventId, itemId: 1} // 测试用
+    let param = {
+      eventId: this.data.eventId,
+      itemId: 1
+    } // 测试用
     api.post('room/event/getBattleGroupMap', param).then(res => {
       if (res) {
         // 处理组
@@ -214,10 +198,12 @@ Page({
     })
   },
 
-  // 获取当前选手的赛事列表
-  getEventList(id) {
+  // 1.获取当前选手的赛事列表
+  getEventList() {
     let openid = wx.getStorageSync('openid')
-    let params = {id:id, userId:openid}
+    let params = {
+      id:this.data.eventId,
+      userId:openid}
     let hasNext = false
 
     api.post('event/eventItemList', params).then((res) => {
@@ -239,35 +225,76 @@ Page({
       }
       this.setData({
         currentItems: itemList,
+        itemId: itemList[0].id, // 默认取第一个 
         hasNext: hasNext,
       })
     })
   },
-  // 获取当前赛事的节点
-  getCurrentNode(id) {
+
+  // 2.获取用户其中一个item信息
+  getUserItemInfo() {
+    let id = this.data.eventId// itemid
     let param = {
-      id: id || '001', //001测试用
+      id: id,
       userId: wx.getStorageSync('openid')
     }
-    api.post('/node/getCurrentNode', param).then(res => {
+    api.post('event/getEventUserInfo', param).then(res => {
+      this.setData({
+        itemUserId: res.id,  // 同一个赛事不同项目用同一个itemuserid
+        name: res.userName,
+      })
+      this.getCurrentNodeType() // 3. 判断节点，判断好会请求battle/audition的数据
+    })
+  },
+
+  // 3.获取当前赛事的节点(切换左右的入口)
+  getCurrentNodeType() {
+    // id = '001' // 测试用
+    let { eventId, itemUserId, itemId } = this.data
+    let param = {
+      eventId: eventId,
+      itemId: itemId,
+      userId: itemUserId
+    }
+    api.post('/room/event/getUserRecord', param).then(res => {
       let type = ''
-      // 0普通1海选2比赛
-      if (res.nodeType == 0) {
+      //auditionStatus 海选状态（0草稿，1评分中，2.已评分）
+      // battleStatus battle状态（草稿 0 ，进行中1，已完成2）
+      let {auditionStatus, battleStatus} = res
+      if (auditionStatus == 0) {
         type = 'normal'
-        this.getEventItem({id:id, title: '赛事准备中'})
+        this.getEventItem({id:itemId, title: '赛事准备中'})
       }
-      else if (res.nodeType == 1) {
-        type = 'audition'
-        this.getEventItem({id:id, title: '海选赛'})
-      }
-      else if (res.nodeType == 2) {
+      // 先判断battle，有battle就没有海选
+      else if (battleStatus == 1 || battleStatus == 2) {
         type = 'battle'
-        this.getEventItem({id:1, title: '对决赛'}) // 获取赛事信息
+        this.getEventItem({id:itemId, title: '对决赛'}) // 获取赛事信息
         this.getBattleInfo() // 获取battle信息
+      }
+      else if (auditionStatus == 1 || (auditionStatus == 2 && battleStatus == 0)) {
+        type = 'audition'
+        this.getEventItem({id:itemId, title: '海选赛'})
+        this.getAuditionList()
       }
       this.setData({
         currentItemStatus: type // 当前展示对决赛/海选
       })
+    })
+  },
+  // 4.获取赛事信息
+  getEventItem(info) {
+    // userid用itemuserid
+    let param = {
+      eventId: this.data.eventId,
+      itemId: info.id
+    } // 测试用
+    api.post('room/event/getEventItem', param).then(res => {
+      if (res) {
+        this.setData({
+          raceName: `${info.title} - ${res.itemName}`,
+          group: res.initRankGroup, // x强
+        })
+      }
     })
   },
   // 海选接口
@@ -277,6 +304,7 @@ Page({
     api.post('room/event/getUserRecordList', param).then(res => {
       if (res) {
         let currentRank = 99
+        let finished = true
         // 排名
         let arr = res.sort((a, b) => {
           return b.totalScore - a.totalScore
@@ -286,10 +314,14 @@ Page({
           if (ele.itemUserId == this.data.itemUserId) {
             currentRank = index
           }
+          if (!ele.totalScore && ele.totalScore !== 0) {
+            finished = false
+          }
         });
         this.setData({
           auditionPlayerList: arr,
-          currentRank: currentRank
+          currentRank: currentRank,
+          auditionFinish: finished
         })
         fn && fn()
       }
@@ -307,10 +339,10 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      eventId: 1 // 测试用
+      eventId: options.eventId // 测试用
     })
-    this.getEventList(1) // 当前选手的赛事列表用于左右切换
-    this.getUserItemInfo() // 获取当前用户信息
-    this.getCurrentNode(1) // 入口！ 判断节点，判断好会请求battle/audition的数据
+    this.getEventList() // 当前选手的赛事列表用于左右切换
+    this.getUserItemInfo()
+
   },
 })

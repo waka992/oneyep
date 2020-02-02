@@ -13,6 +13,7 @@ Page({
     timePlanList: [],
     isComplete: false,
     showDetailList: [], // 详情展示的列表
+    id: '', // 节点id
   },
   /**
    * 生命周期函数--监听页面加载
@@ -74,8 +75,7 @@ Page({
   },
 
   // 获取当前节点
-  getNodes(opt) {
-    let {roleId, id} = opt
+  getNodes(id) {
     // id = '001' // 测试
     this.setData({eventId: id})
     api.post('node/eventAllNode', {id: id, userId: wx.getStorageSync('openid')}).then(res => {
@@ -91,9 +91,23 @@ Page({
     })
   },
 
+  // 刷新列表
+  refresh() {
+    this.getNodes(this.data.id)
+  },
+
   onLoad: function (options) {
     let type = options.type
-    this.getNodes(options)
+    this.setData({
+      id: options.id
+    })
+    this.getNodes(options.id)
   },
+
+  onShow: function() {
+    if (this.data && this.data.id) {
+      this.getNodes(this.data.id)
+    }
+  }
 
 })

@@ -125,7 +125,7 @@ Page({
       // 选手
       case 4:
           wx.navigateTo({
-            url: '/pages/player/playerOn/playerOn',
+            url: `/pages/player/playerOn/playerOn?eventId=${eventid}`,
           })
         break
     }

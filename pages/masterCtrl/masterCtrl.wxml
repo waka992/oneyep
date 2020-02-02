@@ -1,19 +1,19 @@
 <!--pages/masterCtrl/masterCtrl.wxml-->
 <view class="container flex-column-layout">
     <navBar title="" back="{{true}}" home="{{false}}" background="{{'#191919'}}" bindback="backToUser">
-        <view class="white ml20 barTitle" slot="center">总控主页</view>
+        <view class="white ml20 barTitle" slot="center">流程主页</view>
     </navBar>
     <view class="master-ctrl-container flex-column-layout" hover-class="none" hover-stop-propagation="false">
         <view class="time-plan flex-column-layout">
             <view class="time-plan-header">
-                <view class="title">活动时间规划</view>
+                <!-- <view class="title">活动时间规划</view> -->
                 <view class="icon">
-                    <image class="menu-icon" src="/images/icon/menu-icon.png" wx:if="{{!isComplete}}"></image>
+                    <image class="refresh-icon" src="/images/icon/icon-refresh.png" wx:if="{{!isComplete}}" catchtap="refresh"></image>
                     <image class="msg-icon" src="/images/icon/msg-icon.png" wx:if="{{!isComplete}}"></image>
                 </view>
             </view>
             <view class="time-plan-list flex-column-layout" wx:if="{{!isComplete}}">
-                <view class="tips">
+                <view class="tips-icons">
                     <view class="horizon tips-item">-</view>
                     - 未开始
                     <image class="status-icon tips-item" src="/images/icon/icon-playStatus.png"></image>

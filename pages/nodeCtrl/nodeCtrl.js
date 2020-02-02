@@ -141,7 +141,7 @@ Page({
   //     组长 裁判 userId 001 总控 002
     let userid = wx.getStorageSync('openid')
     let param = {id: id, userId: userid }
-    api.post('node/getNode', {id: id, userId: userid}).then(res => {
+    api.post('node/getNode', param).then(res => {
       console.log(res);
       // status 0未开始 1进行中 2结束
       let groups = []
@@ -149,7 +149,7 @@ Page({
       for (let i = 0; i < taskList.length; i++) {
         const ele = taskList[i];
         groups.push({
-          canOperate: Number(ele.flag) ? true : false, // 没值可以操作
+          canOperate: Number(ele.flag) ? true : false,
           name: ele.groupName,
           tasks: ele.taskList
         })

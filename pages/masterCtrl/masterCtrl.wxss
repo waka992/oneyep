@@ -8,9 +8,11 @@
     flex: 1;
 }
 
-.tips {
+.tips-icons {
     width: 100%;
     color: #fff;
+    text-align: center;
+    font-size: 24rpx;
 }
 
 .tips-item {
@@ -54,14 +56,14 @@
     float: right;
 }
 
-.menu-icon,.msg-icon {
+.msg-icon, .refresh-icon {
     width: 40rpx;
-    height: 30rpx;
+    height: 40rpx;
     margin-right: 40rpx;
 }
 
 .list-head {
-    margin-top: 60rpx;
+    margin-top: 20rpx;
     color: #fff;
     font-size: 28rpx;
 }
@@ -95,6 +97,7 @@
     font-size: 40rpx;
     color: #A5A5A5;
     font-weight: 900;
+    margin-left: 0 !important;
 }
 
 .time {

@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    eventId: '',
     showRateList: false,
     playerList: [],
     currentNum: 0,
@@ -60,7 +61,8 @@ Page({
   // 获取海选人员名单
   getPickList(fn) {
     // eventid 赛事id， itemid: 项目(hihop等)id 1poping 2hiphop 3freestyle
-    let param = {eventId: 1, itemId: 1} // 测试用
+    let {eventId} = this.data
+    let param = {eventId: eventId, itemId: 1} // 测试用
     api.post('room/event/getUserRecordList', param).then(res => {
       if (res.length > 0) {
         this.setData({
@@ -139,55 +141,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      eventId: options.eventId
+    })
     this.getPickList()
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

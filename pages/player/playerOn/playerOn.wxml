@@ -49,8 +49,9 @@
             <view wx-if="{{currentItemStatus == 'audition'}}">
                 <view class="race-detail">
                     <image class="rank-list-btn" catchtap="openAuditionList" src="/images/icon/rank-list-open.png"></image>
-                    <view class="race-detail-inner" wx-if="{{auditionFinish}}">{{'赛事进行中...'}}</view>
-                    <view class="race-detail-inner">{{'恭喜您\n晋级十六强'}}</view>
+                    <view class="race-detail-inner" wx-if="{{!auditionFinish}}">{{'赛事进行中...'}}</view>
+                    <view class="race-detail-inner" wx-if="{{auditionFinish && (currentRank + 1 <= 16)}}">{{'恭喜您\n晋级十六强'}}</view>
+                    <view class="race-detail-inner" wx-if="{{auditionFinish && (currentRank + 1 > 16)}}">{{'很遗憾您未能晋级'}}</view>
                 </view>
                 <view class="race-info">
                     <text class="race-info-name">{{raceName}}</text>
