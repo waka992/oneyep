@@ -1,0 +1,19 @@
+<view class="container">
+  <navBar title="" back="{{false}}" home="{{false}}" background="{{'#191919'}}">
+    <view class="white ml20 barTitle" slot="left">demo</view>
+  </navBar>
+  <view class="swiper-container">
+      <view class="id">
+          id:
+          <input class="demo-input" type="text" bindinput="edit" />
+      </view>
+      <button class="custom-btn" catchtap="req">确认绑定角色</button>
+  </view>
+  <view class="swiper-container">
+      <view class="id">
+          id:
+          <input class="demo-input" type="text" bindinput="editSignIn" />
+      </view>
+      <button class="custom-btn" catchtap="signIn">签到</button>
+  </view>
+</view>

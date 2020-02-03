@@ -1,8 +1,9 @@
 {
   "pages": [
-    "pages/nodeCtrl/nodeCtrl",
-    "pages/masterCtrl/masterCtrl",
     "pages/index/index",
+    "pages/masterCtrl/masterCtrl",
+    "pages/nodeCtrl/nodeCtrl",
+    "pages/demo/demoBindRole/demoBindRole",
     "pages/user/user",
     "pages/referee/referee",
     "pages/player/playerOn/playerOn",

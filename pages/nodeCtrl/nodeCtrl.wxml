@@ -50,4 +50,3 @@
     <release-dialog wx:if="{{switchRelease}}" show="{{switchRelease}}" bind:close="closeRelease" bind:release="sendRelease"></release-dialog>
     <my-picker wx:if="{{switchBackNode}}" show="{{switchBackNode}}" nodeList="{{timePlanList}}" bind:showNode="toBackNode" bind:close="closeBackDialog"></my-picker>
 </view>
-

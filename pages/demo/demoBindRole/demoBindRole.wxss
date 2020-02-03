@@ -1,0 +1,10 @@
+/* pages/demo/demoBindRole/demoBindRole.wxss */
+.id {
+    color: #fff;
+}
+
+.demo-input {
+    color: #000;
+    background-color: #fff;
+    width: 100%;
+}

@@ -45,4 +45,5 @@
         </view>
     </view>
     <ctrl-detail wx-if="{{switchDetail}}" show="{{switchDetail}}" nodeList="{{showDetailList}}" groupVal="{{groupVal}}" bind:showNode="showNode" bind:closeNode="closeNode" bind:operate="operate"></ctrl-detail>
+    <my-picker wx:if="{{switchBackNode}}" show="{{switchBackNode}}" nodeList="{{backTimePlanList}}" bind:showNode="toBackNode" bind:close="closeBackDialog"></my-picker>
 </view>

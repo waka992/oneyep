@@ -211,8 +211,8 @@ Page({
   // 跳转到指定回滚节点
   toBackNode(e) {
     console.log(e.detail);
-    let newNodeId = e.detail.nodeId // newnodeid是哪个？
-    api.post('nodeBack', {nodeId: this.data.nodeid, newNodeId: newNodeId}).then(res => {
+    let {nodeId,id,nodeType } = e.detail.nodeId // newnodeid是哪个？
+    api.post('node/nodeBack', {nodeId: nodeId, nodeInstanceId: id, nodeType: nodeType}).then(res => {
       console.log(res);
       this.setData({
       switchBackNode: false
@@ -257,7 +257,7 @@ Page({
           {imgSrc:'/images/icon/icon-start.png', word: '开始', type: 1}, 
           {imgSrc:'/images/icon/icon-end.png', word: '完成', type: 2},
           {imgSrc:'/images/icon/icon-reback.png', word: '回滚', type: 0},
-          {imgSrc:'/images/icon/icon-urge.png', word: '催办', type}, // 总控才有
+          {imgSrc:'/images/icon/icon-urge.png', word: '催办', type: 99}, // 总控才有
         ]
       break
       case 1:

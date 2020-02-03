@@ -12,11 +12,13 @@ Page({
     selectNodeId: '', // 选中的节点
     switchDetail: false,
     timePlanList: [],
+    backTimePlanList: [], // 回滚用
     isComplete: false,
     showDetailList: [], // 详情展示的列表
     id: '', // 节点id
     groupVal: '', // 身份识别 0总控 1组长 2组员
     showRepickList: false, // 重选人员表
+    switchBackNode: false, // 回滚节点选择弹窗
   },
   /**
    * 生命周期函数--监听页面加载
@@ -114,6 +116,13 @@ Page({
 
   // 操作节点
   operate(e) {
+    let type = e.detail.type
+    // 弹出回滚节点选择
+    if (type === 0) {
+      let param = {id: this.data.eventid}
+      this.getBackNodes(param)
+      return
+    }
     this.requestNodeOperate(e.detail)
   },
 
@@ -140,6 +149,45 @@ Page({
         });
         return
       }
+    })
+  },
+
+  // 跳转到指定回滚节点
+  toBackNode(e) {
+    console.log(e.detail);
+    let {nodeId,id,nodeType } = e.detail.nodeId // newnodeid是哪个？
+    api.post('node/nodeBack', {nodeId: nodeId, nodeInstanceId: id, nodeType: nodeType}).then(res => {
+      console.log(res);
+      this.setData({
+      switchBackNode: false
+      })
+    }).catch(res => {
+      this.setData({
+        switchBackNode: false
+      })
+    })
+  },
+
+  // 回滚时候获取列表
+  getBackNodes(opt) {
+    let {roleId, id} = opt
+    // let id = '001' // 测试
+    api.post('node/eventAllNode', {id: id, userId: wx.getStorageSync('openid')}).then(res => {
+      let list = res
+      for (let i = 0; i < res.length; i++) {
+        const ele = res[i];
+        ele.startTime = ele.beginTime.slice(-8)
+        ele.event = ele.nodeName
+      }
+      this.setData({
+        backTimePlanList: list,
+        switchBackNode: true
+      })
+    })
+  },
+  closeBackDialog(){
+    this.setData({
+      switchBackNode: false
     })
   },
 
