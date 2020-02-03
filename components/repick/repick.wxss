@@ -1,8 +1,12 @@
 /* pages/referee/refereeRateList/refereeRateList.wxss */
+.title {
+    color: #fff;
+    text-align: center;
+}
+
 .repick-list {
     margin: 0 auto;
     overflow-y: auto;
-    margin-top: 134rpx;
     max-height: 1050rpx;
 }
 
@@ -30,4 +34,22 @@
     height: 22rpx;
     right: 4rpx;
     bottom: 4rpx;
+}
+
+.custom-repick-btn {
+    position: absolute;
+    width: 482rpx !important;
+    height: 80rpx;
+    line-height: 80rpx;
+    border-radius: 45rpx;
+    background: linear-gradient(to right, #5c3cde, #5489f5);
+    font-size: 36rpx;
+    color: #fff;
+    font-weight: normal;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.ctrl-detail-btn {
+    bottom: 80rpx;
 }

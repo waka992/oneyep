@@ -15,12 +15,12 @@ const request = (url, options) => {
                    resolve(request.data.data)
                } else {
                    console.log('reject function');
-                   reject(request.data.data)
+                   reject(request.data)
                }
            },
            fail(error) {
                console.error(error);
-               reject(error.data)
+               reject(error)
            }
        })
    })

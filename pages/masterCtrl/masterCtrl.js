@@ -8,6 +8,7 @@ Page({
    */
   data: {
     eventId: '', // 赛事id
+    itemId: '', // 节点对应的项目id
     selectNodeId: '', // 选中的节点
     switchDetail: false,
     timePlanList: [],
@@ -15,7 +16,7 @@ Page({
     showDetailList: [], // 详情展示的列表
     id: '', // 节点id
     groupVal: '', // 身份识别 0总控 1组长 2组员
-    showRepickList: true, // 重选人员表
+    showRepickList: false, // 重选人员表
   },
   /**
    * 生命周期函数--监听页面加载
@@ -97,36 +98,37 @@ Page({
     this.getNodes(this.data.id)
   },
 
-  // 获取重选人员名单
-  getRepickList() {
+  // 获取项目id
+  getNodeItemByNodeId() {
     let param = {
-      eventId: this.data.id,
-      isPick: 1, // 海选是否被选中 0 没有被选上 1待重选 2选中
-      itemId: ''
-    } 
-    api.post('/room/event/getPickList', param).then(res => {
-      console.log(res);
+      id: this.data.selectNodeId,
+      userId: wx.getStorageSync('openid')
+    }
+    api.post('/node/getNodeItemByNodeId', param).then(res => {
+      this.setData({
+        itemId: res.itemId,
+        showRepickList: true, // 打开重选人员名单
+      })
     })
   },
 
   // 操作节点
   operate(e) {
-    // 分享
-    if (e.detail == 99) {
-
-      return
-    }
     this.requestNodeOperate(e.detail)
   },
 
   // 请求后台执行动作（大节点）
   requestNodeOperate(type) {
     api.post('node/nodeControl', {nodeId: this.data.selectNodeId, type: type}).then(res => {
+      wx.showToast({
+        title: '操作成功',
+        icon: 'none',
+        duration: 1500,
+      });
+      this.getNode(this.data.id) // 执行成功刷新列表
+    }).catch(res => {
       if (res.code == 2006) {
-        // 打开重选列表
-        this.setData({
-          showRepickList: true
-        })
+        this.getNodeItemByNodeId()
         return
       }
       else if (res.code == 2012) {
@@ -138,12 +140,13 @@ Page({
         });
         return
       }
-      wx.showToast({
-        title: '操作成功',
-        icon: 'none',
-        duration: 1500,
-      });
-      this.getNode(this.data.id) // 执行成功刷新列表
+    })
+  },
+
+  // 关闭重选人员列表
+  closeRepickList() {
+    this.setData({
+      showRepickList: false
     })
   },
 
@@ -151,6 +154,7 @@ Page({
     let type = options.type
     this.setData({
       id: options.id,
+      eventId: options.id,
       groupVal: options.groupVal, // 身份识别
     })
     this.getNodes(options.id)

@@ -1,9 +1,13 @@
 <!--pages/referee/refereeRateList/refereeRateList.wxml-->
 <view class="repick-list">
     <view class="lists">
-        <view class="list {{item.auditionStatus == 2 ? 'rated' : ''}}" wx:for="{{playerList}}" wx:key="index">
-            <text>{{item.itemNum}}</text>
-            <image class="tick" src="/images/icon/icon-tick.png" wx:if="{{item.auditionStatus == 2}}"></image>
+        <view class="title" hover-class="none" hover-stop-propagation="false">
+            请选择重选选手
         </view>
+        <view class="list {{pickList[index] ? 'rated' : ''}}" wx:for="{{playerList}}" wx:key="index" data-index="{{index}}" catchtap="chose">
+            <text>{{item.itemNum}}</text>
+            <image class="tick" src="/images/icon/icon-tick.png" wx:if="{{pickList[index]}}"></image>
+        </view>
+        <button class="custom-repick-btn ctrl-detail-btn" catchtap="confirm">确认</button>
     </view>
 </view>

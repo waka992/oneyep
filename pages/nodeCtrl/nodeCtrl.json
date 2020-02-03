@@ -2,6 +2,7 @@
   "usingComponents": {
     "node-operate": "./nodeOperate/nodeOperate",
     "release-dialog": "./releaseDialog/releaseDialog",
-    "my-picker": "/components/myPicker/myPicker"
+    "my-picker": "/components/myPicker/myPicker",
+    "repick": "/components/repick/repick"
   }
 }

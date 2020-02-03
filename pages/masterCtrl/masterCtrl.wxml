@@ -41,7 +41,7 @@
             </view>
         </view>
         <view class="flex-column-layout" wx-if="{{showRepickList}}">
-            <repick playerList="{{repickList}}"></repick>
+            <repick wx-if="{{showRepickList}}" itemId="{{itemId}}" eventId="{{eventId}}" bind:close="closeRepickList"></repick>
         </view>
     </view>
     <ctrl-detail wx-if="{{switchDetail}}" show="{{switchDetail}}" nodeList="{{showDetailList}}" groupVal="{{groupVal}}" bind:showNode="showNode" bind:closeNode="closeNode" bind:operate="operate"></ctrl-detail>

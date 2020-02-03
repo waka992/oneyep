@@ -4,7 +4,7 @@
         <view class="white ml20 barTitle" slot="center">节点控制台</view>
     </navBar>
     <view class="master-ctrl-container" hover-class="none" hover-stop-propagation="false">
-        <view class="time-plan">
+        <view class="time-plan"  wx-if="{{!showRepickList}}">
             <view class="time-plan-header">
                 <view class="title" catchtap="menuClick">{{'节点'}}</view>
                 <view class="event">{{nodeName}}</view>
@@ -40,6 +40,9 @@
                    </view>
                </view>
             </view>
+        </view>
+        <view class="flex-column-layout" wx-if="{{showRepickList}}">
+            <repick wx-if="{{showRepickList}}" itemId="{{itemId}}" eventId="{{eventId}}" bind:close="closeRepickList"></repick>
         </view>
     </view>
     <node-operate wx:if="{{switchNodeOperate}}" show="{{switchNodeOperate}}" operateList="{{operateList}}" bind:operate="operateNode" bind:close="closeNode"></node-operate>

@@ -11,8 +11,10 @@ Page({
     switchTaskOperate: false,
     switchRelease: false,
     switchBackNode: false, // 回滚节点选择弹窗
+    showRepickList: false, // 重选界面
     nodeid: '', // 当前大节点的id
     eventid: '', // 赛事id
+    itemId: '', // 项目id
     selectNodeId: '', // 选中的小节点id
     nodeName: '',
     startTime: '',
@@ -115,11 +117,16 @@ Page({
   // 提醒后台执行动作（大节点）
   requestNodeOperate(type) {
     api.post('node/nodeControl', {nodeId: this.data.nodeid, type: type}).then(res => {
+      wx.showToast({
+        title: '操作成功',
+        icon: 'none',
+        duration: 1500,
+      });
+      this.getNode(this.data.nodeid) // 执行成功刷新列表
+    }).catch(res => {
+      // 重选
       if (res.code == 2006) {
-        // 打开重选列表
-        this.setData({
-          showRepickList: true
-        })
+        this.getNodeItemByNodeId()
         return
       }
       else if (res.code == 2012) {
@@ -131,14 +138,30 @@ Page({
         });
         return
       }
-      wx.showToast({
-        title: '操作成功',
-        icon: 'none',
-        duration: 1500,
-      });
-      this.getNode(this.data.nodeid) // 执行成功刷新列表
     })
   },
+
+  // 获取项目id
+  getNodeItemByNodeId() {
+    let param = {
+      id: this.data.nodeid,
+      userId: wx.getStorageSync('openid')
+    }
+    api.post('/node/getNodeItemByNodeId', param).then(res => {
+      this.setData({
+        itemId: res.itemId,
+        showRepickList: true, // 打开重选人员名单
+      })
+    })
+  },
+
+  // 关闭重选人员列表
+  closeRepickList() {
+    this.setData({
+      showRepickList: false
+    })
+  },
+
   // 提醒后台执行动作
   requestOperate(type) {
     api.post('task/taskControl', {taskId: this.data.selectNodeId, type: type}).then(res => {

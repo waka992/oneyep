@@ -28,12 +28,12 @@ Page({
       }
       else if (res.nodeType == 1) {
         wx.navigateTo({
-          url: `/pages/referee/refereeRate/refereeRate?eventId=${this.data.eventId}`,
+          url: `/pages/referee/refereeRate/refereeRate?eventId=${this.data.eventId}&itemId=${res.itemId}`,
         })
       }
       else if (res.nodeType == 2) {
         wx.navigateTo({
-          url: `/pages/referee/refereeBattle/refereeBattle?eventId=${this.data.eventId}`,
+          url: `/pages/referee/refereeBattle/refereeBattle?eventId=${this.data.eventId}&itemId=${res.itemId}`,
         }) 
       }
     })

@@ -9,15 +9,17 @@ Page({
   data: {
     group: 0, // x强
     round: 0, // n + 1轮
+    itemId: '',
+    eventId: '',
     playerList: [],
     leftInfo: {},
-    rightInfo: {}
+    rightInfo: {},
   },
   toList() {
-    let {eventId} = this.data
+    let {eventId, itemId} = this.data
     let param = {
       eventId: eventId,
-      itemId: 1,
+      itemId: itemId,
       judgeId:wx.getStorageSync('openid')
     }
     wx.navigateTo({
@@ -27,10 +29,10 @@ Page({
 
   // 获取battle列表
   getBattleList() {
-    let {eventId} = this.data
+    let {eventId, itemId} = this.data
     let param = {
       eventId: eventId,
-      itemId: 1,
+      itemId: itemId,
       judgeId: wx.getStorageSync('openid')
     } // 测试用
     api.post('room/event/getBattleGroupMap', param).then(res => {
@@ -82,7 +84,7 @@ Page({
           let param = {
             eventId: info.eventId, //赛事id
             group: this.data.group, // x强
-            itemId: info.itemId,
+            itemId: this.data.itemId,
             judgeId: wx.getStorageSync('openid'),
             oneMore: true,
             round: info.round,
@@ -117,7 +119,7 @@ Page({
           let param = {
             eventId: info.eventId, //赛事id
             group: this.data.group, // x强
-            itemId: info.itemId,
+            itemId: this.data.itemId,
             judgeId: wx.getStorageSync('openid'),
             oneMore: (side !== 'left') && (side !== 'right') ? true : false,
             round: info.round,
@@ -147,7 +149,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      eventId: options.eventId
+      eventId: options.eventId,
+      itemId: options.itemId
     })
     this.getBattleList()
   },

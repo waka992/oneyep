@@ -38,6 +38,11 @@ Page({
     }
     api.post('room/event/scoreAudition', param).then(res => {
       console.log(res);
+      wx.showToast({
+        title: '完成评分',
+        icon: 'none',
+        duration: 1000,
+      });
     })
     // wx.navigateTo({
     //   url: '/pages/referee/referee?isComplete=true',
