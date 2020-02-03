@@ -1,11 +1,11 @@
 {
   "pages": [
-    "pages/referee/referee",
-    "pages/user/user",
-    "pages/player/playerOn/playerOn",
     "pages/masterCtrl/masterCtrl",
-    "pages/nodeCtrl/nodeCtrl",
     "pages/index/index",
+    "pages/user/user",
+    "pages/referee/referee",
+    "pages/player/playerOn/playerOn",
+    "pages/nodeCtrl/nodeCtrl",
     "pages/race/raceSignUp/raceSignUp",
     "pages/player/playerOnAudition/playerOnAudition",
     "pages/referee/refereeRate/refereeRate",

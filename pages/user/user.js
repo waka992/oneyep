@@ -50,7 +50,6 @@ Page({
   showDetail(e) {
     let id = e.detail.id
     let param = {id: id, userId: wx.getStorageSync('openid')}
-    console.log(param);
     // return
     api.post('event/identity', param).then(res => {
       this.setData({
@@ -101,19 +100,19 @@ Page({
       // 总控
       case 0:
           wx.navigateTo({
-            url: `/pages/masterCtrl/masterCtrl?roleId=${roleid}&id=${eventid}`,
+            url: `/pages/masterCtrl/masterCtrl?roleId=${roleid}&id=${eventid}&groupVal=${groupVal}`,
           })
         break
       // 组长
       case 1:
           wx.navigateTo({
-            url: `/pages/masterCtrl/masterCtrl?roleId=${roleid}&id=${eventid}`,
+            url: `/pages/masterCtrl/masterCtrl?roleId=${roleid}&id=${eventid}&groupVal=${groupVal}`,
           })
         break
       // 组员
       case 2:
           wx.navigateTo({
-            url: `/pages/masterCtrl/masterCtrl?roleId=${roleid}&id=${eventid}`,
+            url: `/pages/masterCtrl/masterCtrl?roleId=${roleid}&id=${eventid}&groupVal=${groupVal}`,
           })
         break
       // 裁判
@@ -177,7 +176,8 @@ Page({
   // 下拉刷新
   onPullDownRefresh() {
     this.setData({
-      page: 0
+      page: 0,
+      raceList: []
     })
     this.getList()
   },

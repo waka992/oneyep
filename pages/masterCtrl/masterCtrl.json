@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "ctrl-detail": "/pages/masterCtrl/ctrlDetail/ctrlDetail"
+    "ctrl-detail": "/pages/masterCtrl/ctrlDetail/ctrlDetail",
+    "repick": "/components/repick/repick"
   }
 }

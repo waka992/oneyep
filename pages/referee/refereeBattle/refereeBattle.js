@@ -18,7 +18,7 @@ Page({
     let param = {
       eventId: eventId,
       itemId: 1,
-      judgeId:1
+      judgeId:wx.getStorageSync('openid')
     }
     wx.navigateTo({
       url: `/pages/referee/refereeBattle/refereeBattleList/refereeBattleList?param=${JSON.stringify(param)}`,
@@ -31,7 +31,7 @@ Page({
     let param = {
       eventId: eventId,
       itemId: 1,
-      judgeId: 1
+      judgeId: wx.getStorageSync('openid')
     } // 测试用
     api.post('room/event/getBattleGroupMap', param).then(res => {
       if (res) {
@@ -83,7 +83,7 @@ Page({
             eventId: info.eventId, //赛事id
             group: this.data.group, // x强
             itemId: info.itemId,
-            judgeId: info.judgeId, // 测试用
+            judgeId: wx.getStorageSync('openid'),
             oneMore: true,
             round: info.round,
             winSide: '',
@@ -118,7 +118,7 @@ Page({
             eventId: info.eventId, //赛事id
             group: this.data.group, // x强
             itemId: info.itemId,
-            judgeId: info.judgeId, // 测试用
+            judgeId: wx.getStorageSync('openid'),
             oneMore: (side !== 'left') && (side !== 'right') ? true : false,
             round: info.round,
             winSide: side == 'left' ? 0 : side == 'right' ? 1 : '',

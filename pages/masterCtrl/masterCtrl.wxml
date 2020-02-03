@@ -4,7 +4,7 @@
         <view class="white ml20 barTitle" slot="center">流程主页</view>
     </navBar>
     <view class="master-ctrl-container flex-column-layout" hover-class="none" hover-stop-propagation="false">
-        <view class="time-plan flex-column-layout">
+        <view class="time-plan flex-column-layout" wx-if="{{!showRepickList}}">
             <view class="time-plan-header">
                 <!-- <view class="title">活动时间规划</view> -->
                 <view class="icon">
@@ -40,6 +40,9 @@
                 </view>
             </view>
         </view>
+        <view class="flex-column-layout" wx-if="{{showRepickList}}">
+            <repick playerList="{{repickList}}"></repick>
+        </view>
     </view>
-    <ctrl-detail wx-if="{{switchDetail}}" show="{{switchDetail}}" nodeList="{{showDetailList}}" bind:showNode="showNode" bind:closeNode="closeNode"></ctrl-detail>
+    <ctrl-detail wx-if="{{switchDetail}}" show="{{switchDetail}}" nodeList="{{showDetailList}}" groupVal="{{groupVal}}" bind:showNode="showNode" bind:closeNode="closeNode" bind:operate="operate"></ctrl-detail>
 </view>

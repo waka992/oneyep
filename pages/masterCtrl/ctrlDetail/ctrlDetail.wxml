@@ -9,5 +9,12 @@
             </view>
         </view>
         <button class="custom-btn ctrl-detail-btn" catchtap="showDetail">详情</button>
+        <view class="operate-btn-group" wx-if="{{groupVal == 0}}">
+            <button class="operate-btn ctrl-detail-btn" data-type="{{1}}" catchtap="operate">开始</button>
+            <button class="operate-btn ctrl-detail-btn" data-type="{{2}}" catchtap="operate">结束</button>
+            <button class="operate-btn ctrl-detail-btn" data-type="{{0}}" catchtap="operate">回滚</button>
+            <button class="operate-btn ctrl-detail-btn" open-type="share">分享</button>
+            
+        </view>
     </view>
 </view>

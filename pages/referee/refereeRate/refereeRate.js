@@ -33,8 +33,8 @@ Page({
       eventId: current.eventId, // 赛事id
       itemId: current.itemId, // 项目id
       userId: current.itemUserId, // 项目id
-      judgeId: 1, // 测试用 裁判id
-      score: Number(this.data.currentScore) || 0, // 测试用 得分
+      judgeId: wx.getStorageSync('openid'), // 裁判id
+      score: Number(this.data.currentScore) || 0, // 得分
     }
     api.post('room/event/scoreAudition', param).then(res => {
       console.log(res);

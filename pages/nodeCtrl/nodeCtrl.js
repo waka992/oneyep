@@ -17,6 +17,7 @@ Page({
     nodeName: '',
     startTime: '',
     endTime: '',
+    groupVal: '', // 身份识别 0总控 1组长 2组员
     groups: [
       // {name: '签到组', status: 1, tasks: [{task: '交场', status: 1},{task: '工作人员到场', status: 1},{task: '清点&交接物料', status: 0},]},
       // {name: '摊位组', status: 0, tasks: [{task: '交场', status: 1},{task: '工作人员到场', status: 1},{task: '清点&交接物料', status: 0},{task: '清点&交接物料2', status: 1},{task: '清点&交接物料3', status: 0},]},
@@ -24,15 +25,15 @@ Page({
     timePlanList: [], // 回滚节点需要的列表
     operateList: [
       {imgSrc:'/images/icon/icon-start.png', word: '开始', type: 1}, 
-      {imgSrc:'/images/icon/icon-urge.png', word: '催办'},
       {imgSrc:'/images/icon/icon-reback.png', word: '回滚', type: 0},
       {imgSrc:'/images/icon/icon-end.png', word: '结束', type: 2},
       {imgSrc:'/images/icon/icon-share.png', word: '分享'},
     ],
     operateList3: [
       {imgSrc:'/images/icon/icon-start.png', word: '开始', type: 1}, 
-      {imgSrc:'/images/icon/icon-end.png', word: '结束', type: 2},
+      {imgSrc:'/images/icon/icon-end.png', word: '完成', type: 2},
       {imgSrc:'/images/icon/icon-reback.png', word: '回滚', type: 0},
+      {imgSrc:'/images/icon/icon-urge.png', word: '催办'},
       {imgSrc:'/images/icon/icon-feedback.png', word: '反馈', type: 9},
     ], // 小节点的列表
     showOperateList3: [], // 过滤后小节点的列表
@@ -114,6 +115,27 @@ Page({
   // 提醒后台执行动作（大节点）
   requestNodeOperate(type) {
     api.post('node/nodeControl', {nodeId: this.data.nodeid, type: type}).then(res => {
+      if (res.code == 2006) {
+        // 打开重选列表
+        this.setData({
+          showRepickList: true
+        })
+        return
+      }
+      else if (res.code == 2012) {
+        // battle列表
+        wx.showToast({
+          title: res.bestSize + '强选手未全部选出',
+          icon: 'none',
+          duration: 1500,
+        });
+        return
+      }
+      wx.showToast({
+        title: '操作成功',
+        icon: 'none',
+        duration: 1500,
+      });
       this.getNode(this.data.nodeid) // 执行成功刷新列表
     })
   },
@@ -204,9 +226,31 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let op3 = []
+    switch(Number(options.groupVal)) {
+     // groupVal身份识别 0总控 1组长 2组员
+      case 0:
+        op3 = [
+          {imgSrc:'/images/icon/icon-start.png', word: '开始', type: 1}, 
+          {imgSrc:'/images/icon/icon-end.png', word: '完成', type: 2},
+          {imgSrc:'/images/icon/icon-reback.png', word: '回滚', type: 0},
+          {imgSrc:'/images/icon/icon-urge.png', word: '催办', type}, // 总控才有
+        ]
+      break
+      case 1:
+      case 2:
+        op3 = [
+          // {imgSrc:'/images/icon/icon-start.png', word: '开始', type: 1}, 
+          // {imgSrc:'/images/icon/icon-end.png', word: '完成', type: 2},
+          // {imgSrc:'/images/icon/icon-reback.png', word: '回滚', type: 0},
+          {imgSrc:'/images/icon/icon-feedback.png', word: '反馈', type: 9}, // 组长 组员只能反馈
+        ]
+    }
     this.setData({
       nodeid: options.nodeid,
-      eventid: options.eventid
+      eventid: options.eventid,
+      groupVal: options.groupVal,
+      operateList3: op3
     })
     this.getNode(options.nodeid) 
   },

@@ -54,11 +54,29 @@
 
 .custom-btn {
     width: 482rpx !important;
-    height: 90rpx;
-    line-height: 90rpx;
+    height: 80rpx;
+    line-height: 80rpx;
     border-radius: 45rpx;
     background: linear-gradient(to right, #5c3cde, #5489f5);
     font-size: 36rpx;
     color: #fff;
     font-weight: normal;
-  }
+}
+
+.operate-btn-group {
+    text-align: center;
+    display: flex;
+    justify-items: self-end;
+    margin-top: 40rpx;
+}
+
+.operate-btn {
+    display: inline-block;
+    width: 120rpx !important;
+    height: 50rpx;
+    line-height: 50rpx;
+    border-radius: 20rpx;
+    font-size: 28rpx;
+    background: linear-gradient(to right, #5c3cde, #5489f5);
+    color: #fff;
+}

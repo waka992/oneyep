@@ -35,7 +35,8 @@ Page({
   // 下拉刷新
   onPullDownRefresh() {
     this.setData({
-      page: 0
+      page: 0,
+      raceList: []
     })
     this.getList()
   },
@@ -56,7 +57,6 @@ Page({
   // 展示详情
   showDetail(evt){
       let id = evt.detail.id
-      console.log(id);
       wx.navigateTo({
         url: '/pages/race/raceDetail/raceDetail?id=' + id,
       })
