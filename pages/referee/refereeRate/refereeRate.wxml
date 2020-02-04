@@ -7,7 +7,7 @@
     <image class="player-pic" src="{{'/images/player-video.png'}}" wx:if="{{!showRateList}}"></image>
     <view class="rate-container" wx:if="{{!showRateList}}">
         <view class="rate-head">
-            <text class="title">HipHop 海选</text>
+            <text class="title">{{raceName + ' 海选'}}</text>
             <image class="list-pic" src="/images/icon/menu-icon.png" catchtap="openList"></image>
         </view>
         <view class="select-area">
@@ -18,7 +18,7 @@
         <view class="rate-bottom">
             <view class="rate-area">
                 <view class="intro">请您为{{currentPlayer.num}}号选手评分</view>
-                <input class="rate-input" type="number" maxlength="3" bindinput="scoreEdit" type="text"/>
+                <input value="{{score}}" class="rate-input" type="number" maxlength="3" bindinput="scoreEdit" type="text"/>
             </view>
             <view class="rate-btn" catchtap="confirmRate">确认评分</view>
         </view>
@@ -32,6 +32,6 @@
                 <image class="back-pic" src="/images/icon/icon-back.png"></image>
             </view>
         </view>
-        <referee-rate-list show="{{showRateList}}" playerList="{{playerList}}"></referee-rate-list>
+        <referee-rate-list show="{{showRateList}}" playerList="{{playerList}}" bind:select="selectPlayer"></referee-rate-list>
     </view>
 </view>

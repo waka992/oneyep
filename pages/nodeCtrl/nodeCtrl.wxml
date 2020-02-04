@@ -48,5 +48,5 @@
     <node-operate wx:if="{{switchNodeOperate}}" show="{{switchNodeOperate}}" operateList="{{operateList}}" bind:operate="operateNode" bind:close="closeNode"></node-operate>
     <node-operate wx:if="{{switchTaskOperate}}" show="{{switchTaskOperate}}" operateList="{{showOperateList3}}" bind:operate="operate" bind:close="closeTask"></node-operate>
     <release-dialog wx:if="{{switchRelease}}" show="{{switchRelease}}" bind:close="closeRelease" bind:release="sendRelease"></release-dialog>
-    <my-picker wx:if="{{switchBackNode}}" show="{{switchBackNode}}" nodeList="{{timePlanList}}" bind:showNode="toBackNode" bind:close="closeBackDialog"></my-picker>
+    <!-- <my-picker wx:if="{{switchBackNode}}" show="{{switchBackNode}}" nodeList="{{timePlanList}}" bind:showNode="toBackNode" bind:close="closeBackDialog"></my-picker> -->
 </view>

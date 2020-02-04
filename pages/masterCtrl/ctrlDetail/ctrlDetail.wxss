@@ -1,6 +1,8 @@
 /* pages/masterCtrl/ctrlDetail/ctrlDetail.wxss */
 .ctrl-detail {
-    position: relative;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 .mask {

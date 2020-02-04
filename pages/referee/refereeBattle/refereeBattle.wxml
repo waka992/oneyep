@@ -16,7 +16,7 @@
             <view class="leftMask mask"></view>
             <image class="player-pic1" src="/images/player-video.png" catchtap="chose" data-side="left"></image>
             <view class="info1">
-                <text class="group">{{'A1'}}</text>
+                <text class="group">{{leftInfo.itemNum}}</text>
                 <text class="name">{{leftInfo.nickName}}</text>
             </view>
         </view>
@@ -25,7 +25,7 @@
             <view class="rightMask mask"></view>
             <image class="player-pic2" src="/images/player-video.png" catchtap="chose" data-side="right"></image>
             <view class="info2">
-                <text class="group">{{'A2'}}</text>
+                <text class="group">{{rightInfo.itemNum}}</text>
                 <text class="name">{{rightInfo.nickName}}</text>
             </view>
         </view>

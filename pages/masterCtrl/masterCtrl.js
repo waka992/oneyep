@@ -19,6 +19,9 @@ Page({
     groupVal: '', // 身份识别 0总控 1组长 2组员
     showRepickList: false, // 重选人员表
     switchBackNode: false, // 回滚节点选择弹窗
+    currentNodeId: '', // 当前选中的nodeid
+    currentInstanceId: '', // 当前选中的id
+    currentNodeType: '', // 当前选中的nodetype
   },
   /**
    * 生命周期函数--监听页面加载
@@ -26,7 +29,8 @@ Page({
   // 弹出详情框
   showDetail(e) {
     // 实际是id而不是nodeid(可查看HTML上绑定的字段)
-    let nodeid = e.currentTarget.dataset.nodeid
+    let {nodeid, nodemodelid, nodetype} = e.currentTarget.dataset
+    console.log(e.currentTarget);
     let arr = []
     for (let i = 0; i < this.data.timePlanList.length; i++) {
       const ele = this.data.timePlanList[i];
@@ -56,7 +60,10 @@ Page({
     this.setData({
       showDetailList: arr,
       selectNodeId: nodeid,
-      switchDetail: true
+      switchDetail: true,
+      currentInstanceId: nodeid,
+      currentNodeId: nodemodelid,
+      currentNodeType: nodetype
     })
   },
   // 打开节点操作界面
@@ -116,11 +123,12 @@ Page({
 
   // 操作节点
   operate(e) {
-    let type = e.detail.type
+    let type = e.detail
     // 弹出回滚节点选择
     if (type === 0) {
-      let param = {id: this.data.eventid}
-      this.getBackNodes(param)
+      // let param = {id: this.data.eventid}
+      // this.getBackNodes(param)
+      this.toBackNode()
       return
     }
     this.requestNodeOperate(e.detail)
@@ -134,7 +142,7 @@ Page({
         icon: 'none',
         duration: 1500,
       });
-      this.getNode(this.data.id) // 执行成功刷新列表
+      this.getNodes(this.data.id) // 执行成功刷新列表
     }).catch(res => {
       if (res.code == 2006) {
         this.getNodeItemByNodeId()
@@ -154,17 +162,21 @@ Page({
 
   // 跳转到指定回滚节点
   toBackNode(e) {
-    console.log(e.detail);
-    let {nodeId,id,nodeType } = e.detail.nodeId // newnodeid是哪个？
-    api.post('node/nodeBack', {nodeId: nodeId, nodeInstanceId: id, nodeType: nodeType}).then(res => {
-      console.log(res);
-      this.setData({
-      switchBackNode: false
-      })
+    let { currentNodeId, currentInstanceId, currentNodeType} = this.data
+    api.post('node/nodeBack', {nodeId: currentNodeId, nodeInstanceId: currentInstanceId, nodeType: currentNodeType}).then(res => {
+      // this.setData({
+      // switchBackNode: false
+      // })
+      wx.showToast({
+        title: '操作成功',
+        icon: 'none',
+        duration: 1500,
+      });
+      this.getNodes(this.data.id) // 执行成功刷新列表
     }).catch(res => {
-      this.setData({
-        switchBackNode: false
-      })
+      // this.setData({
+      //   switchBackNode: false
+      // })
     })
   },
 

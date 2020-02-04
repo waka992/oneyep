@@ -18,6 +18,8 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    
+    select(e) {
+      this.triggerEvent('select', e.currentTarget.dataset.selectindex)
+    }
   }
 })

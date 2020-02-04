@@ -12,8 +12,10 @@ Page({
     playerList: [],
     currentNum: 0,
     currentScore: 0,
+    score: 0,
+    raceName: '',
     currentPlayer: {
-      num: 8,
+      num: 0,
       pic: '/images/player-video.png'
     }
   },
@@ -32,12 +34,11 @@ Page({
     let param = {
       eventId: current.eventId, // 赛事id
       itemId: current.itemId, // 项目id
-      userId: current.itemUserId, // 项目id
-      judgeId: wx.getStorageSync('openid'), // 裁判id
+      userId: current.itemUserId,
+      judgeId:this.data.itemUserId,// 裁判id
       score: Number(this.data.currentScore) || 0, // 得分
     }
     api.post('room/event/scoreAudition', param).then(res => {
-      console.log(res);
       wx.showToast({
         title: '完成评分',
         icon: 'none',
@@ -72,7 +73,8 @@ Page({
       if (res.length > 0) {
         this.setData({
           currentPlayer: {num: res[this.data.currentNum].itemNum},
-          playerList: res
+          playerList: res,
+          score: res[this.data.currentNum].totalScore
         })
         fn && fn()
       }
@@ -116,30 +118,42 @@ Page({
   },
   // 上一个参赛人员
   goPrevious() {
-    let data = this.data
-    if (data.currentNum <= 0) {
+    let {currentNum, playerList} = this.data
+    if (currentNum <= 0) {
       return
     }
-    this.setData({
-      currentNum: data.currentNum - 1
-    })
+    let num = currentNum - 1
     this.animateLeft()
     this.setData({
-      currentPlayer: {num: data.playerList[data.currentNum].itemNum}
+      currentNum: num,
+      currentPlayer: {num: playerList[num].itemNum},
+      score: playerList[num].totalScore
     })
   },
   // 下一个参赛人员
   goNext() {
-    let data = this.data
-    if (data.currentNum >= data.playerList.length) {
+    let {currentNum, playerList} = this.data
+    if (currentNum >= playerList.length - 1) {
       return
     }
-    this.setData({
-      currentNum: data.currentNum + 1
-    })
+    let num = currentNum + 1
     this.animateRight()
     this.setData({
-      currentPlayer: {num: data.playerList[data.currentNum].itemNum}
+      currentNum: num,
+      currentPlayer: {num: playerList[num].itemNum},
+      score: playerList[num].totalScore
+    })
+  },
+
+  // 列表中选中选手
+  selectPlayer(e) {
+    let {playerList} = this.data
+    let index = e.detail
+    this.setData({
+      showRateList: false,
+      currentNum: index,
+      currentPlayer: {num: playerList[index].itemNum},
+      score: playerList[index].totalScore
     })
   },
   /**
@@ -147,7 +161,11 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      eventId: options.eventId
+      eventId: options.eventId,
+      itemUserId: options.itemUserId,
+      raceName: options.raceName,
+      // eventId: 1,
+      // itemUserId: '10474816467873300502',
     })
     this.getPickList()
   },

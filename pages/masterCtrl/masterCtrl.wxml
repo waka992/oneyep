@@ -27,7 +27,7 @@
                     <view class="node">节点</view>
                 </view>
                 <view class="list-items">
-                    <view class="list-item" wx:for="{{timePlanList}}" wx:key="index" catchtap="showDetail" data-nodeid="{{item.id}}">
+                    <view class="list-item" wx:for="{{timePlanList}}" wx:key="index" catchtap="showDetail" data-nodeid="{{item.id}}" data-nodemodelid="{{item.nodeId}}" data-nodetype="{{item.nodeType}}">
                         <view class="status">
                             <!-- 0未开始 1进行中 2结束 -->
                             <image wx-if="{{item.nodeStatus == 2}}" class="status-icon" src="/images/icon/icon-tickStatus.png"></image>
@@ -45,5 +45,5 @@
         </view>
     </view>
     <ctrl-detail wx-if="{{switchDetail}}" show="{{switchDetail}}" nodeList="{{showDetailList}}" groupVal="{{groupVal}}" bind:showNode="showNode" bind:closeNode="closeNode" bind:operate="operate"></ctrl-detail>
-    <my-picker wx:if="{{switchBackNode}}" show="{{switchBackNode}}" nodeList="{{backTimePlanList}}" bind:showNode="toBackNode" bind:close="closeBackDialog"></my-picker>
+    <!-- <my-picker wx:if="{{switchBackNode}}" show="{{switchBackNode}}" nodeList="{{backTimePlanList}}" bind:showNode="toBackNode" bind:close="closeBackDialog"></my-picker> -->
 </view>

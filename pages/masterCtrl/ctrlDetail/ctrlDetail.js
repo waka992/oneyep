@@ -7,6 +7,7 @@ Component({
     show: {type: Boolean, value: false},
     nodeList: {type: Array, value: []},
     animationData: null,
+    groupVal: {type: Number, value: ''}
   },
 
   /**

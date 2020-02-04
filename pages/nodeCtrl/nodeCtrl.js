@@ -13,6 +13,9 @@ Page({
     switchBackNode: false, // 回滚节点选择弹窗
     showRepickList: false, // 重选界面
     nodeid: '', // 当前大节点的id
+    currentNodeId: '', // getnode获得的nodeid
+    currentInstanceId: '', // getnode获得的id
+    currentNodeType: '', // getnode获得的nodetype
     eventid: '', // 赛事id
     itemId: '', // 项目id
     selectNodeId: '', // 选中的小节点id
@@ -94,17 +97,18 @@ Page({
   // 操作框执行的动作(大节点)
   operateNode(e) {
     let type = e.detail.type
-    // 弹出回滚节点选择
+    // 回滚
     if (type === 0) {
-      let param = {id: this.data.eventid}
-      this.getNodes(param)
+      // let param = {id: this.data.eventid}
+      // this.getNodes(param)
+      this.toBackNode() // 回滚接口
       return
     }
     this.requestNodeOperate(type)
   },
   // 操作框执行的动作
   operate(e) {
-    let type = e.detail.type
+    let type = e.detail
     // 反馈不需要传后台
     if (type == 9) {
       this.setData({
@@ -185,6 +189,7 @@ Page({
   getNode(id){
   //     组长 裁判 userId 001 总控 002
     let userid = wx.getStorageSync('openid')
+    // id = '001'; userid = '002'
     let param = {id: id, userId: userid }
     api.post('node/getNode', param).then(res => {
       console.log(res);
@@ -196,7 +201,10 @@ Page({
         groups.push({
           canOperate: Number(ele.flag) ? true : false,
           name: ele.groupName,
-          tasks: ele.taskList
+          tasks: ele.taskList,
+          currentInstanceId: res.node.id,
+          currentNodeId: res.node.nodeId,
+          currentNodeType: res.node.nodeType
         })
       }
       console.log(groups);
@@ -211,16 +219,22 @@ Page({
   // 跳转到指定回滚节点
   toBackNode(e) {
     console.log(e.detail);
-    let {nodeId,id,nodeType } = e.detail.nodeId // newnodeid是哪个？
-    api.post('node/nodeBack', {nodeId: nodeId, nodeInstanceId: id, nodeType: nodeType}).then(res => {
+    let { currentNodeId, currentInstanceId, currentNodeType} = this.data
+    api.post('node/nodeBack', {nodeId: currentNodeId, nodeInstanceId: currentInstanceId, nodeType: currentNodeType}).then(res => {
       console.log(res);
-      this.setData({
-      switchBackNode: false
-      })
+      wx.showToast({
+        title: '操作成功',
+        icon: 'none',
+        duration: 1500,
+      });
+      this.getNode(this.data.nodeid) // 执行成功刷新列表
+      // this.setData({
+      // switchBackNode: false
+      // })
     }).catch(res => {
-      this.setData({
-        switchBackNode: false
-      })
+      // this.setData({
+      //   switchBackNode: false
+      // })
     })
   },
   // 回滚时候获取列表
@@ -249,7 +263,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options);
     let op3 = []
+    let op = []
     switch(Number(options.groupVal)) {
      // groupVal身份识别 0总控 1组长 2组员
       case 0:
@@ -259,9 +275,21 @@ Page({
           {imgSrc:'/images/icon/icon-reback.png', word: '回滚', type: 0},
           {imgSrc:'/images/icon/icon-urge.png', word: '催办', type: 99}, // 总控才有
         ]
+        op = [
+          {imgSrc:'/images/icon/icon-start.png', word: '开始', type: 1}, 
+          {imgSrc:'/images/icon/icon-reback.png', word: '回滚', type: 0},
+          {imgSrc:'/images/icon/icon-end.png', word: '结束', type: 2},
+          {imgSrc:'/images/icon/icon-share.png', word: '分享'},
+        ]
       break
       case 1:
       case 2:
+        op = [
+          // {imgSrc:'/images/icon/icon-start.png', word: '开始', type: 1}, 
+          // {imgSrc:'/images/icon/icon-reback.png', word: '回滚', type: 0},
+          // {imgSrc:'/images/icon/icon-end.png', word: '结束', type: 2},
+          {imgSrc:'/images/icon/icon-share.png', word: '分享'},
+        ]
         op3 = [
           // {imgSrc:'/images/icon/icon-start.png', word: '开始', type: 1}, 
           // {imgSrc:'/images/icon/icon-end.png', word: '完成', type: 2},
@@ -273,7 +301,8 @@ Page({
       nodeid: options.nodeid,
       eventid: options.eventid,
       groupVal: options.groupVal,
-      operateList3: op3
+      operateList3: op3,
+      operateList: op,
     })
     this.getNode(options.nodeid) 
   },
