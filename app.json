@@ -1,13 +1,13 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/referee/referee",
-    "pages/referee/refereeRate/refereeRate",
-    "pages/masterCtrl/masterCtrl",
-    "pages/referee/refereeBattle/refereeBattle",
     "pages/nodeCtrl/nodeCtrl",
-    "pages/demo/demoBindRole/demoBindRole",
+    "pages/masterCtrl/masterCtrl",
+    "pages/referee/referee",
     "pages/user/user",
+    "pages/referee/refereeRate/refereeRate",
+    "pages/referee/refereeBattle/refereeBattle",
+    "pages/demo/demoBindRole/demoBindRole",
     "pages/player/playerOn/playerOn",
     "pages/race/raceSignUp/raceSignUp",
     "pages/player/playerOnAudition/playerOnAudition",

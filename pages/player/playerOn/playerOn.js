@@ -173,7 +173,7 @@ Page({
   getBattleList(fn) {
     let param = {
       eventId: this.data.eventId,
-      itemId: 1
+      itemId: this.data.itemId
     } // 测试用
     api.post('room/event/getBattleGroupMap', param).then(res => {
       if (res) {
@@ -300,7 +300,7 @@ Page({
   // 海选接口
   // 海选列表
   getAuditionList(fn) {
-    let param = {eventId: this.data.eventId, itemId: 1} // 测试用
+    let param = {eventId: this.data.eventId, itemId: this.data.itemId} // 测试用
     api.post('room/event/getUserRecordList', param).then(res => {
       if (res) {
         let currentRank = 99

@@ -17,8 +17,8 @@ Component({
     playerList: [],
   },
 
-  pageLifetimes: {
-    show: function() {
+  lifetimes: {
+    attached: function() {
       // 页面被展示
       this.getRepickList()
     },
@@ -80,12 +80,16 @@ Component({
       })
       let resIds = []
       res.forEach(ele => {
-        resIds.push(ele.id)
+        resIds.push(ele.itemUserId)
       });
+      if (resIds.length == 0) {
+        that.triggerEvent('close')
+        return
+      }
       let param = {
         bestSize: 16,
-        eventId: 1,
-        itemId: 1,
+        eventId: this.data.eventId,
+        itemId: this.data.itemId,
         userIds: resIds
       }
       api.post('/room/event/repeatPickToChoose', param).then(res => {

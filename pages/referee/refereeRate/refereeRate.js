@@ -67,8 +67,8 @@ Page({
   // 获取海选人员名单
   getPickList(fn) {
     // eventid 赛事id， itemid: 项目(hihop等)id 1poping 2hiphop 3freestyle
-    let {eventId} = this.data
-    let param = {eventId: eventId, itemId: 1} // 测试用
+    let {eventId, itemId} = this.data
+    let param = {eventId: eventId, itemId: itemId} // 测试用
     api.post('room/event/getUserRecordList', param).then(res => {
       if (res.length > 0) {
         this.setData({
@@ -164,6 +164,7 @@ Page({
       eventId: options.eventId,
       itemUserId: options.itemUserId,
       raceName: options.raceName,
+      itemId: options.itemId
       // eventId: 1,
       // itemUserId: '10474816467873300502',
     })

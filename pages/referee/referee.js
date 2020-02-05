@@ -23,6 +23,10 @@ Page({
     api.post('/node/getCurrentNode', param).then(res => {
       // 0普通 1海选 2比赛
       console.log(res);
+      this.setData({
+        itemId: res.itemId
+      })
+
       if (res.nodeType == 0) {
         wx.showToast({
           title: '赛事未开始，请等待通知',
@@ -30,36 +34,37 @@ Page({
           duration: 1500,
         });
       }
-      else if (res.nodeType == 1) {
-        wx.navigateTo({
-          url: `/pages/referee/refereeRate/refereeRate?eventId=${this.data.eventId}&itemId=${res.itemId}&itemUserId=${this.data.itemUserId}&raceName=${this.data.raceName}`,
-        })
-      }
-      else if (res.nodeType == 2) {
-        wx.navigateTo({
-          url: `/pages/referee/refereeBattle/refereeBattle?eventId=${this.data.eventId}&itemId=${res.itemId}&itemUserId=${this.data.itemUserId}`,
-        }) 
+      else if (res.nodeType == 1 || res.nodeType == 2) {
+        this.getEventItem(res.nodeType)
       }
     })
   },
 
   // 2.获取赛事信息
-  getEventItem(id) {
+  getEventItem(type) {
     // userid用itemuserid
+    let { eventId, itemId, itemUserId} = this.data
     let param = {
-      eventId: this.data.eventId,
-      itemId: id
-    } // 测试用
+      eventId: eventId,
+      itemId: itemId
+    }
     api.post('room/event/getEventItem', param).then(res => {
       if (res) {
-        this.setData({
-          raceName: res.itemName,
-        })
+        if (type == 1) {
+          wx.navigateTo({
+            url: `/pages/referee/refereeRate/refereeRate?eventId=${eventId}&itemId=${itemId}&itemUserId=${itemUserId}&raceName=${res.itemName}`,
+          })
+        }
+        else if (type == 2) {
+          wx.navigateTo({
+            url: `/pages/referee/refereeBattle/refereeBattle?eventId=${eventId}&itemId=${itemId}&itemUserId=${itemUserId}`,
+          }) 
+        }
       }
     })
   },
 
-  // 1.获取用户其中一个item信息
+  // 0.获取用户其中一个item信息
   getUserItemInfo() {
     wx.showLoading({
       mask: true,
@@ -73,7 +78,6 @@ Page({
       this.setData({
         itemUserId: res.id,  // 同一个赛事不同项目用同一个itemuserid
       })
-      this.getEventItem(res.id) // 获取赛事名字
       wx.hideLoading();
     }).catch(err => {
       wx.hideLoading();

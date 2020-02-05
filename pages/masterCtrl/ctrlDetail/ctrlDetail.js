@@ -60,6 +60,7 @@ Component({
     // 操作节点
     operate(e) {
       this.triggerEvent('operate', e.currentTarget.dataset.type)
+      this.close()
     }
   }
 })

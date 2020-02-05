@@ -12,11 +12,11 @@ Page({
     switchRelease: false,
     switchBackNode: false, // 回滚节点选择弹窗
     showRepickList: false, // 重选界面
-    nodeid: '', // 当前大节点的id
+    nodeId: '', // 当前大节点的id
     currentNodeId: '', // getnode获得的nodeid
     currentInstanceId: '', // getnode获得的id
     currentNodeType: '', // getnode获得的nodetype
-    eventid: '', // 赛事id
+    eventId: '', // 赛事id
     itemId: '', // 项目id
     selectNodeId: '', // 选中的小节点id
     nodeName: '',
@@ -120,13 +120,13 @@ Page({
   },
   // 提醒后台执行动作（大节点）
   requestNodeOperate(type) {
-    api.post('node/nodeControl', {nodeId: this.data.nodeid, type: type}).then(res => {
+    api.post('node/nodeControl', {nodeId: this.data.nodeId, type: type}).then(res => {
       wx.showToast({
         title: '操作成功',
         icon: 'none',
         duration: 1500,
       });
-      this.getNode(this.data.nodeid) // 执行成功刷新列表
+      this.getNode(this.data.nodeId) // 执行成功刷新列表
     }).catch(res => {
       // 重选
       if (res.code == 2006) {
@@ -148,7 +148,7 @@ Page({
   // 获取项目id
   getNodeItemByNodeId() {
     let param = {
-      id: this.data.nodeid,
+      id: this.data.nodeId,
       userId: wx.getStorageSync('openid')
     }
     api.post('/node/getNodeItemByNodeId', param).then(res => {
@@ -169,7 +169,7 @@ Page({
   // 提醒后台执行动作
   requestOperate(type) {
     api.post('task/taskControl', {taskId: this.data.selectNodeId, type: type}).then(res => {
-      this.getNode(this.data.nodeid) // 执行成功刷新列表
+      this.getNode(this.data.nodeId) // 执行成功刷新列表
     })
   },
   openGroup(evt) {
@@ -227,7 +227,7 @@ Page({
         icon: 'none',
         duration: 1500,
       });
-      this.getNode(this.data.nodeid) // 执行成功刷新列表
+      this.getNode(this.data.nodeId) // 执行成功刷新列表
       // this.setData({
       // switchBackNode: false
       // })
@@ -298,8 +298,8 @@ Page({
         ]
     }
     this.setData({
-      nodeid: options.nodeid,
-      eventid: options.eventid,
+      nodeId: options.nodeid,
+      eventId: options.eventId,
       groupVal: options.groupVal,
       operateList3: op3,
       operateList: op,
@@ -317,7 +317,7 @@ Page({
     }
     return {
       title: '节点控制台',
-      path: `/pages/nodeCtrl/nodeCtrl?nodeid=${this.data.nodeid}&eventid=${this.data.eventid}`
+      path: `/pages/nodeCtrl/nodeCtrl?nodeid=${this.data.nodeid}&eventid=${this.data.eventId}`
     }
   }
 })

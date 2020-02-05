@@ -216,6 +216,9 @@ Page({
       id: options.id,
       eventId: options.id,
       groupVal: options.groupVal, // 身份识别
+      // id: 1,
+      // eventId: 1,
+      // groupVal: 0, // 身份识别
     })
     this.getNodes(options.id)
   },
