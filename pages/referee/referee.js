@@ -57,7 +57,7 @@ Page({
         }
         else if (type == 2) {
           wx.navigateTo({
-            url: `/pages/referee/refereeBattle/refereeBattle?eventId=${eventId}&itemId=${itemId}&itemUserId=${itemUserId}`,
+            url: `/pages/referee/refereeBattle/refereeBattle?eventId=${eventId}&itemId=${itemId}&itemUserId=${itemUserId}&raceName=${res.itemName}`,
           }) 
         }
       }

@@ -16,14 +16,14 @@ Page({
     rightInfo: {},
   },
   toList() {
-    let {eventId, itemId} = this.data
+    let {eventId, itemId, raceName, itemUserId} = this.data
     let param = {
       eventId: eventId,
       itemId: itemId,
-      judgeId:this.data.itemUserId
+      judgeId: itemUserId,
     }
     wx.navigateTo({
-      url: `/pages/referee/refereeBattle/refereeBattleList/refereeBattleList?param=${JSON.stringify(param)}`,
+      url: `/pages/referee/refereeBattle/refereeBattleList/refereeBattleList?param=${JSON.stringify(param)}&raceName=${raceName}`,
     });
   },
 
@@ -96,11 +96,41 @@ Page({
       },
     });
   },
+  // 下一个选手
+  tonext() {
+    let { round, playerList, group } = this.data
+    let num = round + 1
+    let leftInfo = playerList[num].battleLeft
+    let rightInfo = playerList[num].battleRight
+    if (num > group / 2) {
+      wx.showToast({
+        title: '已经是最后一组',
+        icon: 'none',
+        duration: 1500,
+        mask: false,
+      });
+      return
+    }
+    this.setData({
+      round: num,
+      leftInfo: leftInfo,
+      rightInfo: rightInfo,
+    })
+  },
   // 选择胜者
   chose(e) {
+    let eside = e.currentTarget.dataset.side
+    let einfo = {}
+    if (eside == 'left') {
+      einfo = this.data.leftInfo
+    }
+    else if (eside == 'right') {
+      einfo = this.data.rightInfo
+    }
+    let contentNum = einfo.itemNum
     wx.showModal({
       title: '提示',
-      content: '确认选择该参赛者胜出？',
+      content: `确认选择${contentNum}号参赛者胜出？`,
       showCancel: true,
       cancelText: '取消',
       cancelColor: '#000000',
@@ -152,6 +182,10 @@ Page({
       eventId: options.eventId,
       itemId: options.itemId,
       itemUserId: options.itemUserId,
+      raceName: options.raceName,
+      // eventId: 1,
+      // itemId: 1,
+      // itemUserId: 1,
     })
     this.getBattleList()
   },

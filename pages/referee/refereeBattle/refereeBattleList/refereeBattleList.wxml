@@ -6,22 +6,27 @@
     <view class="mask"></view>
     <view class="rate-list">
         <view class="rate-head2">
-            <text class="title">HipHop 海选</text>
-            <view class="reback-btn" catchtap="closeList">
+            <text class="title">{{raceName}} 对决赛</text>
+            <view class="reback-btn" catchtap="backToRefereeBattle">
                 <text class="reback-word" catchtap="backToRefereeBattle">返回</text>
                 <image class="back-pic" src="/images/icon/icon-back.png"></image>
             </view>
         </view>
         <view class="referee-battle-lists">
             <view class="list-item" wx:for="{{playerList}}" wx:key="index">
+            <!-- iswin 1 赢 0 输 -1未评分 两个都是0平局 -->
                 <view class="group1">
-                    <image class="res-icon" src="{{'/images/icon/icon-win.png'}}"></image>
-                    <view class="group-no bgpink">A1</view>
+                    <image wx-if="{{item.battleLeft.isWin == 1}}" class="res-icon" src="{{'/images/icon/icon-win.png'}}"></image>
+                    <image wx-if="{{item.battleLeft.isWin == 0 && item.battleRight.isWin != 0}}" class="res-icon" src="{{'/images/icon/icon-lose.png'}}"></image>
+                    <image wx-if="{{item.battleLeft.isWin == item.battleRight.isWin}}" class="res-icon" src="{{'/images/icon/icon-tie.png'}}"></image>
+                    <view class="group-no {{item.battleLeft.isWin == 1 ?'bgpink' : item.battleLeft.isWin == 0 && item.battleRight.isWin == 0 ? 'bggrey' : item.battleLeft.isWin == 0 ? 'bgblue' : 'bggrey' }}">{{item.battleLeft.itemNum}}</view>
                 </view>
                 <image class="vs-pic" src="/images/icon/icon-vs.png"></image>
                 <view class="group2">
-                    <view class="group-no bgblue">A2</view>
-                    <image class="res-icon" src="{{'/images/icon/icon-lose.png'}}"></image>
+                    <view class="group-no {{item.battleRight.isWin == 1 ?'bgpink' : item.battleLeft.isWin == 0 && item.battleRight.isWin == 0 ? 'bggrey' : item.battleRight.isWin == 0 ? 'bgblue' : 'bggrey' }}">{{item.battleRight.itemNum}}</view>
+                    <image wx-if="{{item.battleRight.isWin == 1}}" class="res-icon" src="{{'/images/icon/icon-win.png'}}"></image>
+                    <image wx-if="{{item.battleRight.isWin == 0  && item.battleLeft.isWin != 0}}" class="res-icon" src="{{'/images/icon/icon-lose.png'}}"></image>
+                    <image wx-if="{{item.battleRight.isWin == item.battleLeft.isWin}}" class="res-icon" src="{{'/images/icon/icon-tie.png'}}"></image>
                 </view>
             </view>
         </view>

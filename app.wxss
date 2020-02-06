@@ -80,3 +80,7 @@ button {
 .bgblue {
   background-color: #557FF1;
 }
+
+.bggrey {
+  background-color: #656565;
+}

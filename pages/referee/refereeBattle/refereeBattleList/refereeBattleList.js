@@ -7,7 +7,8 @@ Page({
    */
   data: {
     group: 0, // x强
-    playerList: []
+    playerList: [],
+    raceName: ''
   },
   backToRefereeBattle() {
     wx.navigateBack({
@@ -47,7 +48,15 @@ Page({
    */
   onLoad: function (options) {
     console.log(options);
-    let param = JSON.parse(options.param)
-    this.getBattleList(param)
+    try{
+      let param = JSON.parse(options.param)
+      this.getBattleList(param)
+      this.setData({
+        raceName: options.raceName
+      })
+    }
+    catch(err) {
+      console.log(err);
+    }
   },
 })

@@ -6,15 +6,20 @@
 }
 
 /* 弃权 */
-.abstain-btn {
+.abstain-btn, .tonext-btn {
     position: absolute;
     top: 30rpx;
-    left: 40rpx;
+    left: 20rpx;
     padding: 20rpx;
     z-index: 13;
 }
 
-.abstain-btn-inner {
+.tonext-btn {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.abstain-btn-inner, .tonext-btn-inner {
     width: 132rpx;
     height: 54rpx;
     line-height: 54rpx;
