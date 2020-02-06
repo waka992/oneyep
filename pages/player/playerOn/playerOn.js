@@ -19,7 +19,8 @@ Page({
     currentItemStatus: 'battle', // 当前项目节点（battle还是audition）
     currentItems: [], // 当前选手赛事列表
     group: 0,
-    eventId: 1,
+    eventId: '',
+    itemId: '',
     // battle用的变量
     showFinalRankList: false, // 展开battle名单
     chosenGroup: {}, // 当前查看组
@@ -228,6 +229,7 @@ Page({
         itemId: itemList[0].id, // 默认取第一个 
         hasNext: hasNext,
       })
+      this.getUserItemInfo()
     })
   },
 
@@ -339,10 +341,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      eventId: options.eventId // 测试用
+      eventId: options.eventId
     })
     this.getEventList() // 当前选手的赛事列表用于左右切换
-    this.getUserItemInfo()
-
   },
 })

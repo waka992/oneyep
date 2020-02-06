@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/player/playerOn/playerOn",
     "pages/index/index",
     "pages/nodeCtrl/nodeCtrl",
     "pages/masterCtrl/masterCtrl",
@@ -8,7 +9,6 @@
     "pages/referee/refereeRate/refereeRate",
     "pages/referee/refereeBattle/refereeBattle",
     "pages/demo/demoBindRole/demoBindRole",
-    "pages/player/playerOn/playerOn",
     "pages/race/raceSignUp/raceSignUp",
     "pages/player/playerOnAudition/playerOnAudition",
     "pages/referee/refereeBattle/refereeBattleList/refereeBattleList",

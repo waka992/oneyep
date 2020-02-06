@@ -299,7 +299,7 @@ Page({
     }
     this.setData({
       nodeId: options.nodeid,
-      eventId: options.eventId,
+      eventId: options.eventid,
       groupVal: options.groupVal,
       operateList3: op3,
       operateList: op,
