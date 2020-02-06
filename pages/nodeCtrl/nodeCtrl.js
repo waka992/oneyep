@@ -136,7 +136,7 @@ Page({
       else if (res.code == 2012) {
         // battle列表
         wx.showToast({
-          title: res.bestSize + '强选手未全部选出',
+          title: res.desc,
           icon: 'none',
           duration: 1500,
         });
