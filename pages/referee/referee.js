@@ -29,7 +29,7 @@ Page({
 
       if (res.nodeType == 0) {
         wx.showToast({
-          title: '赛事未开始，请等待通知',
+          title: '评分节点未开始，请等待通知',
           icon: 'none',
           duration: 1500,
         });

@@ -8,7 +8,7 @@
         <view class="abstain-btn" catchtap="giveup">
             <view class="abstain-btn-inner">弃权</view>
         </view>
-        <view class="tonext-btn" catchtap="tonext">
+        <view class="tonext-btn" catchtap="canNext">
             <view class="tonext-btn-inner">下一组</view>
         </view>
         <view class="list-pic" catchtap="toList">

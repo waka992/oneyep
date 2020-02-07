@@ -8,7 +8,7 @@ Page({
    */
   data: {
     group: 0, // x强
-    round: 0, // n + 1轮
+    round: 0, // 使用时需要n + 1轮
     itemId: '',
     eventId: '',
     playerList: [],
@@ -53,6 +53,7 @@ Page({
         console.log(res);
         let x = 0
         if (Object.keys(res) && Object.keys(res)[0]) {
+          console.log(Object.keys(res));
           x = Number(Object.keys(res)[0])
         }
         let leftInfo = groups[this.data.round].battleLeft
@@ -115,6 +116,27 @@ Page({
       round: num,
       leftInfo: leftInfo,
       rightInfo: rightInfo,
+    })
+  },
+  // 能不能到下一组选手
+  canNext() {
+    let {eventId, group, itemId, round } = this.data
+    if (group == 0) {return} // 防止数据未加载成功
+    let param = {
+      eventId: eventId,
+      group: group,
+      itemId: itemId,
+      round: round + 1,
+    }
+    api.post('room/event/calculateGroupBattle', param).then(res => {
+      this.tonext()
+    }).catch(err => {
+      wx.showToast({
+        title: '当前结果为平局，需要重新评分',
+        icon: 'none',
+        duration: 1500,
+        mask: false,
+      });
     })
   },
   // 选择胜者

@@ -33,8 +33,8 @@
             <view wx-if="{{currentItemStatus == 'battle'}}">
                 <view class="race-detail" wx-if="{{battleFinish}}">
                     <image class="rank-list-btn" catchtap="openRankList" src="/images/icon/rank-list-open.png"></image>
-                    <view class="race-detail-inner" wx-if="{{chosenGroup.winBattle.itemUserId == itemUserId}}">{{'恭喜您\n晋级'+ group +'强'}}</view>
-                    <view class="race-detail-inner" wx-if="{{chosenGroup.loseBattle.itemUserId == itemUserId}}">{{'很遗憾\n未能晋级'}}</view>
+                    <view class="race-detail-inner" wx-if="{{chosenGroup.winBattle.itemUserId == itemUserId}}">{{'恭喜您\n晋级'+ group / 2 +'强'}}</view>
+                    <view class="race-detail-inner" wx-if="{{chosenGroup.loseBattle.itemUserId == itemUserId}}">{{'恭喜您\n最后成绩' + group + '强'}}</view>
                 </view>
                 <!-- 赛事信息 -->
                 <view class="race-detail" wx-if="{{!battleFinish}}">

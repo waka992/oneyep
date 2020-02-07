@@ -13,7 +13,7 @@
             </view>
         </view>
         <view class="referee-battle-lists">
-            <view class="list-item" wx:for="{{playerList}}" wx:key="index">
+            <view class="list-item" wx:for="{{playerList}}" wx:key="index" catchtap="toTargetPage" data-round="{{item.round}}">
             <!-- iswin 1 赢 0 输 -1未评分 两个都是0平局 -->
                 <view class="group1">
                     <image wx-if="{{item.battleLeft.isWin == 1}}" class="res-icon" src="{{'/images/icon/icon-win.png'}}"></image>
