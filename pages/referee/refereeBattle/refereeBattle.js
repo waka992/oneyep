@@ -14,22 +14,30 @@ Page({
     playerList: [],
     leftInfo: {},
     rightInfo: {},
+    pollingTimer: null, // 轮询timer
   },
+  // 返回上一页
+  back() {
+    wx.navigateBack({
+      delta: 1
+    });
+  },
+  // 查看列表
   toList() {
-    let {eventId, itemId, raceName, itemUserId} = this.data
+    let {eventId, itemId, raceName, itemUserId, group} = this.data
     let param = {
       eventId: eventId,
       itemId: itemId,
       judgeId: itemUserId,
     }
     wx.navigateTo({
-      url: `/pages/referee/refereeBattle/refereeBattleList/refereeBattleList?param=${JSON.stringify(param)}&raceName=${raceName}`,
+      url: `/pages/referee/refereeBattle/refereeBattleList/refereeBattleList?param=${JSON.stringify(param)}&raceName=${raceName}&group=${group}`,
     });
   },
 
   // 获取battle列表
-  getBattleList() {
-    let {eventId, itemId} = this.data
+  getBattleList(judge = false) {
+    let {eventId, itemId, group} = this.data
     let param = {
       eventId: eventId,
       itemId: itemId,
@@ -37,30 +45,41 @@ Page({
     } // 测试用
     api.post('room/event/getBattleGroupMap', param).then(res => {
       if (res) {
-        // 处理组
-        let groups = []
-        for (const key in res) {
-          if (res.hasOwnProperty(key)) {
-            const element = res[key];
-            for (const k in element) {
-              if (element.hasOwnProperty(k)) {
-                const group = element[k];
-                groups.push(group)
-              }
+        // 调用以判断是否评分完毕
+        if (judge) {
+          let canBackToStart = true // 是否评分完回到开始界面
+          let isComplete = false
+          let num = 0
+          for (const key in res[group]) {
+            num ++
+            const element = res[group][key];
+            if (element.status == 0) {
+              canBackToStart = false
             }
           }
+          console.log(canBackToStart);
+          if (canBackToStart) {
+            // 决赛评分完，就是完成了
+            if (num == 1) {
+              isComplete = true
+            }
+            wx.navigateTo({
+              url: `/pages/referee/referee?isComplete=${isComplete}&id=${this.data.eventid}`,
+            })
+          }
+          return
+        }
+        // 处理组
+        let groups = []
+        for (const key in res[group]) {
+            const element = res[group][key];
+            groups.push(element)
         }
         console.log(res);
-        let x = 0
-        if (Object.keys(res) && Object.keys(res)[0]) {
-          console.log(Object.keys(res));
-          x = Number(Object.keys(res)[0])
-        }
         let leftInfo = groups[this.data.round].battleLeft
         let rightInfo = groups[this.data.round].battleRight
         this.setData({
           playerList: groups,
-          group: x,
           leftInfo: leftInfo,
           rightInfo: rightInfo,
         })
@@ -103,15 +122,16 @@ Page({
     let num = round + 1
     let leftInfo = playerList[num].battleLeft
     let rightInfo = playerList[num].battleRight
-    if (num > group / 2) {
-      wx.showToast({
-        title: '已经是最后一组',
-        icon: 'none',
-        duration: 1500,
-        mask: false,
-      });
-      return
-    }
+    this.getBattleList(true) // 判断完成没有
+    // if (num >= group / 2) {
+      // wx.showToast({
+      //   title: '已经是最后一组',
+      //   icon: 'none',
+      //   duration: 1500,
+      //   mask: false,
+      // });
+      // return
+    // }
     this.setData({
       round: num,
       leftInfo: leftInfo,
@@ -120,6 +140,10 @@ Page({
   },
   // 能不能到下一组选手
   canNext() {
+    wx.showLoading({
+      title: '正在评分统计',
+      mask: true,
+    });
     let {eventId, group, itemId, round } = this.data
     if (group == 0) {return} // 防止数据未加载成功
     let param = {
@@ -129,16 +153,32 @@ Page({
       round: round + 1,
     }
     api.post('room/event/calculateGroupBattle', param).then(res => {
+      wx.hideLoading();
       this.tonext()
-    }).catch(err => {
-      wx.showToast({
-        title: '当前结果为平局，需要重新评分',
-        icon: 'none',
-        duration: 1500,
-        mask: false,
-      });
+    }).catch(res => {
+      // 平局
+      if (res.code == 2005) {
+        wx.hideLoading();
+        wx.showToast({
+          title: '当前结果为平局，请重新评分',
+          icon: 'none',
+          duration: 1500,
+          mask: false,
+        });
+      }
+      // 等待中
+      else if (res.code == 2004) {
+        let that = this
+        let timer = setTimeout(() => {
+          that.canNext()
+        }, 10000);
+        this.setData({
+          pollingTimer: timer
+        })
+      }
     })
   },
+
   // 选择胜者
   chose(e) {
     let eside = e.currentTarget.dataset.side
@@ -150,6 +190,7 @@ Page({
       einfo = this.data.rightInfo
     }
     let contentNum = einfo.itemNum
+    if (!contentNum) { return } // 防止数据为加载
     wx.showModal({
       title: '提示',
       content: `确认选择${contentNum}号参赛者胜出？`,
@@ -186,14 +227,15 @@ Page({
   // 通知结果
   sendResult(param) {
     api.post('/room/event/battleJudge', param).then(res => {
-      console.log(res);
       wx.showToast({
         title: '评分成功！',
         icon: 'none',
-        image: '',
         duration: 1500,
-        mask: false,
+        mask: true,
       });
+      setTimeout(() => {
+        this.canNext()
+      }, 1000)
     })
   },
   /**
@@ -205,11 +247,17 @@ Page({
       itemId: options.itemId,
       itemUserId: options.itemUserId,
       raceName: options.raceName,
+      group: options.group, // x强
       // eventId: 1,
       // itemId: 1,
       // itemUserId: 1,
+      // group: 16, // x强
     })
     this.getBattleList()
+  },
+  onUnload: function() {
+    // 清除timer
+    clearTimeout(this.data.pollingTimer)
   },
 
 })

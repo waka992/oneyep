@@ -1,16 +1,16 @@
 <!--pages/referee/refereeBattle/refereeBattle.wxml-->
 <view class="container bgo flex-column-layout">
-    <navBar title="" back="{{false}}" home="{{false}}" background="{{'transparent'}}" backgroundColorTop="{{'transparent'}}">
-        <view class="white ml20 barTitle" slot="left">裁判</view>
+    <navBar title="" back="{{true}}" home="{{false}}" background="{{'transparent'}}" backgroundColorTop="{{'transparent'}}" bindback="back">
+        <view class="white ml20 barTitle" slot="center">裁判</view>
     </navBar>
     <view class="battle-container">
         <image class="vs-pic" src="/images/vs-pic.png"></image>
         <view class="abstain-btn" catchtap="giveup">
             <view class="abstain-btn-inner">弃权</view>
         </view>
-        <view class="tonext-btn" catchtap="canNext">
+        <!-- <view class="tonext-btn" catchtap="canNext">
             <view class="tonext-btn-inner">下一组</view>
-        </view>
+        </view> -->
         <view class="list-pic" catchtap="toList">
             <image class="list-pic-inner" src="/images/icon/menu-icon.png" catchtap="toList"></image>
         </view>

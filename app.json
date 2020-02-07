@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/player/playerOn/playerOn",
     "pages/referee/refereeBattle/refereeBattle",
     "pages/referee/referee",
     "pages/referee/refereeBattle/refereeBattleList/refereeBattleList",
-    "pages/player/playerOn/playerOn",
     "pages/nodeCtrl/nodeCtrl",
     "pages/masterCtrl/masterCtrl",
     "pages/user/user",

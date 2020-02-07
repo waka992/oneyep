@@ -119,7 +119,7 @@ Page({
       if (res) {
         // 处理组
         let data = [] // 默认选取第一组
-        let battleFinish = false
+        let battleFinish = true
         let leftWinNum = 0, rightWinNum = 0, readyNum = 0, readyFlag = false
         for (let i = 0; i < res.length; i++) {
           const ele = res[i];
@@ -138,11 +138,15 @@ Page({
           if (ele.battleLeft.itemUserId == this.data.itemUserId || ele.battleRight.itemUserId == this.data.itemUserId) {
             data = ele
           }
+        }
+        for (let i = 0; i < res.length; i++) {
           // 如果当前已经全部出成绩了
-          if (res.length == res[0].group / 2) {
-            battleFinish = true
+          if (res[i].status == 0) {
+            battleFinish = false
+            break
           }
         }
+
 
         // 判断得分
         let judge = ''

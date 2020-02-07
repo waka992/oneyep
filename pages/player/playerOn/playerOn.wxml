@@ -38,6 +38,7 @@
                 </view>
                 <!-- 赛事信息 -->
                 <view class="race-detail" wx-if="{{!battleFinish}}">
+                    <image class="rank-list-btn" catchtap="openRankList" src="/images/icon/rank-list-open.png"></image>
                     <pair-final playerInfo="{{chosenGroup}}" judge="{{judge}}"></pair-final>
                 </view>
                 <view class="race-info">

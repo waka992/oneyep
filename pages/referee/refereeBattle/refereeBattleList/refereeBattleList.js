@@ -19,24 +19,13 @@ Page({
   getBattleList(param) {
     api.post('room/event/getBattleGroupMap', param).then(res => {
       if (res) {
+        let {group} = this.data
         let groups = []
-        for (const key in res) {
-          if (res.hasOwnProperty(key)) {
-            const element = res[key];
-            for (const k in element) {
-              if (element.hasOwnProperty(k)) {
-                const group = element[k];
-                groups.push(group)
-              }
-            }
-          }
-        }
-        let x = 0
-        if (Object.keys(res) && Object.keys(res)[0]) {
-          x = Number(Object.keys(res)[0])
+        for (const key in res[group]) {
+            const element = res[group][key];
+            groups.push(element)
         }
         this.setData({
-          group: x,
           playerList: groups,
         })
         // fn && fn()
@@ -67,7 +56,8 @@ Page({
       let param = JSON.parse(options.param)
       this.getBattleList(param)
       this.setData({
-        raceName: options.raceName
+        raceName: options.raceName,
+        group: options.group,
       })
     }
     catch(err) {
