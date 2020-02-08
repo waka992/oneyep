@@ -11,6 +11,8 @@ Page({
     isComplete: true,
     itemUserId: '',
     raceName: '', // 赛事名
+    nodeType: 0,
+    group: '', // x强
   },
 
   // 1.开始
@@ -35,29 +37,46 @@ Page({
         });
       }
       else if (res.nodeType == 1 || res.nodeType == 2) {
-        this.getEventItem(res.nodeType)
+        this.setData({
+          nodeType: res.nodeType
+        })
+        this.getNodeItemByNodeId(res.currNodeInstanceId)
       }
     })
   },
 
+  // 2.获取项目id
+  getNodeItemByNodeId(id) {
+    let param = {
+      id: id,
+      userId: wx.getStorageSync('openid')
+    }
+    api.post('/node/getNodeItemByNodeId', param).then(res => {
+      this.setData({
+        group: res.rankGroup
+      })
+      this.getEventItem()
+    })
+  },
+
   // 2.获取赛事信息
-  getEventItem(type) {
+  getEventItem() {
     // userid用itemuserid
-    let { eventId, itemId, itemUserId} = this.data
+    let { eventId, itemId, itemUserId, nodeType, group} = this.data
     let param = {
       eventId: eventId,
       itemId: itemId
     }
     api.post('room/event/getEventItem', param).then(res => {
       if (res) {
-        if (type == 1) {
+        if (nodeType == 1) {
           wx.navigateTo({
             url: `/pages/referee/refereeRate/refereeRate?eventId=${eventId}&itemId=${itemId}&itemUserId=${itemUserId}&raceName=${res.itemName}`,
           })
         }
-        else if (type == 2) {
+        else if (nodeType == 2) {
           wx.navigateTo({
-            url: `/pages/referee/refereeBattle/refereeBattle?eventId=${eventId}&itemId=${itemId}&itemUserId=${itemUserId}&raceName=${res.itemName}&group=${res.initRankGroup}`,
+            url: `/pages/referee/refereeBattle/refereeBattle?eventId=${eventId}&itemId=${itemId}&itemUserId=${itemUserId}&raceName=${res.itemName}&group=${group}`,
           }) 
         }
       }
@@ -111,6 +130,7 @@ Page({
     this.setData({
       isComplete: isComplete,
       eventId: id,
+      // eventId: 1,
     })
     this.getUserItemInfo()
   },
