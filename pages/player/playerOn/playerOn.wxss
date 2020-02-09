@@ -115,7 +115,7 @@
     width: 68rpx;
     top: 60rpx;
     right: 0;
-    z-index: 999;
+    z-index: 9;
 }
 
 .race-info {

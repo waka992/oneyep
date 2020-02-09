@@ -49,7 +49,7 @@ Page({
   getNodeItemByNodeId(id) {
     let param = {
       id: id,
-      userId: wx.getStorageSync('openid')
+      // userId: wx.getStorageSync('openid')
     }
     api.post('/node/getNodeItemByNodeId', param).then(res => {
       this.setData({

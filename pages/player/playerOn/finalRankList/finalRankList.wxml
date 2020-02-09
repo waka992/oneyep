@@ -20,7 +20,8 @@
                     <!-- <view class="list-item">
                         <image class="icon-vs" src="/images/icon/icon-vs-light.png"></image>
                     </view> -->
-                    <view class="list-item">{{item.battleLeft.nickName}}</view>
+                    <view class="list-item" wx-if="{{item.winBattle}}">{{item.winBattle && item.winBattle.nickName}}</view>
+                    <view class="list-item" wx-if="{{!item.winBattle}}"></view>
                     <!-- <view class="list-item {{item.battleRight.isWin == 1 ?'winner' : item.battleLeft.isWin == 0 && item.battleRight.isWin == 0 ? 'draw' : item.battleRight.isWin == 0 ? 'loser' : 'draw' }}">{{item.battleRight.itemNum}}</view> -->
                 </view>
             </view>
