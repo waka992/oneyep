@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    ranking: '?',
+    itemNum: '?',
     name: '',
     status: 1, // 0未开始
     describe: '',
@@ -21,6 +21,8 @@ Page({
     group: 0,
     eventId: '',
     itemId: '',
+    winWord: '',
+    loseWord: '',
     // battle用的变量
     showFinalRankList: false, // 展开battle名单
     chosenGroup: {}, // 当前查看组
@@ -162,9 +164,33 @@ Page({
         else if (leftWinNum == rightWinNum) { // 否则就是平局
           judge = 'draw'
         }
+
+        let winWord = ''
+        let loseWord = ''
+        switch(Number(data.group)) {
+          case 2:
+            winWord = '获得冠军'
+            loseWord = '亚军'
+            break
+          case 4:
+            winWord = '晋级决赛'
+            loseWord = '四强'
+            break
+          case 8:
+            winWord = '晋级四强'
+            loseWord = '八强'
+            break
+          case 16:
+            winWord = '晋级八强'
+            loseWord = '十六强'
+            break
+        }
    
         this.setData({
           chosenGroup: data,
+          group: data.group, // x强
+          winWord: winWord,
+          loseWord: loseWord,
           playerList: res,
           judge: judge,
           battleFinish: battleFinish,
@@ -266,7 +292,7 @@ Page({
       let type = ''
       //auditionStatus 海选状态（0草稿，1评分中，2.已评分）
       // battleStatus battle状态（草稿 0 ，进行中1，已完成2）
-      let {auditionStatus, battleStatus} = res
+      let {auditionStatus, battleStatus, itemNum} = res
       if (auditionStatus == 0) {
         type = 'normal'
         this.getEventItem({id:itemId, title: '赛事准备中'})
@@ -283,6 +309,7 @@ Page({
         this.getAuditionList()
       }
       this.setData({
+        itemNum: itemNum,
         currentItemStatus: type // 当前展示对决赛/海选
       })
     })
@@ -298,7 +325,6 @@ Page({
       if (res) {
         this.setData({
           raceName: `${info.title} - ${res.itemName}`,
-          group: res.initRankGroup, // x强
         })
       }
     })

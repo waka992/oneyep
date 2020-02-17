@@ -15,6 +15,14 @@ const request = (url, options) => {
                    resolve(request.data.data)
                } else {
                    console.log('reject function');
+                   if (request.data && request.data.code == 2014) {
+                    wx.showToast({
+                        title: request.data.desc,
+                        icon: 'none',
+                        duration: 1500,
+                    });
+                    return
+                   }
                    reject(request.data)
                }
            },
