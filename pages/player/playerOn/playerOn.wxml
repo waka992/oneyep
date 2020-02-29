@@ -15,8 +15,8 @@
         <view class="race-status globalWidth">
             <!-- 头部操作 -->
             <view class="race-status-head">
-                <view class="race-left">
-                    <image class="race-left-inner {{hasPrev ? '' : 'opacity6'}}" src="/images/icon/arow-left.png" catchtap="toPrevious"></image>
+                <view class="race-left" catchtap="toPrevious">
+                    <image class="race-left-inner {{hasPrev ? '' : 'opacity6'}}" src="/images/icon/arow-left.png"></image>
                 </view>
                 <view class="race-right" bindtap="toNext">
                     <image class="race-right-inner {{hasNext ? '' : 'opacity6'}}" src="/images/icon/arow-right.png"></image>

@@ -10,6 +10,7 @@ Page({
     gender: 0,
     genderArr: ['男', '女'],
     raceId: '',
+    avatar: '',
     form: {
       name: '',
       gender: 0,
@@ -36,6 +37,7 @@ Page({
       openId: wx.getStorageSync('openid'),
       id: this.data.raceId,
       phone: mobile,
+      pic: this.data.avatar
     }
     console.log(param);
     // 提交到后台
@@ -44,6 +46,24 @@ Page({
       wx.switchTab({
         url: '/pages/user/user'  
       });
+    })
+  },
+
+  checkAuth() {
+    let that = this
+    wx.getSetting({
+      success: function (res) {
+          if (res.authSetting['scope.userInfo']) {
+              wx.getUserInfo({
+                  success: function (res) {
+                    console.log(res);
+                    that.setData({
+                      avatar: res.userInfo.avatarUrl,
+                    })
+                  }
+              });
+          }
+      }
     })
   },
 
@@ -59,5 +79,6 @@ Page({
     this.setData({
       raceId: options.raceId
     })
+    this.checkAuth()
   },
 })

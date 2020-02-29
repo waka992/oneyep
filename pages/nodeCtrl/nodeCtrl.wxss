@@ -48,6 +48,11 @@
     margin-right: 40rpx;
 }
 
+.msg-icon {
+    display: inline-block;
+    position: relative;
+}
+
 .groups {
     margin-top: 54rpx;
 }

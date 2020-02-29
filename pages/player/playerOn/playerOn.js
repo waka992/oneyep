@@ -287,6 +287,7 @@ Page({
       eventId: eventId,
       itemId: itemId,
       userId: itemUserId
+      // userId: "afc6d5d8-5c5a-4a79-9556-71ea87a55b85"
     }
     api.post('/room/event/getUserRecord', param).then(res => {
       let type = ''

@@ -3,7 +3,7 @@
 <!-- <scroll-view scroll-y='true' style="height:{{height}}px" bindscrolltolower='lower'> -->
     <view class="raceList-box">
         <view class="raceList-container" wx:for="{{raceList}}" wx:for-item="race" wx:key="index" data-id="{{race.id}}" data-flowstatus="{{race.flowStatus}}" catchtap="showDetail">
-            <!-- <image src="{{race.picUrl}}" class="race-pic"></image> -->
+            <image src="{{race.picture}}" class="race-pic"></image>
             <view class="race-detail">
                 <view class="race-title">{{race.eventName}}</view>
                 <view class="race-time">{{race.beginTime + '-' + race.endTime}}</view>

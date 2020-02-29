@@ -57,6 +57,8 @@
 }
 
 .msg-icon, .refresh-icon {
+    position: relative;
+    display: inline-block;
     width: 40rpx;
     height: 40rpx;
     margin-right: 40rpx;

@@ -3,6 +3,7 @@
     "node-operate": "./nodeOperate/nodeOperate",
     "release-dialog": "./releaseDialog/releaseDialog",
     "my-picker": "/components/myPicker/myPicker",
-    "repick": "/components/repick/repick"
+    "repick": "/components/repick/repick",
+    "mp-badge": "/components/badge/badge"
   }
 }

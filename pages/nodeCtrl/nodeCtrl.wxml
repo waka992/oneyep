@@ -10,7 +10,10 @@
                 <view class="event">{{nodeName}}</view>
                 <view class="icon">
                     <image class="menu-icon" src="/images/icon/menu-icon.png" catchtap="menuClick"></image>
-                    <image class="msg-icon" src="/images/icon/msg-icon.png" catchtap="msgClick"></image>
+                    <view class="msg-icon" catchtap="msgClick">
+                        <image class="msg-icon" src="/images/icon/msg-icon.png" wx:if="{{!isComplete}}"></image>
+                        <mp-badge wx:if="{{msgCount}}" content="{{msgCount}}" style="position: absolute;top: -30rpx;right: -30rpx;"/>
+                    </view>
                 </view>
             </view>
             <view class="time-detail">时间：{{startTime + '-' + endTime}}</view>

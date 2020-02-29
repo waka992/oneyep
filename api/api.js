@@ -15,7 +15,7 @@ const request = (url, options) => {
                    resolve(request.data.data)
                } else {
                    console.log('reject function');
-                   if (request.data && request.data.code == 2014) {
+                   if (request.data) {
                     wx.showToast({
                         title: request.data.desc,
                         icon: 'none',

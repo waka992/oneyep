@@ -14,6 +14,7 @@ Page({
     timePlanList: [],
     backTimePlanList: [], // 回滚用
     isComplete: false,
+    msgCount: 0,
     showDetailList: [], // 详情展示的列表
     id: '', // 节点id
     groupVal: '', // 身份识别 0总控 1组长 2组员
@@ -28,6 +29,7 @@ Page({
    */
   // 弹出详情框
   showDetail(e) {
+    this.getMsgCount()
     // 实际是id而不是nodeid(可查看HTML上绑定的字段)
     let {nodeid, nodemodelid, nodetype} = e.currentTarget.dataset
     console.log(e.currentTarget);
@@ -105,6 +107,7 @@ Page({
   // 刷新列表
   refresh() {
     this.getNodes(this.data.id)
+    this.getMsgCount()
   },
 
   // 获取项目id
@@ -209,6 +212,24 @@ Page({
       showRepickList: false
     })
   },
+  // 获取消息数
+  getMsgCount() {
+    let param = {
+      id: wx.getStorageSync('openid')
+    }
+    api.post('message/messageCount', param).then(res => {
+      this.setData({
+        msgCount: 0
+      })
+      console.log(res);
+    })
+  },
+  // 跳转mymessage
+  msgClick(e) {
+    wx.navigateTo({
+      url: '/pages/myMessage/myMessage',
+    })
+  },
 
   onLoad: function (options) {
     let type = options.type
@@ -221,6 +242,7 @@ Page({
       // groupVal: 0, // 身份识别
     })
     this.getNodes(options.id)
+    this.getMsgCount()
   },
 
   onShow: function() {

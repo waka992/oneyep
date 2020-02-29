@@ -16,9 +16,11 @@ Page({
     currentNodeId: '', // getnode获得的nodeid
     currentInstanceId: '', // getnode获得的id
     currentNodeType: '', // getnode获得的nodetype
+    currentOperateType: '', // 当前操作的type
+    msgCount: 0, // 消息数量
     eventId: '', // 赛事id
     itemId: '', // 项目id
-    selectNodeId: '', // 选中的小节点id
+    selectNodeId: '', // 选中的小节点id(任务id)
     nodeName: '',
     startTime: '',
     endTime: '',
@@ -38,8 +40,8 @@ Page({
       {imgSrc:'/images/icon/icon-start.png', word: '开始', type: 1}, 
       {imgSrc:'/images/icon/icon-end.png', word: '完成', type: 2},
       {imgSrc:'/images/icon/icon-reback.png', word: '回滚', type: 0},
-      {imgSrc:'/images/icon/icon-urge.png', word: '催办'},
-      {imgSrc:'/images/icon/icon-feedback.png', word: '反馈', type: 9},
+      {imgSrc:'/images/icon/icon-urge.png', word: '催办', type: 3},
+      {imgSrc:'/images/icon/icon-feedback.png', word: '反馈', type: 9},// type传送时候改为2
     ], // 小节点的列表
     showOperateList3: [], // 过滤后小节点的列表
     openIndex: 0
@@ -60,6 +62,7 @@ Page({
     })
   },
   taskClick(e) {
+    this.getMsgCount()
     let {nodeid, status} = e.currentTarget.dataset
     let arr = this.data.operateList3
     // 已结束的只能执行回滚操作
@@ -91,11 +94,24 @@ Page({
   // 发送反馈
   sendRelease(e) {
     let content = e.detail.content
-    console.log(content);
-    api.post('task/feedBack', {})
+    let {selectNodeId, currentOperateType} = this.data
+    let param = {
+      content: content,
+      sendUserId: wx.getStorageSync('openid'),
+      taskId: selectNodeId,
+      type: currentOperateType
+    }
+    api.post('message/feedBack', param).then(res => {
+      wx.showToast({
+        title: '发布成功',
+        icon: 'none',
+        duration: 1500,
+      });
+    })
   },
   // 操作框执行的动作(大节点)
   operateNode(e) {
+    this.getMsgCount()
     let type = e.detail.type
     // 回滚
     if (type === 0) {
@@ -108,10 +124,12 @@ Page({
   },
   // 操作框执行的动作
   operate(e) {
+    this.getMsgCount()
     let type = e.detail
     // 反馈不需要传后台
-    if (type == 9) {
+    if (type == 9 || type == 3) {
       this.setData({
+        currentOperateType: type,
         switchRelease: true
       })
       return
@@ -173,6 +191,7 @@ Page({
     })
   },
   openGroup(evt) {
+    this.getMsgCount()
     let i = evt.currentTarget.dataset.index
     if (this.data.openIndex === i) {
       this.setData({
@@ -259,10 +278,23 @@ Page({
       switchBackNode: false
     })
   },
+  // 获取信息数量
+  getMsgCount() {
+    let param = {
+      id: wx.getStorageSync('openid')
+    }
+    api.post('message/messageCount', param).then(res => {
+      this.setData({
+        msgCount: 0
+      })
+      console.log(res);
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getMsgCount()
     console.log(options);
     let op3 = []
     let op = []
@@ -273,7 +305,7 @@ Page({
           {imgSrc:'/images/icon/icon-start.png', word: '开始', type: 1}, 
           {imgSrc:'/images/icon/icon-end.png', word: '完成', type: 2},
           {imgSrc:'/images/icon/icon-reback.png', word: '回滚', type: 0},
-          {imgSrc:'/images/icon/icon-urge.png', word: '催办', type: 99}, // 总控才有
+          {imgSrc:'/images/icon/icon-urge.png', word: '催办', type: 3}, // 总控才有
         ]
         op = [
           {imgSrc:'/images/icon/icon-start.png', word: '开始', type: 1}, 
@@ -294,7 +326,7 @@ Page({
           // {imgSrc:'/images/icon/icon-start.png', word: '开始', type: 1}, 
           // {imgSrc:'/images/icon/icon-end.png', word: '完成', type: 2},
           // {imgSrc:'/images/icon/icon-reback.png', word: '回滚', type: 0},
-          {imgSrc:'/images/icon/icon-feedback.png', word: '反馈', type: 9}, // 组长 组员只能反馈
+          {imgSrc:'/images/icon/icon-feedback.png', word: '反馈', type: 9}, // 组长 组员只能反馈，type传2
         ]
     }
     this.setData({
