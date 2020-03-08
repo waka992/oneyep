@@ -23,7 +23,13 @@
 .msg-list {
     min-height: 348rpx;
     color: #fff;
+    padding-bottom: 20rpx;
     margin-bottom: 40rpx;
+    border-bottom: 1px solid #666;
+}
+
+.user-msg {
+    padding-left: 80rpx;
 }
 
 .user-info {
@@ -37,7 +43,22 @@
     border-radius: 50%;
 }
 
-.user-name,.user-avatar,.user-group,.user-identity,.msg-time {
+.reply-list {
+    margin-top: 20rpx;
+    padding-left: 60rpx;
+}
+
+.reply-avatar {
+    height: 40rpx;
+    width: 40rpx;
+    border-radius: 50%;
+}
+
+.reply-name {
+    color: #fff;
+}
+
+.user-name,.user-avatar,.user-group,.user-identity,.msg-time,.reply-avatar,.reply-name {
     vertical-align: middle;
 }
 
@@ -47,12 +68,12 @@
 
 .user-group,.user-identity {
     display: inline-block;
-    width: 100rpx;
-    height: 40rpx;
-    line-height: 40rpx;
+    width: 120rpx;
+    height: 60rpx;
+    line-height: 60rpx;
     text-align: center;
     border-radius: 18rpx;
-    font-size: 22rpx;
+    font-size: 26rpx;
 }
 
 .user-group {
@@ -76,7 +97,8 @@
 .msg-from {
     color: #919191;
     font-size: 24rpx;
-    margin-left: 80rpx;
+    margin-left: 20rpx;
+    display: inline-block;
 }
 
 .hl-from {
@@ -85,7 +107,8 @@
 }
 
 .reply-word {
-    margin: 16rpx 0 16rpx 80rpx;
+    padding: 16rpx 40rpx 0;
+    /* background-color: #eee; */
 }
 
 .input-area {
@@ -106,12 +129,12 @@
 
 .reply-btn, .delete-btn {
     display: inline-block;
-    width: 90rpx;
-    height: 36rpx;
-    line-height: 36rpx;
+    width: 120rpx;
+    height: 48rpx;
+    line-height: 48rpx;
     text-align: center;
     border-radius: 18rpx;
-    font-size: 22rpx;
+    font-size: 26rpx;
 }
 
 .reply-btn {
@@ -131,6 +154,6 @@
 }
 
 .reply-textarea-style {
-    height: 110rpx;
-    font-size: 26rpx;
+    height: 80rpx;
+    font-size: 28rpx;
 }

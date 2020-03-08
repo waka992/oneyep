@@ -99,7 +99,7 @@ Page({
       content: content,
       sendUserId: wx.getStorageSync('openid'),
       taskId: selectNodeId,
-      type: currentOperateType
+      type: currentOperateType == 3 ? 2 : currentOperateType
     }
     api.post('message/feedBack', param).then(res => {
       wx.showToast({
@@ -125,7 +125,7 @@ Page({
   // 操作框执行的动作
   operate(e) {
     this.getMsgCount()
-    let type = e.detail
+    let type = e.detail.type
     // 反馈不需要传后台
     if (type == 9 || type == 3) {
       this.setData({
@@ -281,7 +281,7 @@ Page({
   // 获取信息数量
   getMsgCount() {
     let param = {
-      id: wx.getStorageSync('openid')
+      userId: wx.getStorageSync('openid')
     }
     api.post('message/messageCount', param).then(res => {
       this.setData({

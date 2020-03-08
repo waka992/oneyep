@@ -11,16 +11,25 @@
         <view class="msg-lists">
             <view class="msg-list" wx:for="{{msgLists}}" wx:key="index" wx:for-item="info">
                 <view class="user-info">
-                    <image class="user-avatar" src="{{info.avatar}}"></image>
-                    <text class="user-name">{{info.userName}}</text>
-                    <view class="user-group">{{info.group}}</view>
-                    <view class="user-identity">{{info.identity}}</view>
-                    <view class="msg-time">{{info.time}}</view>
+                    <image class="user-avatar" src="{{info.sendUserPic}}"></image>
+                    <text class="user-name">{{info.createName}}</text>
+                    <view class="user-group">{{info.groupName}}</view>
+                    <view class="user-identity">{{info.roleName}}</view>
+                    <view class="msg-time">{{info.createTime}}</view>
                 </view>
-                <view class="msg-from">回复了你在<text class="hl-from">{{info.from}}</text>中的{{info.operate}}信息</view>
-                <view class="reply-word">{{info.msg}}</view>
+                <view class="user-msg">
+                    {{info.content}}
+                </view>
+                    <!-- <view class="msg-from">回复了你在<text class="hl-from">{{info.taskName}}</text>中的信息</view> -->
+
+                <view class="reply-list" wx:for="{{info.replyList}}" wx:key="index" wx:for-item="rlist">
+                    <image class="reply-avatar" src="{{rlist.userPic}}"></image>
+                    <text class="reply-name">{{rlist.replyName}}</text>
+                    <view class="msg-from">回复：</view>
+                    <view class="reply-word">{{rlist.content}}</view>
+                </view>
                 <view class="input-area">
-                    <textarea class="reply-textarea-style" placeholder-class="textarea-placeholder" value="{{info.content}}" id="" placeholder="{{info.fromMsg}}" bindinput="contentChange" data-index="{{index}}"></textarea>
+                    <textarea class="reply-textarea-style" placeholder-class="textarea-placeholder" value="{{info.replyContent}}" id=""  bindinput="contentChange" data-index="{{index}}"></textarea>
                 </view>
                 <view class="operate-area">
                     <view class="operate-btn">

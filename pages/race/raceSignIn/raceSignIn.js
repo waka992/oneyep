@@ -1,4 +1,5 @@
 // pages/race/raceSignIn/raceSignIn.js
+import api from '../../../api/api';
 Page({
 
   /**
@@ -7,10 +8,12 @@ Page({
   data: {
     status: 0,
     imgSrc: '/images/race-detail.png',
-    raceTitle: '赛事标题名称备份',
-    raceTime: '2019/10/29-2019/11/1',
-    raceAddress: '四川省成都市天府新区华府大道一段',
-    raceDetail: '内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 内容描述 …'
+    raceTitle: '',
+    raceTime: '',
+    startTime: '',
+    endTime: '',
+    raceAddress: '',
+    raceDetail: ''
   },
   // 返回
   onBack() {
@@ -20,21 +23,63 @@ Page({
   },
   // 签到
   signIn() {
+    let phone = wx.getStorageSync('phone');
+    if (!phone) {
+      wx.navigateTo({
+        url: '/pages/authorizationPhone/authorizationPhone',
+      });
+      return
+    }
     wx.scanCode({
       success: (res) => {
+        // http://www.oneyep.com.cn:8601/event/sign?eventId=SQC22DY9JRH2RU0F5J0HWG018F
         console.log(res)
-      }
+        try {
+          let obj = JSON.parse(res.result)
+          let {url, eventId } = obj
+          let param = {
+            phone: wx.getStorageSync('phone'),
+            openId: wx.getStorageSync('openid'),
+            eventId: eventId,
+          }
+          api.post(url, param)
+        }
+        finally {
+          
+        }
+        }
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.setStorageSync('phone', '');
     console.log(
       options.id
     )
+    // this.getData(options.id)
   },
-
+  getData(id) {
+    wx.showLoading({
+      mask: true,
+    });
+    api.post('event/eventDetail', {id: id, userId: id}).then((res) => {
+      let {eventName, address, beginTime, endTime, flowStatus, picture, description} = res
+      this.setData({
+        raceTitle: eventName,
+        raceAddress: address,
+        startTime: beginTime.slice(0, 10),
+        endTime: endTime.slice(0, 10),
+        status: Number(flowStatus),
+        imgSrc: picture,
+        raceDetail: description,
+        id: id,
+      })
+      console.log(res);
+      wx.hideLoading()
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -51,9 +51,39 @@ const remove = (url, options) => {
    return request(url, { method: 'DELETE', data: options })
 }
 
+  // 登录操作
+const login = (fn) => {
+    wx.login({
+      success (res) {
+        if (res.code) {
+          // 登录成功，获取用户信息
+          console.log('login');
+          backendLogin(res.code, fn)
+        // fn && fn()
+        } else {
+          // showToast()
+        }
+      },
+      fail () {
+        // showToast()
+      }
+    })
+}
+
+  // 调用后台登录接口
+const backendLogin = (code, fn) => {
+    post('wx/login', {code: code}).then((res) => {
+      wx.setStorageSync('sessionKey', res.session_key);
+      wx.setStorageSync('openid', res.openid);
+      fn && fn()
+      wx.hideLoading();
+    })
+}
+
 module.exports = {
    get,
    post,
    put,
-   remove
+   remove,
+   login
 }

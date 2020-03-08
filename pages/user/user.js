@@ -175,6 +175,7 @@ Page({
   },
   // 下拉刷新
   onPullDownRefresh() {
+    console.log(1);
     this.setData({
       page: 0,
       raceList: []
@@ -189,6 +190,7 @@ Page({
           if (res.authSetting['scope.userInfo']) {
               wx.getUserInfo({
                   success: function (res) {
+                    console.log(res);
                     that.setData({
                       avatar: res.userInfo.avatarUrl,
                       username: res.userInfo.nickName

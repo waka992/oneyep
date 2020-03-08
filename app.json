@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/race/raceSignIn/raceSignIn",
+    "pages/user/user",
+    "pages/race/raceDetail/raceDetail",
     "pages/masterCtrl/masterCtrl",
     "pages/nodeCtrl/nodeCtrl",
     "pages/myMessage/myMessage",
@@ -9,16 +12,14 @@
     "pages/referee/referee",
     "pages/referee/refereeBattle/refereeBattle",
     "pages/referee/refereeBattle/refereeBattleList/refereeBattleList",
-    "pages/user/user",
     "pages/referee/refereeRate/refereeRate",
     "pages/demo/demoBindRole/demoBindRole",
     "pages/race/raceSignUp/raceSignUp",
     "pages/player/playerOnAudition/playerOnAudition",
     "pages/authorization/authorization",
-    "pages/race/raceDetail/raceDetail",
+    "pages/authorizationPhone/authorizationPhone",
     "pages/activityProcess/activityProcess",
     "pages/pay/pay",
-    "pages/race/raceSignIn/raceSignIn",
     "pages/scan/scan"
   ],
   "window": {

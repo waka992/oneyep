@@ -215,13 +215,12 @@ Page({
   // 获取消息数
   getMsgCount() {
     let param = {
-      id: wx.getStorageSync('openid')
+      userId: wx.getStorageSync('openid')
     }
     api.post('message/messageCount', param).then(res => {
       this.setData({
-        msgCount: 0
+        msgCount: res
       })
-      console.log(res);
     })
   },
   // 跳转mymessage

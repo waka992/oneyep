@@ -7,9 +7,9 @@
         <image class="race-detail-pic" src="{{imgSrc}}"></image>
         <view class="race-detail-title">
             {{raceTitle}}
-            <view class="tips race-detail-tips {{status === 0 ? 'pink' : ''}}">{{status === 0 ? '未开始' : '进行中'}}</view>
+            <view class="tips race-detail-tips {{status === 1 ? 'pink' : 'blue'}}">{{status === 1 ? '未开始' : '进行中'}}</view>
         </view>
-        <text class="race-detail-time">{{raceTime}}</text>
+        <text class="race-detail-time">{{startTime + '-' + endTime}}</text>
         <text class="race-detail-address">{{raceAddress}}</text>
         <text class="race-detail-detail">{{raceDetail}}</text>
         <button class="custom-btn" catchtap="signIn">签到</button>

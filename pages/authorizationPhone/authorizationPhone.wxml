@@ -1,0 +1,17 @@
+<!-- 授权界面 -->
+<view class="container">
+    <navBar title="" back="{{true}}" home="{{false}}" bindback="onBack">
+        <view class="white barTitle" slot="center">玩野文化</view>
+    </navBar>
+    <view class="auth-page" wx:if="{{canIUse}}" style="color:#fff;">
+        <view class='header'>微信授权</view>
+        <view class='content'>
+            <view>申请获取以下权限（否则无法进行签到绑定）</view>
+            <text>获得你的个人信息（手机号码）</text>
+        </view>
+        <button class='custom-btn bottom' type='primary' open-type="getPhoneNumber" lang="zh_CN" bindgetphonenumber="getPhoneNumber">
+            授权获取信息
+        </button>
+    </view>
+    <view wx:else>请升级微信版本</view>
+</view>
