@@ -23,6 +23,8 @@ Page({
     currentNodeId: '', // 当前选中的nodeid
     currentInstanceId: '', // 当前选中的id
     currentNodeType: '', // 当前选中的nodetype
+    fromShare: false,
+    getNodesTimer: null
   },
   /**
    * 生命周期函数--监听页面加载
@@ -82,11 +84,25 @@ Page({
   },
   // 回到user界面
   backToUser() {
+    if (this.data.fromShare) {
+      wx.switchTab({
+        url: '/pages/user/user'  
+      })
+      return
+    }
     wx.switchTab({
       url: '/pages/user/user',
     });
   },
-
+  debounceGetNodes(id) {
+    if (this.data.getNodesTimer) {
+      console.log(1);
+      clearTimeout(this.data.getNodesTimer)
+    }
+    this.setData({
+      getNodesTimer: setTimeout(() => {this.getNodes(id)}, 300)
+    })
+  },
   // 获取当前节点
   getNodes(id) {
     // id = '001' // 测试
@@ -231,6 +247,11 @@ Page({
   },
 
   onLoad: function (options) {
+    if (options.share == 'true') {
+      this.setData({
+        fromShare: true
+      })
+    }
     let type = options.type
     this.setData({
       id: options.id,
@@ -240,13 +261,14 @@ Page({
       // eventId: 1,
       // groupVal: 0, // 身份识别
     })
-    this.getNodes(options.id)
-    this.getMsgCount()
+    this.debounceGetNodes(options.id)
+    // this.getMsgCount()
   },
 
   onShow: function() {
+    this.getMsgCount()
     if (this.data && this.data.id) {
-      this.getNodes(this.data.id)
+      this.debounceGetNodes(this.data.id)
     }
   },
   /**
@@ -257,9 +279,10 @@ Page({
       // 来自页面内转发按钮
       console.log(res.target)
     }
+    let {id, groupVal} = this.data
     return {
-      title: '节点控制台',
-      path: `/pages/nodeCtrl/nodeCtrl?nodeid=${this.data.selectNodeId}&eventid=${this.data.id}`
+      title: '总控',
+      path: `/pages/masterCtrl/masterCtrl?share=true&id=${id}&groupVal=${groupVal}`
     }
   }
 

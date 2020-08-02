@@ -13,6 +13,9 @@
             <view class="describe">{{describe}}</view>
         </view>
         <view class="race-status globalWidth">
+            <view class="process-btn">
+                <image class="process-btn-pic" catchtap="openProcessList" src="/images/icon/icon-process.png"></image>
+            </view>
             <!-- 头部操作 -->
             <view class="race-status-head">
                 <view class="race-left" catchtap="toPrevious">
@@ -63,4 +66,6 @@
     </view>
     <final-rank-list show="{{showFinalRankList}}" playerList="{{playerList}}" title="{{raceName}}"></final-rank-list>
     <rank-list show="{{showAuditionRankList}}" playerList="{{auditionPlayerList}}" title="{{raceName}}" currentRank="{{currentRank}}"></rank-list>
+    <process show="{{showProcess}}" list="{{processList}}"></process>
+
 </view>

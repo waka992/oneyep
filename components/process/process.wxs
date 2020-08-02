@@ -1,0 +1,8 @@
+var getI = function(i, list) {
+        console.log(i === list.length - 1);
+        return i === list.length - 1
+}
+
+module.exports = {
+    getI: getI
+}

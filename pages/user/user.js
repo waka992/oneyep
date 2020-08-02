@@ -204,7 +204,7 @@ Page({
                       iv: iv,
                       sessionKey: sessionKey,
                     }).then((res) => {
-                      if (res.openId) {wx.setStorageSync('openid', res.openId);}
+                      if (res && res.openId) {wx.setStorageSync('openid', res.openId);}
                       if (that.data.raceList.length == 0) {
                         that.getList()
                       }

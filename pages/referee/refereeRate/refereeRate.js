@@ -19,6 +19,11 @@ Page({
       pic: '/images/player-video.png'
     }
   },
+  back() {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
   // 输入评分
   scoreEdit(e) {
     if (e.detail.value) {

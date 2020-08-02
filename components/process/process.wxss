@@ -1,0 +1,120 @@
+/* components/process/process.wxss */
+.process-list {
+    position: absolute;
+    height: calc(100% - 200rpx);
+    width: 100%;
+    top: 200rpx;
+    left: 0;
+}
+
+.mask {
+    background-color: #000;
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    top: -200rpx;
+    left: 0;
+}
+
+.list-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    background-color: #000;
+    z-index: 99;
+}
+
+.process {
+    position: relative;
+    height: 100rpx;
+    background-color: #000;
+}
+
+.half-round,.round,.round-on {
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.half-round {
+    border: 1px solid #999;
+    background-color: #000;
+    width: 60rpx;
+    height: 60rpx;
+    z-index: 9;
+}
+
+.round, .round-on {
+    width: 40rpx;
+    height: 40rpx;
+    background-color: #4F4F4F;
+    z-index: 10;
+    text-align: center;
+    color: #aaa;
+    line-height: 40rpx;
+}
+
+/* // 当前环节 */
+.round-on {
+    background-color: #4D7AFF;
+    color: #fff;
+}
+
+.left-arrow, .right-arrow {
+    position: absolute;
+    border: 14rpx solid transparent;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28rpx;
+    height: 28rpx;
+}
+
+.left-arrow {
+    border-right-color: #999;
+    left: -46rpx;
+}
+
+.right-arrow {
+    border-left-color: #999;
+    right: -46rpx;
+}
+
+.left-word,.right-word {
+    position: absolute;
+    color: #aaa;
+    width: 400rpx;
+}
+
+.left-word {
+    left: -460rpx;
+    text-align: right;
+}
+
+.right-word {
+    left: 116rpx;
+    /* +60+46+10得到left */
+    text-align: left;
+}
+
+.line-up,.line-down {
+    position: absolute;
+    height: 48rpx;
+    width: 1px;
+    transform: translateX(-50%);
+    left: 50%;
+    background-color: #999;
+}
+
+.line-up {
+    top: -28rpx;
+}
+
+.line-down {
+    top: 83rpx;
+}

@@ -44,9 +44,17 @@ Page({
       {imgSrc:'/images/icon/icon-feedback.png', word: '反馈', type: 9},// type传送时候改为2
     ], // 小节点的列表
     showOperateList3: [], // 过滤后小节点的列表
-    openIndex: 0
+    openIndex: 0,
+    fromShare: false,
   },
   onBack() {
+    // 分享过来的
+    if (this.data.fromShare) {
+      wx.switchTab({
+        url: '/pages/user/user'  
+      })
+      return
+    }
     wx.navigateBack({
       delta: 1
     })
@@ -285,7 +293,7 @@ Page({
     }
     api.post('message/messageCount', param).then(res => {
       this.setData({
-        msgCount: 0
+        msgCount: res
       })
       console.log(res);
     })
@@ -294,8 +302,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getMsgCount()
-    console.log(options);
+    if (options.share == 'true') {
+      this.setData({
+        fromShare: true
+      })
+    }
+    // this.getMsgCount()
     let op3 = []
     let op = []
     switch(Number(options.groupVal)) {
@@ -338,7 +350,9 @@ Page({
     })
     this.getNode(options.nodeid) 
   },
-
+  onShow() {
+    this.getMsgCount()
+  },
   /**
    * 用户点击右上角分享
    */
@@ -349,7 +363,7 @@ Page({
     }
     return {
       title: '节点控制台',
-      path: `/pages/nodeCtrl/nodeCtrl?nodeid=${this.data.nodeid}&eventid=${this.data.eventId}`
+      path: `/pages/nodeCtrl/nodeCtrl?share=true&nodeid=${this.data.nodeid}&eventid=${this.data.eventId}groupVal=${this.data.groupVal}`
     }
   }
 })

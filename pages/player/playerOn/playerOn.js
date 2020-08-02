@@ -34,6 +34,8 @@ Page({
     auditionPlayerList: [],
     currentRank: 99, // 当前排名
     auditionFinish: false, // 是否结束
+    showProcess: false,
+    processList: []
   },
   // 返回
   onBack() {
@@ -45,6 +47,12 @@ Page({
     this.getBattleInfo()
     this.setData({
       showFinalRankList: true
+    })
+  },
+  openProcessList() {
+    this.getAllNodes()
+    this.setData({
+      showProcess: true
     })
   },
   // 下一个赛事
@@ -365,6 +373,21 @@ Page({
     this.getAuditionList()
     this.setData({
       showAuditionRankList: true
+    })
+  },
+  getAllNodes() {
+    // id = '001' // 测试
+    let id = this.data.eventId //this.data.eventId
+    api.post('node/eventAllNode', {id: id, userId: wx.getStorageSync('openid')}).then(res => {
+      let list = []
+      for (let i = 0; i < res.length; i++) {
+        list.push({
+          name: res[i].nodeName
+        })
+      }
+      this.setData({
+        processList: list
+      })
     })
   },
   /**

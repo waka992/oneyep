@@ -1,0 +1,19 @@
+<!--进度表-->
+<wxs module="judge" src="./process.wxs"></wxs>
+<view class="process-list" wx-if="{{show}}" catchtap="close">
+    <view class="mask"></view>
+    <view class="list-container">
+        <view class="process" wx:for="{{list}}"  wx:key="index">
+            <view class="line-up"></view>
+            <view class="{{ judge.getI(index, list) ? 'line-down' : ''}}"></view>
+            <view class="half-round">
+                <view class="{{index % 2 == 0 ? 'left-word' : 'right-word'}}">{{item.name}}</view>
+                <view class="left-arrow" wx:if="{{index % 2 == 0}}"></view>
+                <view class="right-arrow" wx:if="{{index % 2 == 1}}"></view>
+                <view class="{{index == 2 ? 'round-on' : 'round'}}">
+                    {{index + 1}}
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

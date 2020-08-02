@@ -28,10 +28,17 @@ Page({
       userId: wx.getStorageSync('openid')
     }
     api.post('message/getMessageList', param).then(res => {
+      this.setRead()
       this.setData({
         msgLists: res
       })
     })
+  },
+  setRead() {
+    let param = {
+      userId: wx.getStorageSync('openid')
+    }
+    api.post('message/alreadyRead', param).then(res => {})
   },
   // 返回
   onBack() {

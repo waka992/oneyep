@@ -1,7 +1,7 @@
 <!--pages/referee/refereeRate/refereeRate.wxml-->
 <view class="container bgo flex-column-layout">
-    <navBar title="" back="{{false}}" home="{{false}}" background="{{'transparent'}}" backgroundColorTop="{{'transparent'}}">
-        <view class="white ml20 barTitle" slot="left">裁判</view>
+    <navBar title="" back="{{true}}" home="{{false}}" background="{{'transparent'}}" backgroundColorTop="{{'transparent'}}" bindback="back">
+        <view class="white ml20 barTitle" slot="center">裁判</view>
     </navBar>
     <view class="mask"></view>
     <image class="player-pic" src="{{'/images/player-video.png'}}" wx:if="{{!showRateList}}"></image>

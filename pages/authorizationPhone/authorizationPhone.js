@@ -34,9 +34,23 @@ Page({
     }
     api.post('getPhone', param).then(res => {
       if (res) {
+        wx.showToast({
+          title: '授权成功',
+          icon: 'none',
+          duration: 1500,
+          mask: false,
+        });
         wx.setStorageSync('phone', res);
+        this.onBack()
       }
-      this.onBack()
+      else {
+        wx.showToast({
+          title: '授权失败请重试',
+          icon: 'none',
+          duration: 1500,
+          mask: false,
+        });
+      }
     })
   },
   

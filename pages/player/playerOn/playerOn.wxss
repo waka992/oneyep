@@ -54,6 +54,26 @@
     margin-top: 40rpx;
 }
 
+.process-btn {
+    position: absolute;
+    height: 68rpx;
+    width: 68rpx;
+    border-radius: 50%;
+    background-color: #557FF1;
+    top: 200rpx;
+    right: 0;
+    z-index: 9;
+}
+.process-btn-pic {
+    position: absolute;
+    height: 50rpx;
+    width: 50rpx;
+    background-color: #557FF1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .race-status-head {
   height: 38rpx;  
 } 
